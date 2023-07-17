@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/'); ?>style.css">
     <script type="text/javascript" src="<?= base_url('vendor/easyui/'); ?>jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url('vendor/easyui/'); ?>jquery.easyui.min.js"></script>
+
 </head>
 
 <body>
@@ -26,24 +27,43 @@
             </div>
 
         </div>
-        <div data-options="region:'south',split:true" style="height:50px;"></div>
-        <div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
+        <!-- <div data-options="region:'east',split:true" title="East" style="width:100px;"></div> -->
         <div data-options="region:'west',split:true" title="Menu" style="width:100px;"></div>
         <div data-options="region:'center',iconCls:'icon-ok'" title="Dokumen">
-            <input type="search" class="search-box">
-            <table class="easyui-datagrid" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
+
+            <div id="toolbar" >
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="">New</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="edit()">Edit</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="remove()">Remove</a>
+                <input id="term" placeholder="Type Keyword....." style="float: right;">
+                <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()" style="float: right;">Search</a> -->
+            </div>
+
+
+            <table class="easyui-datagrid" id="dg" title="Users Management" url="getData.php" toolbar="#toolbar" pagination="true" rownumbers="true" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
+
                 <thead>
                     <tr>
                         <th data-options="field:'itemid'" width="30">ID</th>
                         <th data-options="field:'Jenis DOkumen',align:'left'" width="100">Jenis Dokumen</th>
                         <th data-options="field:'Nama Dokumen',align:'left'" width="100">Nama Dokumen</th>
                         <th data-options="field:'Keterangan'" width="150">Keterangan</th>
-                        <th data-options="field:'path',align:'left'" width="60">Path</th>
+                        <th data-options="field:'path',align:'left'" width="80">Path</th>
                     </tr>
                 </thead>
             </table>
+            <!-- 
+        <div id="toolbar">
+                <div id="tb">
+                    <input id="term" placeholder="Type Keyword.....">
+                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doSearch()">Search </a>
+                </div>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="new()">New </a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="edit()">Edit </a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="remove()">Remove </a>
+            </div> -->
         </div>
-    </div>
+
 
 </body>
 
