@@ -41,12 +41,14 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">SDM - Perumda Air Minum Tugu Tirta</h1>
                                     </div>
-                                    <form action="<?= base_url('auth/login')?>" method="post" name="login_form" class="user">
+                                    <form action="<?= base_url('auth')?>" method="post" name="login_form" class="user">
                                         <div class="form-group">
                                             <input name="nip" type="text" class="form-control form-control-user" id="inputUser" placeholder="NIP" value="<?=set_value('nip') ?>">
+                                            <?= form_error('nip', '<small style="color:red;padding-left:3px;">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <input name="password" type="password" class="form-control form-control-user" id="inputPassword" placeholder="Password" value="<?=set_value('password') ?>">
+                                            <?= form_error('password', '<small style="color:red;padding-left:3px;">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="text-right">
