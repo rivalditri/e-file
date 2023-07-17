@@ -44,11 +44,10 @@
 
                 <thead>
                     <tr>
-                        <th data-options="field:'itemid'" width="30">ID</th>
-                        <th data-options="field:'Jenis DOkumen',align:'left'" width="100">Jenis Dokumen</th>
-                        <th data-options="field:'Nama Dokumen',align:'left'" width="100">Nama Dokumen</th>
-                        <th data-options="field:'Keterangan'" width="150">Keterangan</th>
-                        <th data-options="field:'path',align:'left'" width="80">Path</th>
+                        <th data-options="field:'itemid'" width="150">NIP</th>
+                        <th data-options="field:'Jenis Dokumen',align:'left'" width="150">Nama Karyawan</th>
+                        <th data-options="field:'Nama Dokumen',align:'left'" width="150">Bagian</th>
+                        <th data-options="field:'Nama Dokumen',align:'left'" width="150">Action</th>
                     </tr>
                 </thead>
             </table>
