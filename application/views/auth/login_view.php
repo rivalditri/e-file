@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SDM - Login</title>
+    <title><?= $title;?></title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('vendor/'); ?>fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,19 +41,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">SDM - Perumda Air Minum Tugu Tirta</h1>
                                     </div>
+                                    <?= $this->session->flashdata('message')?>
                                     <form action="<?= base_url('auth')?>" method="post" name="login_form" class="user">
                                         <div class="form-group">
                                             <input name="nip" type="text" class="form-control form-control-user" id="inputUser" placeholder="NIP" value="<?=set_value('nip') ?>">
                                             <?= form_error('nip', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
-                                            <input name="password" type="password" class="form-control form-control-user" id="inputPassword" placeholder="Password" value="<?=set_value('password') ?>">
+                                            <input name="password" type="password" class="form-control form-control-user" id="inputPassword" placeholder="Password">
                                             <?= form_error('password', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="text-right">
-                                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                            </div>
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">
                                             Login
