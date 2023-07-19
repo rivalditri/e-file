@@ -1,8 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
-    
+class Auth extends CI_Controller
+{
+
     public function __construct()
     {
         parent::__construct();
@@ -13,21 +14,23 @@ class Auth extends CI_Controller {
         $data['title'] = 'Login Page E-file Perumda Air Minum Tugu Tirta';
         $this->form_validation->set_rules('nip', 'NIP', 'required|min_length[8]|max_length[8]|trim');
         $this->form_validation->set_rules('password', 'NIP', 'required|min_length[4]|trim');
-        if($this->form_validation->run() == false){
+        if ($this->form_validation->run() == false) {
             $this->load->view('auth/login_view', $data);
-        }else{
+        } else {
             $this->_login();
         }
     }
 
     private function _login()
     {
+        $data['title'] = 'E-file Perumda Air Minum Tugu Tirta';
         $nip = $this->input->post('nip');
-        $password = $this->input->post('password');
-        $user = $this->db->get_where('user', ['nip' => $nip, 'password' => $password])->row_array();
-        if($user){
-            $this->load->view('dashboard/menu');
-        }else{
+        $pwd = $this->input->post('password');
+        // $password = md5('tugutirta'.$pwd);
+        $user = $this->db->get_where('user', ['nip' => $nip, 'password' => $pwd])->row_array();
+        if ($user) {
+            $this->load->view('dashboard/menu', $data);
+        } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">NIP atau Password salah!</div>');
             redirect('auth');
         }
@@ -39,9 +42,9 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules('nip', 'NIP', 'required|min_length[8]|max_length[8]|trim');
         $this->form_validation->set_rules('password1', 'Password', 'required|min_length[4]|trim');
         $this->form_validation->set_rules('password2', 'Password', 'required|min_length[4]|trim|matches[password1]');
-        if($this->form_validation->run() == false){
-            $this->load->view('auth/registration_view', $data);
-        }else{
+        if ($this->form_validation->run() == false) {
+
+        } else {
             $data = [
                 'nip' => htmlspecialchars($this->input->post('nip', true)),
                 'password' => password_hash($this->input->post('password1'), md5('tugutirta')),

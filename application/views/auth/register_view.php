@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Basic Form - jQuery EasyUI Demo</title>
+    <title><?= $this->title;?></title>
     <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/easyui/'); ?>themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="../<?= base_url('vendor/easyui/'); ?>themes/icon.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/easyui/'); ?>demo.css">
@@ -28,10 +28,10 @@
                 <input class="easyui-textbox" name="nip" style="width:90%" data-options="label:'NIP:',required:true,">
             </div>
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="password" style="width:90%" data-options="label:'Password:',required:true" type="password">
+                <input class="easyui-textbox" name="password1" style="width:90%" data-options="label:'Password:',required:true" type="password">
             </div>
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="repassword" style="width:90%" data-options="label:'Re-Password:',required:true" type="password">
+                <input class="easyui-textbox" name="password2" style="width:90%" data-options="label:'Re-Password:',required:true" type="password">
             </div>
             <div style="margin-bottom:20px">
                 <select class="easyui-combobox" name="role" label="Role User" style="width:90%">
