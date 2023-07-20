@@ -41,7 +41,7 @@
 
                     <div id="formDialog" class="easyui-dialog" title="Register"
                         style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
-                        <form id="ff" method="post" action="<?= base_url('auth/registration') ?>">
+                        <form id="ff" action="<?= base_url('auth') ?>" method="post" name="register_form">
                             <div style="margin-bottom:20px">
                                 <input class="easyui-textbox" name="nama" style="width:90%"
                                     data-options="label:'Nama:',required:true">
@@ -64,13 +64,12 @@
                                     <option value="ab">Admin</option>
                                 </select>
                             </div>
+                            <div id="formButtons" style="text-align:center;padding:5px 0">
+                                <button type="submit" name="submit" style="width:80px">Submit</button>
+                                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
+                                    style="width:80px">Clear</a>
+                            </div>
                         </form>
-                    </div>
-                    <div id="formButtons" style="text-align:center;padding:5px 0">
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()"
-                            style="width:80px">Submit</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
-                            style="width:80px">Clear</a>
                     </div>
 
                     <script>

@@ -38,23 +38,24 @@ class Auth extends CI_Controller
 
     public function registration()
     {
-        $data['title'] = 'Registration Page E-file Perumda Air Minum Tugu Tirta';
-        $this->form_validation->set_rules('nip', 'NIP', 'required|min_length[8]|max_length[8]|trim');
-        $this->form_validation->set_rules('password1', 'Password', 'required|min_length[4]|trim');
-        $this->form_validation->set_rules('password2', 'Password', 'required|min_length[4]|trim|matches[password1]');
-        if ($this->form_validation->run() == false) {
+        $this->load->view('auth/login_view');
+        // $data['title'] = 'Registration Page E-file Perumda Air Minum Tugu Tirta';
+        // $this->form_validation->set_rules('nip', 'NIP', 'required|min_length[8]|max_length[8]|trim');
+        // $this->form_validation->set_rules('password1', 'Password', 'required|min_length[4]|trim');
+        // $this->form_validation->set_rules('password2', 'Password', 'required|min_length[4]|trim|matches[password1]');
+        // if ($this->form_validation->run() == false) {
 
-        } else {
-            $data = [
-                'nip' => htmlspecialchars($this->input->post('nip', true)),
-                'password' => password_hash($this->input->post('password1'), md5('tugutirta')),
-                'role_id' => 2,
-                'is_active' => 1,
-                'date_created' => time()
-            ];
-            $this->db->insert('user', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat! Akun anda telah dibuat. Silahkan Login</div>');
-            redirect('auth');
-        }
+        // } else {
+        //     $data = [
+        //         'nip' => htmlspecialchars($this->input->post('nip', true)),
+        //         'password' => password_hash($this->input->post('password1'), md5('tugutirta')),
+        //         'role_id' => 2,
+        //         'is_active' => 1,
+        //         'date_created' => time()
+        //     ];
+        //     $this->db->insert('user', $data);
+        //     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat! Akun anda telah dibuat. Silahkan Login</div>');
+        //     redirect('auth');
+        // }
     }
 }

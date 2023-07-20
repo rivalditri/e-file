@@ -1,0 +1,7 @@
+.search-box {
+	display: inline-block;
+	font-size: 14px;
+	width: 25%;
+	float: right;
+	margin: 10px 10px;
+}
