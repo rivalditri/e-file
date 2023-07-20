@@ -16,30 +16,36 @@
 </head>
 
 <body>
-    <div class="easyui-layout" style="width:100%;height:720px;">
+    <div class="easyui-layout" style="width:100%;height:700px;">
         <!-- header menu -->
-        <div data-options="region:'north'" style="width:100%;height:20%">
-            <div>
+        <div data-options="region:'north'" style="width:100%;height:5%">
+            <!-- <div>
                 <h1>
                     PERUMDA Air Minum Tugu Tirta
                 </h1>
                 <h5>
                     Jl. Terusan Danau Sentani no. 100 Kota Malang - Jawa Timur, Indonesia.
                 </h5>
-            </div>
+            </div> -->
             <!-- sidebar menu -->
         </div>
+
         <div data-options="region:'west',split:true" title="Menu" style="width:10%;">
             <div class="easyui-accordion" data-options="fit:true,border:false">
                 <!-- menu Karyawan -->
                 <div title="Karyawan" style="padding:10px;">
+                    <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Bagian/ Manajer</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Asisten Manajer</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Supervisor</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Staf</a>
+                    <a href="javascript:void(0)" class="easyui-sidebutton" plain="true" onclick="" style="width:100%">Tambahkan Jenis a>
 
                 </div>
                 <div title="Manage User" data-options="selected:true" style="padding:20px;">
                     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog()" style="width:100%">Add User</a>
 
                     <div id="formDialog" class="easyui-dialog" title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
-                        <form id="ff" action="<?= base_url('auth') ?>" method="post" name="register_form">
+                        <form id="ff" method="post">
                             <div style="margin-bottom:20px">
                                 <input class="easyui-textbox" name="nama" style="width:90%" data-options="label:'Nama:',required:true">
                             </div>
@@ -58,11 +64,11 @@
                                     <option value="ab">Admin</option>
                                 </select>
                             </div>
-                            <div id="formButtons" style="text-align:center;padding:5px 0">
-                                <button type="submit" name="submit" style="width:80px">Submit</button>
-                                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
-                            </div>
                         </form>
+                    </div>
+                    <div id="formButtons" style="text-align:center;padding:5px 0">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
                     </div>
 
                     <script>
@@ -85,8 +91,7 @@
                     <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 2</a>
                     <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 3</a>
                     <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 4</a>
-                    <a href="javascript:void(0)" class="easyui-sidebutton" plain="true" onclick="" style="width:100%">Tambahkan Jenis Dokumen</a>
-
+                    <a href="javascript:void(0)" class="easyui-sidebutton" plain="true" onclick="" style="width:100%">Tambahkan Jenis a>
                 </div>
             </div>
         </div>
@@ -100,7 +105,7 @@
                             <a href="#" class="easyui-linkbutton" onclick="getSelected()">Pilih </a>
                         </div>
                     </div>
-                    <table class="easyui-datagrid" id="dg" title="Users Management" url="getData.php" toolbar="#toolbar" pagination="true" rownumbers="true" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
+                    <table class="easyui-datagrid" id="dg" title="Users Management" url="getData.php" toolbar="#toolbar" pagination="true" rownumbers="true" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true,">
                         <thead>
                             <tr>
                                 <th data-options="field:'itemid'" width="150">NIP</th>
