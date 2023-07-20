@@ -36,27 +36,21 @@
 
                 </div>
                 <div title="Manage User" data-options="selected:true" style="padding:20px;">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog()"
-                        style="width:100%">Add User</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog()" style="width:100%">Add User</a>
 
-                    <div id="formDialog" class="easyui-dialog" title="Register"
-                        style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
+                    <div id="formDialog" class="easyui-dialog" title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
                         <form id="ff" action="<?= base_url('auth') ?>" method="post" name="register_form">
                             <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="nama" style="width:90%"
-                                    data-options="label:'Nama:',required:true">
+                                <input class="easyui-textbox" name="nama" style="width:90%" data-options="label:'Nama:',required:true">
                             </div>
                             <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="nip" style="width:90%"
-                                    data-options="label:'NIP:',required:true,">
+                                <input class="easyui-textbox" name="nip" style="width:90%" data-options="label:'NIP:',required:true,">
                             </div>
                             <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="password1" style="width:90%"
-                                    data-options="label:'Password:',required:true" type="password">
+                                <input class="easyui-textbox" name="password1" style="width:90%" data-options="label:'Password:',required:true" type="password">
                             </div>
                             <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="password2" style="width:90%"
-                                    data-options="label:'Re-Password:',required:true" type="password">
+                                <input class="easyui-textbox" name="password2" style="width:90%" data-options="label:'Re-Password:',required:true" type="password">
                             </div>
                             <div style="margin-bottom:20px">
                                 <select class="easyui-combobox" name="role" label="Role User" style="width:90%">
@@ -66,8 +60,7 @@
                             </div>
                             <div id="formButtons" style="text-align:center;padding:5px 0">
                                 <button type="submit" name="submit" style="width:80px">Submit</button>
-                                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
-                                    style="width:80px">Clear</a>
+                                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
                             </div>
                         </form>
                     </div>
@@ -87,8 +80,13 @@
                         }
                     </script>
                 </div>
-                <div title="Dokumen" style="padding:10px">
-                    content3
+                <div title="Dokumen" style="padding:0px">
+                    <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 1</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 2</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 3</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 4</a>
+                    <a href="javascript:void(0)" class="easyui-sidebutton" plain="true" onclick="" style="width:100%">Tambahkan Jenis Dokumen</a>
+
                 </div>
             </div>
         </div>
@@ -102,9 +100,7 @@
                             <a href="#" class="easyui-linkbutton" onclick="getSelected()">Pilih </a>
                         </div>
                     </div>
-                    <table class="easyui-datagrid" id="dg" title="Users Management" url="getData.php" toolbar="#toolbar"
-                        pagination="true" rownumbers="true"
-                        data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
+                    <table class="easyui-datagrid" id="dg" title="Users Management" url="getData.php" toolbar="#toolbar" pagination="true" rownumbers="true" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
                         <thead>
                             <tr>
                                 <th data-options="field:'itemid'" width="150">NIP</th>
@@ -116,19 +112,61 @@
                     </table>
                 </div>
                 <div title="Dokumen" style="padding:5px;" rownumbers="true">
-                    <div style="margin:20px 0;">
-                        <!-- <div style="text-align: right;">
-                            <a href="#" class="easyui-linkbutton" onclick="getSelected()">Pilih </a>
-                        </div> -->
-                        <h2 style="margin-bottom: 10px;">Dokumen - User</h2>
+                    <div style="margin:10px 0;">
+                        <h2 style="margin-bottom: 0px;">Dokumen - User</h2>
                         <h4 style="margin-bottom: 10px;">Direksi PERUMDA Tugu Tirta</h4>
+                        <div style="text-align: right;">
+                            <a href="#" class="easyui-linkbutton" onclick="openFormDialog1()">Tambah Dokumen</a>
+                            <div id="formDokumen" class="easyui-dialog" title="Dokumen" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
+                                <form id="ff" action="<?= base_url('auth') ?>" method="post" name="dokumen_form">
+                                    <div style="margin-bottom:20px">
+                                        <select class="easyui-combobox" name="jenisdokumen" label="Jenis Dokumen" style="width:90%">
+                                            <option value="aa">Dokumen 1</option>
+                                            <option value="ab">Dokumen 2</option>
+                                            <option value="aa">Dokumen 3</option>
+                                            <option value="ab">Dokumen 4</option>
+                                        </select>
+                                    </div>
+                                    <div style="margin-bottom:20px">
+                                        <input class="easyui-textbox" name="namadokumen" style="width:90%" data-options="label:'Nama Dokumen:',required:true,">
+                                    </div>
+                                    <div style="margin-bottom:20px">
+                                        <input class="easyui-textbox" name="keterangan" style="width:90%" data-options="label:'Keterangan:',required:true">
+                                    </div>
+                                    <div style="margin-bottom:20px">
+                                        <input class="easyui-textbox" name="path" style="width:90%" data-options="label:'Path:',required:true">
+                                    </div>
+                                    <div style="margin-bottom:20px">
+                                        <input class="f1 easyui-filebox" name="file" style="width:90%" data-options="label:'File:',required:true">
+                                    </div>
+                                    <div id="formButtons" style="text-align:center;padding:5px 0">
+                                        <button type="submit" name="submit" style="width:80px">Submit</button>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <script>
+                                function openFormDialog1() {
+                                    $('#formDokumen').dialog('open');
+                                }
+
+                                function submitForm() {
+                                    $('#ff').form('submit');
+                                    $('#formDokumen').dialog('close');
+                                }
+
+                                function clearForm() {
+                                    $('#ff').form('clear');
+                                }
+                            </script>
+                        </div>
                     </div>
-                    <table class="easyui-datagrid" id="dg" title="Dokumen" url="getData.php" toolbar="#toolbar"
-                        pagination="true" rownumbers="true"
-                        data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
+
+                    <table class="easyui-datagrid" id="dg" title="Dokumen" url="getData.php" toolbar="#toolbar" pagination="true" rownumbers="true" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
                         <thead>
                             <tr>
-                                <th data-options="field:'itemid'" width="150">nama Dokumen</th>
+                                <th data-options="field:'itemid'" width="150">Nama Dokumen</th>
                                 <th data-options="field:'Jenis Dokumen',align:'left'" width="150">Jenis Dokumen</th>
                                 <th data-options="field:'Nama Dokumen',align:'left'" width="150">Path</th>
                                 <th data-options="field:'Nama Dokumen',align:'left'" width="150">Action</th>
