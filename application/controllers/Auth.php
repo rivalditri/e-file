@@ -28,7 +28,7 @@ class Auth extends CI_Controller
         $pwd = md5($this->input->post('password'));
         $user = $this->db->get_where('user', ['nip' => $nip, 'password' => $pwd])->row_array();
         if ($user) {
-            $this->load->view('dashboard/menu', $data);
+            $this->load->view('dashboard/menu1', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">NIP atau Password salah!</div>');
             redirect('auth');
