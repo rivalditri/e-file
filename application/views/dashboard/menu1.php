@@ -16,9 +16,9 @@
 </head>
 
 <body>
-    <div class="easyui-layout" style="width:100%;height:700px;">
+    <div class="easyui-layout modalBox" style="width:100%;height:700px;">
         <!-- header menu -->
-        <div data-options="region:'north'" style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
+        <div class="modalContent" data-options="region:'north'" style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
             <div style="float: left;">
                 Perumda Tugu Tirta
             </div>
@@ -62,7 +62,7 @@
                     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog()" style="width:100%;  margin: 5px;">Tambah User</a>
                     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog1()" style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
 
-                    <div id="formDialog" class="easyui-dialog" title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
+                    <div id="formDialog" class="easyui-dialog " title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
                         <form id="ff" method="post">
                             <div style="margin-bottom:20px">
                                 <input class="easyui-textbox" name="nama" style="width:90%" data-options="label:'Nama:',required:true">
@@ -87,6 +87,7 @@
                     <div id="formButtons" style="text-align:center;padding:5px 0">
                         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm()" style="width:80px">Close</a>
                     </div>
 
                     <div id="formDialog1" class="easyui-dialog" title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
@@ -106,26 +107,38 @@
                     </div>
 
                     <script>
+                        var modal =$('.modalBox');
                         function openFormDialog() {
                             $('#formDialog').dialog('open');
+                            modal.css('filter', 'blur(5px)');
+                        }
+                        function closeForm() {
+                            $('#formDialog').dialog('close');
+                            modal.hide();
                         }
 
                         function openFormDialog1() {
                             $('#formDialog1').dialog('open');
+                            modal.show('filter', 'blur(5px)');
                         }
 
                         function submitForm() {
                             $('#ff').form('submit');
                             $('#formDialog').dialog('close');
+                            modal.closest();
                         }
 
-                        function submitForm() {
+                        function submitForm1() {
                             $('#ff').form('submit');
                             $('#formDialog1').dialog('close');
+                            modal.hide();
                         }
-
+                        $('.close').click(function() {
+                            modal.hide('filter', 'blur(5px)');
+                        });
                         function clearForm() {
                             $('#ff').form('clear');
+
                         }
                     </script>
                 </div>
