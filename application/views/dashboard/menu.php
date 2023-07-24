@@ -6,12 +6,12 @@
     <title>
         <?= $title; ?>
     </title>
-    <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/easyui/'); ?>themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../<?= base_url('vendor/easyui/'); ?>themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/easyui/'); ?>demo.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/'); ?>style.css">
-    <script type="text/javascript" src="<?= base_url('vendor/easyui/'); ?>jquery.min.js"></script>
-    <script type="text/javascript" src="<?= base_url('vendor/easyui/'); ?>jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
+	<link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
+	<script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 
 </head>
 
@@ -91,7 +91,7 @@
                     <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 2</a>
                     <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 3</a>
                     <a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="" style="width:100%">Dokumen 4</a>
-                    <a href="javascript:void(0)" class="easyui-sidebutton" plain="true" onclick="" style="width:100%">Tambahkan Jenis a>
+                    <a href="javascript:void(0)" class="easyui-sidebutton" plain="true" onclick="" style="width:100%">Tambahkan Jenis </a>
                 </div>
             </div>
         </div>
