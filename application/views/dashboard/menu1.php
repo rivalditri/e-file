@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <div class="easyui-layout " style="width:100%;height:700px;">
-        <div class="easyui-layout modalBox" data-options="fit:true">
+    <div class="easyui-layout modalBox" style="width:100%;height: 675px;">
+        <!-- <div class="easyui-layout " data-options="fit:true"> -->
             <!-- header menu -->
             <div class="modalContent" data-options="region:'north'" style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
                 <div style="float: left;">
@@ -208,7 +208,7 @@
         </div>
 
     </div>
-    </div>
+    <!-- </div> -->
 
 
     </div>
