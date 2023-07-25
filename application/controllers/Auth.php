@@ -15,7 +15,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('nip', 'NIP', 'required|min_length[8]|max_length[8]|trim');
         $this->form_validation->set_rules('password', 'NIP', 'required|min_length[4]|trim');
         if ($this->form_validation->run() == false) {
-            $this->load->view('auth/login', $data);
+            $this->load->view('auth/login_view', $data);
         } else {
             $this->_login();
         }
