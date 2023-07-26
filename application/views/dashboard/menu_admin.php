@@ -168,9 +168,9 @@
                     <!-- </div> -->
                     <div id="mm">
                         <div data-options="name:'all',iconCls:'icon-ok'">All </div>
-                        <div data-options="name:'sports'">NIP</div>
-                        <div data-options="name:'sports'">Nama</div>
-                        <div data-options="name:'sports'">Jenis dokumen</div>
+                        <div data-options="name:'sports',iconCls:'icon-man'">NIP</div>
+                        <div data-options="name:'sports',iconCls:'icon-man'">Nama</div>
+                        <div data-options="name:'sports',iconCls:'icon-man'">Jenis dokumen</div>
                     </div>
                 </div>
                 <table class="easyui-datagrid" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
