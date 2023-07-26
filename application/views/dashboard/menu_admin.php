@@ -154,8 +154,10 @@
 
                         function submitForm() {
                             $('#ff').form('submit');
-                            $('#formDialog').dialog('close');
+                            $.messager.alert('Data Berhsail Disimpan', 'info');
+                            // $('#formDialog').dialog('close');
                             modal.css('filter', 'none');
+
                         }
 
                         function submitForm1() {
