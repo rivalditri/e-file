@@ -59,10 +59,105 @@
                         </li>
                     </ul>
 
-                    
+                    <div title="Manage" data-options="selected:true" style="padding:20px;">
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog()" style="width:100%;  margin: 5px;">Tambah User</a> -->
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog1()" style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
+
+                        <!-- <div id="formDialog" class="easyui-dialog " title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons" closable="false">
+                            <form id="ff" method="post">
+                                <div style="margin-bottom:20px">
+                                    <input class="easyui-textbox" name="nama" style="width:90%" data-options="label:'Nama:',required:true">
+                                </div>
+                                <div style="margin-bottom:20px">
+                                    <input class="easyui-textbox" name="nip" style="width:90%" data-options="label:'NIP:',required:true,">
+                                </div>
+                                <div style="margin-bottom:20px">
+                                    <input class="easyui-textbox" name="password1" style="width:90%" data-options="label:'Password:',required:true" type="password">
+                                </div>
+                                <div style="margin-bottom:20px">
+                                    <input class="easyui-textbox" name="password2" style="width:90%" data-options="label:'Re-Password:',required:true" type="password">
+                                </div>
+                                <div style="margin-bottom:20px">
+                                    <select class="easyui-combobox" name="role" label="Role User" style="width:90%">
+                                        <option value="aa">Administrator</option>
+                                        <option value="ab">Admin</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="formButtons" style="text-align:center;padding:5px 0">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm()" style="width:80px">Close</a>
+                        </div> -->
+
+                        <div id="formDialog1" class="easyui-dialog" title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons" closable="false">
+                            <form id="ff1" method="post">
+                                <div style="margin-bottom:20px">
+                                    <input class="easyui-textbox" name="jenisdokumen" style="width:90%" data-options="label:'Jenis Dokumen:',required:true">
+                                </div>
+                                <div style="margin-bottom:20px">
+                                    <input class="easyui-textbox" name="kodejenisdokumen" style="width:90%" data-options="label:'Kode Jenis Dokumen:',required:true,">
+                                </div>
+
+                            </form>
+                        </div>
+                        <div id="formButtons" style="text-align:center;padding:5px 0">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm1()" style="width:80px">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm1()" style="width:80px">Clear</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm1()" style="width:80px">Close</a>
+                        </div>
+
+                        <script>
+                            var modal = $('.modalBox');
+
+                            function openFormDialog() {
+                                $('#formDialog').dialog('open');
+                                modal.css('filter', 'blur(5px)');
+
+                            }
+
+                            function closeForm() {
+                                $('#formDialog').dialog('close');
+                                modal.css('filter', 'none');
+                            }
+
+                            function openFormDialog1() {
+                                $('#formDialog1').dialog('open');
+                                modal.css('filter', 'blur(5px)');
+                            }
+
+                            function closeForm1() {
+                                $('#formDialog1').dialog('close');
+                                modal.css('filter', 'none');
+                            }
+
+                            function submitForm() {
+                                $('#ff').form('submit');
+                                $('#formDialog').dialog('close');
+                                modal.css('filter', 'none');
+                            }
+
+                            function submitForm1() {
+                                $('#ff1').form('submit');
+                                $('#formDialog1').dialog('close');
+                                modal.css('filter', 'none');
+                            }
+
+                            function clearForm() {
+                                $('#ff').form('clear');
+
+                            }
+
+                            function clearForm1() {
+                                $('#ff1').form('clear');
+
+                            }
+                        </script>
+                    </div>
                 </div>
             </div>
-            <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+            <div data-options="region:'center',title:'Users',iconCls:'icon-ok'">
                 <div id="toolbar">
                     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openFormDialog()">Tambah</a>
                     <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
