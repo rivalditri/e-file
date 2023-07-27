@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <?= $this->session->flashdata('message') ?>
     <div class="easyui-layout modalBox" style="width:100%;height: 675px;">
         <!-- <div class="easyui-layout " data-options="fit:true"> -->
         <!-- header menu -->

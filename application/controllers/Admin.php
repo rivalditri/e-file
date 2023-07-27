@@ -7,6 +7,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        $this->load->model('user_model');
     }
     public function index()
     {
@@ -29,20 +30,9 @@ class Admin extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('dashboard/menu_admin', $data);
         } else {
-            $this->_addUser();
+            $this->user_model->create_user();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User berhasil ditambahkan</div>');
+            $this->load->view('dashboard/menu_admin');
         }
-    }
-
-    private function _adduser()
-    {
-        $data = [
-            'nip' => htmlspecialchars($this->input->post('nip', true)),
-            'nama' => htmlspecialchars($this->input->post('nama', true)),
-            'role_id' => $this->input->post('role', true),
-            'password' => md5($this->input->post('password1')),
-        ];
-        $this->db->insert('user', $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat! Akun anda telah dibuat. Silahkan Login</div>');
-        $this->load->view('dashboard/menu_admin');
     }
 }
