@@ -155,8 +155,8 @@
 
                         function submitForm() {
                             $('#ff').form('submit');
-                            $.messager.alert('Data Berhsail Disimpan', 'info');
-                            // $('#formDialog').dialog('close');
+                            // $.messager.alert('notif','Data Berhasil Disimpan', 'info');
+                            $('#formDialog').dialog('close');
                             modal.css('filter', 'none');
 
                         }
@@ -204,13 +204,28 @@
                 singleSelect="true">
                 <thead>
                     <tr>
-                        <th field="nama" width="50" editor="{type:'validatebox',options:{required:true}}">Nama Karyawan
+                        <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP
                         </th>
-                        <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP</th>
+                        <th field="nama" width="50" editor="{type:'validatebox',options:{required:true}}">Nama Karyawan</th>
                         <th field="jabatan" width="50" editor="text">Jabatan</th>
                         <!-- <th field="email" width="50" editor="{type:'validatebox',options:{validType:'email'}}">Email</th> -->
                     </tr>
                 </thead>
+                <tbody>
+                    <?php foreach ($karyawan as $k) : ?>
+                    <tr>
+                        <td>
+                            <?= $k['nip']; ?>
+                        </td>
+                        <td>
+                            <?= $k['nama_karyawan']; ?>
+                        </td>
+                        <td>
+                            <?= $k['jabatan']; ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
         <style>

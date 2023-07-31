@@ -8,10 +8,12 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('user_model');
+        $this->load->model('karyawan_model');
     }
     public function index()
     {
-        $data['title'] = 'admin - e-file perumda tugu tirta';
+        $data['title'] = 'tes';
+        $data['karyawan'] = $this->karyawan_model->get_karyawan();
         $this->load->view('dashboard/menu_admin', $data);
     }
 
