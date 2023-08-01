@@ -271,10 +271,10 @@
                     <?php foreach ($dokumen as $dok): ?>
                         <tr>
                             <td>
-                                <?= $dok['id_jenis_dokumen']; ?>
+                                <?= $dok['kode_jenis_dokumen']; ?>
                             </td>
                             <td>
-                                <?= $dok['id_dokumen']; ?>
+                                <?= $dok['jenis_dokumen']; ?>
                             </td>
                             <td>
                                 <?= $dok['nama_dokumen']; ?>
