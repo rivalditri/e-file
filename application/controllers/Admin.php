@@ -9,6 +9,7 @@ class Admin extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('user_model');
         $this->load->model('karyawan_model');
+        $this->load->model('dokumen_model');
     }
     public function index()
     {
@@ -36,5 +37,11 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User berhasil ditambahkan</div>');
             $this->load->view('dashboard/menu_admin');
         }
+    }
+
+    public function manageDoc()
+    {
+        $data['dokumen'] = $this->dokumen_model->get_dokumen();
+        $this->load->view('dashboard/menu_dokumen', $data);
     }
 }
