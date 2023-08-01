@@ -13,14 +13,14 @@ class Admin extends CI_Controller
     }
     public function index()
     {
-        $data['title'] = 'tes';
+        $data['title'] = 'admin e-link perumda tugu tirta';
         $data['karyawan'] = $this->karyawan_model->get_karyawan();
         $this->load->view('dashboard/menu_admin', $data);
     }
 
     public function registration()
     {
-        $data['title'] = 'admin - e-file perumda tugu tirta';
+        $data['title'] = 'admin - e-link perumda tugu tirta';
         $this->form_validation->set_rules('nip', 'NIP', 'required|min_length[8]|max_length[8]|trim|is_unique[user.nip]', [
             'is_unique' => 'NIP ini sudah terdaftar!'
         ]);
@@ -41,6 +41,7 @@ class Admin extends CI_Controller
 
     public function manageDoc()
     {
+        $data['title'] = 'admin - e-link perumda tugu tirta';
         $data['dokumen'] = $this->dokumen_model->get_dokumen();
         $this->load->view('dashboard/menu_dokumen', $data);
     }
