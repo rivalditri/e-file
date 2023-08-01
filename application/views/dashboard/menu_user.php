@@ -57,18 +57,27 @@ https://templatemo.com/tm-581-kind-heart-charity
                     </div>
 
 
-                    <div class="col-lg-2 col-md-6 col-12 mb-4 ">
+                    <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="#" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png"
-                                    class="featured-block-image img-fluid" alt="">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                                <p class="featured-block-text"> Data <strong>Pribadi</strong></p>
                             </a>
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 col-8 mb-4 ">
+                    <div class="col-lg-3 col-md-6 col-12 mb-4 ">
+                        <div class="featured-block d-flex justify-content-center align-items-center">
+                            <a href="#" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png" class="featured-block-image img-fluid" alt="">
+
+                                <p class="featured-block-text"> Surat <strong>Keputusan</strong></p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-lg-2 col-md-6 col-8 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="#" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/data1.png"
@@ -98,26 +107,24 @@ https://templatemo.com/tm-581-kind-heart-charity
                                 <p class="featured-block-text"> Data <strong>1</strong></p>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-lg-2 col-md-6 col-12 mb-4 ">
+                    <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="detail_data.html" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png"
-                                    class="featured-block-image img-fluid" alt="">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                                <p class="featured-block-text"> Data <strong> Ijazah</strong></p>
                             </a>
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-6 col-12 mb-4 mb-lg-0">
+                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="detail_data.html" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder2.png"
-                                    class="featured-block-image img-fluid" alt="">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder2.png" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                                <p class="featured-block-text"> Data <strong>Sertifikat</strong></p>
                             </a>
                         </div>
                     </div>
