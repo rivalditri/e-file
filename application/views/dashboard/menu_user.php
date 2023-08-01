@@ -1,218 +1,142 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>
-        <?= $title; ?>
-    </title>
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
-    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>E-Filling Perumda Tugu Tirta</title>
+
+    <!-- CSS FILES -->
+    <link href="<?= base_url('vendor/user/') ?>css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="<?= base_url('vendor/user/') ?>css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="<?= base_url('vendor/user/') ?>css/templatemo-kind-heart-charity.css" rel="stylesheet">
+    <!--
+
+TemplateMo 581 Kind Heart Charity
+
+https://templatemo.com/tm-581-kind-heart-charity
+
+-->
 
 </head>
 
-<body>
-    <div class="easyui-layout modalBox" style="width:100%;height: 675px;">
-        <!-- <div class="easyui-layout " data-options="fit:true"> -->
-            <!-- header menu -->
-            <div class="modalContent" data-options="region:'north'" style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
-                <div style="float: left;">
-                    Perumda Tugu Tirta
-                </div>
-                <div style="float: right;">
-                    <a href="#" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
-                    <div id="mm2" style="width:100px;">
-                        <div>Profil</div>
-                        <div>LogOut</div>
-                    </div>
-                </div>
-            </div>
+<body id="section_1">
 
 
-            <!-- <div data-options="region:'east',split:true" title="East" style="width:100px;"></div> -->
-            <div data-options="region:'west',split:true" title="Menu" style="width:15%;">
-                <div class="easyui-accordion" data-options="fit:true,border:false">
-
-                    <ul class="easyui-tree">
-                        <li>
-                            <span>Karyawan</span>
-                            <ul>
-                                <li><span>Bagian / Manajer</span></li>
-                                <li><span>Asisten Manajer</span></li>
-                                <li><span>Supervisor</span></li>
-                                <li><span>Staff</span></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <span>Dokumen</span>
-                            <ul>
-                                <li><span>Dokumen 1</span></li>
-                                <li><span>Dokumen 2</span></li>
-                                <li><span>Dokumen 3</span></li>
-                                <li><span>Dokumen 4</span></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <div title="Manage" data-options="selected:true" style="padding:20px;">
-                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog()" style="width:100%;  margin: 5px;">Tambah User</a> -->
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog1()" style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
-
-                        <!-- <div id="formDialog" class="easyui-dialog " title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons" closable="false">
-                            <form id="ff" method="post">
-                                <div style="margin-bottom:20px">
-                                    <input class="easyui-textbox" name="nama" style="width:90%" data-options="label:'Nama:',required:true">
-                                </div>
-                                <div style="margin-bottom:20px">
-                                    <input class="easyui-textbox" name="nip" style="width:90%" data-options="label:'NIP:',required:true,">
-                                </div>
-                                <div style="margin-bottom:20px">
-                                    <input class="easyui-textbox" name="password1" style="width:90%" data-options="label:'Password:',required:true" type="password">
-                                </div>
-                                <div style="margin-bottom:20px">
-                                    <input class="easyui-textbox" name="password2" style="width:90%" data-options="label:'Re-Password:',required:true" type="password">
-                                </div>
-                                <div style="margin-bottom:20px">
-                                    <select class="easyui-combobox" name="role" label="Role User" style="width:90%">
-                                        <option value="aa">Administrator</option>
-                                        <option value="ab">Admin</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                        <div id="formButtons" style="text-align:center;padding:5px 0">
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm()" style="width:80px">Close</a>
-                        </div> -->
-
-                        <div id="formDialog1" class="easyui-dialog" title="Register" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons" closable="false">
-                            <form id="ff1" method="post">
-                                <div style="margin-bottom:20px">
-                                    <input class="easyui-textbox" name="jenisdokumen" style="width:90%" data-options="label:'Jenis Dokumen:',required:true">
-                                </div>
-                                <div style="margin-bottom:20px">
-                                    <input class="easyui-textbox" name="kodejenisdokumen" style="width:90%" data-options="label:'Kode Jenis Dokumen:',required:true,">
-                                </div>
-
-                            </form>
-                        </div>
-                        <div id="formButtons" style="text-align:center;padding:5px 0">
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm1()" style="width:80px">Submit</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm1()" style="width:80px">Clear</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm1()" style="width:80px">Close</a>
-                        </div>
-
-                        <script>
-                            var modal = $('.modalBox');
-
-                            function openFormDialog() {
-                                $('#formDialog').dialog('open');
-                                modal.css('filter', 'blur(5px)');
-
-                            }
-
-                            function closeForm() {
-                                $('#formDialog').dialog('close');
-                                modal.css('filter', 'none');
-                            }
-
-                            function openFormDialog1() {
-                                $('#formDialog1').dialog('open');
-                                modal.css('filter', 'blur(5px)');
-                            }
-
-                            function closeForm1() {
-                                $('#formDialog1').dialog('close');
-                                modal.css('filter', 'none');
-                            }
-
-                            function submitForm() {
-                                $('#ff').form('submit');
-                                $('#formDialog').dialog('close');
-                                modal.css('filter', 'none');
-                            }
-
-                            function submitForm1() {
-                                $('#ff1').form('submit');
-                                $('#formDialog1').dialog('close');
-                                modal.css('filter', 'none');
-                            }
-
-                            function clearForm() {
-                                $('#ff').form('clear');
-
-                            }
-
-                            function clearForm1() {
-                                $('#ff1').form('clear');
-
-                            }
-                        </script>
-                    </div>
-                </div>
-            </div>
-            <div data-options="region:'center',title:'Users',iconCls:'icon-ok'">
-                <div id="toolbar">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openFormDialog()">Tambah</a>
-                    <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a> -->
-                    <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a> -->
-                    <!-- <div class="search-container"> -->
-                    <input class="easyui-searchbox" data-options="prompt:'Please Input Value',menu:'#mm',searcher:doSearch" style="width: 20%;">
-                    <!-- </div> -->
-                    <div id="mm">
-                        <div data-options="name:'all',iconCls:'icon-ok'">All </div>
-                        <div data-options="name:'sports',iconCls:'icon-man'">NIP</div>
-                        <div data-options="name:'sports',iconCls:'icon-man'">Nama</div>
-                        <div data-options="name:'sports',iconCls:'icon-man'">Jenis dokumen</div>
-                    </div>
-                </div>
-                <table class="easyui-datagrid" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
-                    <thead>
-                        <tr>
-                            <th field="nama" width="50" editor="{type:'validatebox',options:{required:true}}">Nama Karyawan</th>
-                            <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP</th>
-                            <th field="jabatan" width="50" editor="text">Jabatan</th>
-                            <!-- <th field="email" width="50" editor="{type:'validatebox',options:{validType:'email'}}">Email</th> -->
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <style>
-                .sidebar {
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    gap: 10px;
-                }
-
-                .easyui-linkbutton {
-                    height: 28px;
-                    line-height: 28px;
-                }
-            </style>
-
-            <script>
-                function doSearch(value, name) {
-                    alert('You input: ' + value + '(' + name + ')');
-                }
-            </script>
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="<?= base_url('vendor/user/') ?>images/logo.png" class="logo img-fluid" alt="Kind Heart Charity">
+                <span>
+                    Helllo, User
+                    <small>Direktur Utama(Jabatan)</small>
+                </span>
+            </a>
 
 
         </div>
+    </nav>
 
-    </div>
-    <!-- </div> -->
+    <main>
 
 
-    </div>
 
+        <section class="section-padding">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-12 col-8 text-center mx-auto">
+                        <h2 class="mb-5">Welcome to E-Filling Perumda Tugu Tirta</h2>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-6 col-12 mb-4 ">
+                        <div class="featured-block d-flex justify-content-center align-items-center">
+                            <a href="#" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png"
+                                    class="featured-block-image img-fluid" alt="">
+
+                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 col-8 mb-4 ">
+                        <div class="featured-block d-flex justify-content-center align-items-center">
+                            <a href="#" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/data1.png"
+                                    class="featured-block-image img-fluid" alt="">
+
+                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 col-12 mb-4 ">
+                        <div class="featured-block d-flex justify-content-center align-items-center">
+                            <a href="#" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/data2.png"
+                                    class="featured-block-image img-fluid" alt="">
+
+                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-12 mb-4 ">
+                        <div class="featured-block d-flex justify-content-center align-items-center">
+                            <a href="#" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/data.png"
+                                    class="featured-block-image img-fluid" alt="">
+
+                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 col-12 mb-4 ">
+                        <div class="featured-block d-flex justify-content-center align-items-center">
+                            <a href="detail_data.html" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png"
+                                    class="featured-block-image img-fluid" alt="">
+
+                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="featured-block d-flex justify-content-center align-items-center">
+                            <a href="detail_data.html" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder2.png"
+                                    class="featured-block-image img-fluid" alt="">
+
+                                <p class="featured-block-text"> Data <strong>1</strong></p>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="<?= base_url('vendor/user/') ?>js/jquery.min.js"></script>
+    <script src="<?= base_url('vendor/user/') ?>js/bootstrap.min.js"></script>
+    <script src="<?= base_url('vendor/user/') ?>js/jquery.sticky.js"></script>
+    <script src="<?= base_url('vendor/user/') ?>js/click-scroll.js"></script>
+    <script src="<?= base_url('vendor/user/') ?>js/counter.js"></script>
+    <script src="<?= base_url('vendor/user/') ?>js/custom.js"></script>
 
 </body>
 
