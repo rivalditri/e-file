@@ -113,7 +113,7 @@ https://templatemo.com/tm-581-kind-heart-charity
                             <a href="detail_data.html" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"> Data <strong> Ijazah</strong></p>
+                                <p class="featured-block-text"> <strong> Ijazah</strong></p>
                             </a>
                         </div>
                     </div>
@@ -123,7 +123,7 @@ https://templatemo.com/tm-581-kind-heart-charity
                             <a href="detail_data.html" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/folder2.png" class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"> Data <strong>Sertifikat</strong></p>
+                                <p class="featured-block-text"> <strong>Sertifikat</strong></p>
                             </a>
                         </div>
                     </div>
