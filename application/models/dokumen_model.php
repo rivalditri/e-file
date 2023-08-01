@@ -10,7 +10,7 @@ class dokumen_model extends CI_Model
 
     public function get_dokumen()
     {
-        $query = $this->db->get('dokumen');
+        $query = $this->db->select('*')->from('dokumen')->join('jenis_dokumen', 'jenis_dokumen.id_jenis_dokumen = dokumen.id_jenis_dokumen')->get();
         return $query->result_array();
     }
 }
