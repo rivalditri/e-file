@@ -28,10 +28,6 @@
             <div style="float: right;">
                 <a href="<?= base_url('admin/LogOut') ?>" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
                 <div id="mm2" style="width:100px;">
-                <!-- <div style="float: center;">                   
-                    <a href="<?= base_url('admin/profile') ?>">Profile</a>
-                    </div> -->
-
                     <div style="float: center;">                   
                     <a href="<?= base_url('admin/LogOut') ?>">LogOut</a>
                     </div>
