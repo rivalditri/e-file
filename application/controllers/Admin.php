@@ -45,4 +45,18 @@ class Admin extends CI_Controller
         $data['dokumen'] = $this->dokumen_model->get_dokumen();
         $this->load->view('dashboard/menu_dokumen', $data);
     }
+
+    public function logOut()
+    {
+        $data['title'] = 'admin - e-link perumda tugu tirta';
+        $data['dokumen'] = $this->dokumen_model->get_dokumen();
+        $this->load->view('auth/login_view', $data);
+    }
+
+    // public function profile()
+    // {
+    //     $data['title'] = 'admin - e-link perumda tugu tirta';
+    //     $data['dokumen'] = $this->dokumen_model->get_dokumen();
+    //     $this->load->view('dashboard/menu_user', $data);
+    // }
 }

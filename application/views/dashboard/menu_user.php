@@ -38,6 +38,13 @@ https://templatemo.com/tm-581-kind-heart-charity
                     Helllo, User
                     <small>Direktur Utama(Jabatan)</small>
                 </span>
+              
+                <div id="mm2" style="width:100px;">
+
+                    <div style="float: center;">                   
+                    <a href="<?= base_url('admin/LogOut') ?>">LogOut</a>
+                    </div>
+                </div>
             </a>
 
 
@@ -69,7 +76,7 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="#" class="d-block">
+                        <a href="<?= base_url('sk') ?>" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"> Surat <strong>Keputusan</strong></p>
@@ -111,7 +118,7 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="detail_data.html" class="d-block">
+                            <a href="menu_sk.php" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"> Data <strong> Ijazah</strong></p>
