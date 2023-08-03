@@ -93,7 +93,7 @@
                             </div>
                             <div style="margin-bottom:20px">
                                 <input class="easyui-textbox" name="password2" style="width:90%"
-                                    data-options="label:'Re-Password:',required:true" type="password">
+                                    data-options="label:'Re-Password:',zzzzzzrequired:true" type="password">
                             </div>
                             <div style="margin-bottom:20px">
                                 <select class="easyui-combobox" name="role" label="Role User" style="width:90%">

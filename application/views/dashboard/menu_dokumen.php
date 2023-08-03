@@ -111,24 +111,31 @@
 
                     <div id="formDialog2" class="easyui-dialog " title="Tambah Dokumen" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons" closable="false">
                         <form id="ff2" method="post">
-                        <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="nip" style="width:90%" data-options="label:'NIP:',required:true">
+                            <div style="margin-bottom: 20px;">
+                                <label for="nip">NIP:</label>
+                                <input id="nip" class="easyui-textbox" name="nip" style="width: 90%;" data-options="required:true">
                             </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="kodejenisdokumen" style="width:90%" data-options="label:'Kode Jenis Dokumen:',required:true">
+                            <div style="margin-bottom: 20px;">
+                                <label for="kodejenisdokumen">Kode Jenis Dokumen:</label>
+                                <input id="kodejenisdokumen" class="easyui-textbox" name="kodejenisdokumen" style="width: 90%;" data-options="required:true">
                             </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="jenisdokumen" style="width:90%" data-options="label:'Jenis Dokumen:',required:true,">
+                            <div style="margin-bottom: 20px;">
+                                <label for="jenisdokumen">Jenis Dokumen:</label>
+                                <input id="jenisdokumen" class="easyui-textbox" name="jenisdokumen" style="width: 90%;" data-options="required:true">
                             </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="namadokumen" style="width:90%" data-options="label:'Nama Dokumen:',required:true">
+                            <div style="margin-bottom: 20px;">
+                                <label for="namadokumen">Nama Dokumen:</label>
+                                <input id="namadokumen" class="easyui-textbox" name="namadokumen" style="width: 90%;" data-options="required:true">
                             </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="path" style="width:90%" data-options="label:'Path:',required:true">
+                            <div style="margin-bottom: 20px;">
+                                <label for="path">Path:</label>
+                                <input id="path" class="easyui-textbox" name="path" style="width: 90%;" data-options="required:true">
                             </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-filebox" name="file" style="width:90%" data-options="label:'Unggah File:'">
+                            <div style="margin-bottom: 20px;">
+                                <label for="file">Unggah File:</label>
+                                <input id="file" class="easyui-filebox" name="file" style="width: 90%;">
                             </div>
+
                         </form>
                     </div>
                     <div id="formButtons" style="text-align:center;padding:5px 0">
@@ -226,14 +233,16 @@
             <table class="easyui-datagrid" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
                 <thead>
                     <tr>
-                        <th field="kodejenisdokumen" width="50" editor="{type:'validatebox',options:{required:true}}">
-                            Kode Jenis Dokumen</th>
-                        <th field="jenisdokumen" width="50" editor="{type:'validatebox',options:{required:true}}">Jenis
-                            Dokumen</th>
-                        <th field="namadokumen" width="50" editor="{type:'validatebox',options:{required:true}}">Nama
-                            Dokumen</th>
-                        <th field="path" width="50" editor="text">Path</th>
-                        <!-- <th field="email" width="50" editor="{type:'validatebox',options:{validType:'email'}}">Email</th> -->
+                        <th field="namadokumen" width="50" editor="{type:'validatebox',options:{required:true}}">
+                            namadokumen</th>
+                        <th field="jenisdokumen" width="50" editor="{type:'validatebox',options:{required:true}}">
+                            jenisdokumen</th>
+                        <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP
+                            </th>
+                        <th field="nama" width="50" editor="{type:'validatebox',options:{required:true}}">Nama
+                            </th>
+                        <th field="kodejabatan" width="50" editor="text">kodejabatan</th>
+                        <th field="jabatan" width="50" editor="text">jabatan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -304,7 +313,7 @@
 
     </div>
 
-<!-- 
+    <!-- 
 
     <div id="mm" class="easyui-menu" style="width:120px;">
         <div onclick="javascript:alert('open')">open</div>
