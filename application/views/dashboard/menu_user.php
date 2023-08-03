@@ -111,7 +111,7 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="detail_data.html" class="d-block">
+                            <a href="menu_sk" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"> <strong> Ijazah</strong></p>
