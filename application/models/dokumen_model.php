@@ -10,7 +10,57 @@ class dokumen_model extends CI_Model
 
     public function get_dokumen()
     {
-        $query = $this->db->select('*')->from('dokumen')->join('jenis_dokumen', 'jenis_dokumen.id_jenis_dokumen = dokumen.id_jenis_dokumen')->get();
+        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
+            ->from('dokumen AS dk')
+            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
+            ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
+            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')->get();
         return $query->result_array();
     }
+
+    public function get_dokumenByNip($nip)
+    {
+        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
+            ->from('dokumen AS dk')
+            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
+            ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
+            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->where('k.nip', $nip)->get();
+        return $query->result_array();
+    }
+
+    public function get_dokumenByJenisDokumen($jenis_dokumen)
+    {
+        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
+            ->from('dokumen AS dk')
+            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
+            ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
+            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->where('jk.jenis_dokumen', $jenis_dokumen)->get();
+        return $query->result_array();
+    }
+
+    public function get_dokumenByNamaDokumen($nama_dokumen)
+    {
+        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
+            ->from('dokumen AS dk')
+            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
+            ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
+            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->where('dk.nama_dokumen', $nama_dokumen)->get();
+        return $query->result_array();
+    }
+
+    public function get_dokumenByNamaKaryawan($nama_karyawan)
+    {
+        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
+            ->from('dokumen AS dk')
+            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
+            ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
+            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->where('k.nama_karyawan', $nama_karyawan)->get();
+        return $query->result_array();
+    }
+
+
 }

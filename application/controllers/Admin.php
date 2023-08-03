@@ -9,7 +9,6 @@ class Admin extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('user_model');
         $this->load->model('karyawan_model');
-        $this->load->model('dokumen_model');
     }
     public function index()
     {
@@ -38,14 +37,6 @@ class Admin extends CI_Controller
             $this->load->view('dashboard/menu_admin');
         }
     }
-
-    public function manageDoc()
-    {
-        $data['title'] = 'admin - e-link perumda tugu tirta';
-        $data['dokumen'] = $this->dokumen_model->get_dokumen();
-        $this->load->view('dashboard/menu_dokumen', $data);
-    }
-
     public function logOut()
     {
         $data['title'] = 'admin - e-link perumda tugu tirta';
