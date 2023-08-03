@@ -26,10 +26,11 @@
                 Perumda Tugu Tirta
             </div>
             <div style="float: right;">
-                <a href="#" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
+                <a href="<?= base_url('admin/LogOut') ?>" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
                 <div id="mm2" style="width:100px;">
-                    <!-- <div>Profil</div> -->
-                    <div>LogOut</div>
+                    <div style="float: center;">                   
+                    <a href="<?= base_url('admin/LogOut') ?>">LogOut</a>
+                    </div>
                 </div>
             </div>
         </div>
