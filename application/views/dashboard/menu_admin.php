@@ -20,16 +20,15 @@
     <div class="easyui-layout modalBox" style="width:100%;height: 675px;">
         <!-- <div class="easyui-layout " data-options="fit:true"> -->
         <!-- header menu -->
-        <div class="modalContent" data-options="region:'north'"
-            style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
+        <div class="modalContent" data-options="region:'north'" style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
             <div style="float: left;">
                 Perumda Tugu Tirta
             </div>
             <div style="float: right;">
                 <a href="<?= base_url('admin/LogOut') ?>" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
                 <div id="mm2" style="width:100px;">
-                    <div style="float: center;">                   
-                    <a href="<?= base_url('admin/LogOut') ?>">LogOut</a>
+                    <div style="float: center;">
+                        <a href="<?= base_url('admin/LogOut') ?>">LogOut</a>
                     </div>
                 </div>
             </div>
@@ -67,71 +66,65 @@
                 </ul>
 
                 <div title="Manage" data-options="selected:true" style="padding:20px;">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog()"
-                        style="width:100%;  margin: 5px;">Tambah User</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog1()"
-                        style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog()" style="width:100%;  margin: 5px;">Tambah User</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog1()" style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
 
-                    <div id="formDialog" class="easyui-dialog " title="Register"
-                        style="width:400px;height:500px;padding:30px;" closed="true" buttons="#formButtons">
-                        <form id="ff" method="post" action="<?= base_url('admin/registration') ?>">
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="nama" style="width:90%"
-                                    data-options="label:'Nama:',required:true">
-                            </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="nip" style="width:90%"
-                                    data-options="label:'NIP:',required:true,">
-                                <br>
-                                <?= form_error('nip', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
-                            </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="password1" style="width:90%"
-                                    data-options="label:'Password:',required:true" type="password">
-                                <br>
-                                <?= form_error('password1', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
-                            </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="password2" style="width:90%"
-                                    data-options="label:'Re-Password:',zzzzzzrequired:true" type="password">
-                            </div>
-                            <div style="margin-bottom:20px">
-                                <select class="easyui-combobox" name="role" label="Role User" style="width:90%">
-                                    <option value="0">Administrator</option>
-                                    <option value="1">Admin</option>
-                                </select>
-                            </div>
-                            <button type="submit" href="javascript:void(0)" class="easyui-linkbutton"
-                                onclick="submitForm()" style="width:80px; margin: 5px;">Submit</button>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
-                                style="width:80px; margin: 5px;">Clear</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm()"
-                                style="width:80px; margin: 5px;">Close</a>
-                        </form>
-                    </div>
-
-
-                    <div id="formDialog1" class="easyui-dialog" title="Register"
-                        style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons">
-                        <form id="ff1" method="post">
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="jenisdokumen" style="width:90%"
-                                    data-options="label:'Jenis Dokumen:',required:true">
-                            </div>
-                            <div style="margin-bottom:20px">
-                                <input class="easyui-textbox" name="kodejenisdokumen" style="width:90%"
-                                    data-options="label:'Kode Jenis Dokumen:',required:true,">
-                            </div>
-
+                    <div id="formDialog" class="easyui-dialog" title="Register" style="width:400px;height:300px;padding:30px;" closed="true" buttons="#formButtons" closable="false">
+                        <form id="ff" method="post">
+                            <table>
+                                <tr>
+                                    <td><label for="nama">Nama:</label></td>
+                                    <td><input id="nama" class="easyui-textbox" name="nama" style="width:100%" data-options="required:true"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="nip">NIP:</label></td>
+                                    <td><input id="nip" class="easyui-textbox" name="nip" style="width:100%" data-options="required:true"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="password1">Password:</label></td>
+                                    <td><input id="password1" class="easyui-textbox" name="password1" style="width:100%" data-options="required:true" type="password"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="password2">Re-Password:</label></td>
+                                    <td><input id="password2" class="easyui-textbox" name="password2" style="width:100%" data-options="required:true" type="password"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="role">Role User:</label></td>
+                                    <td>
+                                        <select id="role" class="easyui-combobox" name="role" style="width:100%">
+                                            <option value="aa">Administrator</option>
+                                            <option value="ab">Admin</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
                         </form>
                     </div>
                     <div id="formButtons" style="text-align:center;padding:5px 0">
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm1()"
-                            style="width:80px">Submit</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm1()"
-                            style="width:80px">Clear</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm1()"
-                            style="width:80px">Close</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm()" style="width:80px">Close</a>
+                    </div>
+
+                    <div id="formDialog1" class="easyui-dialog" title="Register" style="width:450px;height:200px;padding:30px;" closed="true" buttons="#formButtons" closable="false">
+                        <form id="ff1" method="post">
+                            <table>
+                                <tr>
+                                    <td><label for="jenisdokumen">Jenis Dokumen:</label></td>
+                                    <td><input id="jenisdokumen" class="easyui-textbox" name="jenisdokumen" style="width:100%" data-options="required:true"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="kodejenisdokumen">Kode Jenis Dokumen:</label></td>
+                                    <td><input id="kodejenisdokumen" class="easyui-textbox" name="kodejenisdokumen" style="width:100%" data-options="required:true"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+
+                    <div id="formButtons" style="text-align:center;padding:5px 0">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm1()" style="width:80px">Submit</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm1()" style="width:80px">Clear</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm1()" style="width:80px">Close</a>
                     </div>
 
                     <script>
@@ -187,14 +180,12 @@
         </div>
         <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
             <div id="toolbar">
-                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-                    onclick="openFormDialog()">Tambah</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="openFormDialog()">Tambah</a>
                 <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a> -->
                 <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a> -->
                 <!-- <div class="search-container"> -->
-                <input class="easyui-searchbox" data-options="prompt:'Please Input Value',menu:'#mm',searcher:doSearch"
-                    style="width: 20%;">
+                <input class="easyui-searchbox" data-options="prompt:'Please Input Value',menu:'#mm',searcher:doSearch" style="width: 20%;">
                 <!-- </div> -->
                 <div id="mm">
                     <div data-options="name:'all',iconCls:'icon-ok'">All </div>
@@ -203,10 +194,7 @@
                     <!-- <div data-options="name:'sports',iconCls:'icon-man'">Jenis dokumen</div> -->
                 </div>
             </div>
-            <table class="easyui-datagrid"
-                data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true"
-                toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true"
-                singleSelect="true">
+            <table class="easyui-datagrid" data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
                 <thead>
                     <tr>
                         <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP
@@ -219,7 +207,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($karyawan as $k): ?>
+                    <?php foreach ($karyawan as $k) : ?>
                         <tr onclick="window.location.href = 'menu_dokumen.php?id=<?= $k['nip']; ?>'">
                             <td>
                                 <?= $k['nip']; ?>
