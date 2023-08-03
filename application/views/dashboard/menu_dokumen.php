@@ -235,7 +235,7 @@
                 </thead>
                 <tbody>
                     <?php foreach ($dokumen as $dok) : ?>
-                        <tr oncontextmenu="showContextMenu(event, '<?= $k['nip']; ?>')">
+                        <tr oncontextmenu="showContextMenu(event, '<?= $dok['kode_jenis_dokumen']; ?>')">
                             <td>
                                 <?= $dok['kode_jenis_dokumen']; ?>
                             </td>
@@ -265,30 +265,6 @@
                 height: 28px;
                 line-height: 28px;
             }
-
-            .context-menu {
-                position: absolute;
-                background-color: #f9f9f9;
-                border: 1px solid #ccc;
-                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-                z-index: 1000;
-                padding: 0;
-            }
-
-            .context-menu ul {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }
-
-            .context-menu li {
-                padding: 8px 16px;
-                cursor: pointer;
-            }
-
-            .context-menu li:hover {
-                background-color: #ddd;
-            }
         </style>
 
         <script>
@@ -296,39 +272,34 @@
                 alert('You input: ' + value + '(' + name + ')');
             }
 
-            function redirectToMenuDokumen(nip) {
-                window.location.href = 'menu_dokumen.php?nip=' + nip;
-            }
-
             function showContextMenu(event, nip) {
-                event.preventDefault(); // Prevent the default right-click context menu
-                const contextMenu = document.createElement('div');
+                event.preventDefault();
+
+                // Tampilkan menu konteks saat klik kanan
+                var contextMenu = document.createElement('div');
                 contextMenu.classList.add('context-menu');
-                contextMenu.innerHTML = `
-            <ul>
-                <li onclick="redirectToMenuDokumen('${nip}')">Open</li>
-                <li onclick="editData('${nip}')">Edit</li>
-                <li onclick="deleteData('${nip}')">Delete</li>
-            </ul>
-        `;
-                contextMenu.style.top = event.clientY + 'px';
+                contextMenu.innerHTML = '<a href="menu_dokumen.php?id=' + nip + '">Edit</a> | <a href="#" onclick="hapusData(\'' + nip + '\')">Hapus</a>';
+                contextMenu.style.position = 'absolute';
                 contextMenu.style.left = event.clientX + 'px';
+                contextMenu.style.top = event.clientY + 'px';
+
+                // Tambahkan menu konteks ke dalam body
                 document.body.appendChild(contextMenu);
 
-                // Remove context menu when clicked outside
-                window.addEventListener('click', () => {
-                    document.body.removeChild(contextMenu);
+                // Tambahkan event listener untuk menutup menu konteks saat diklik di luar menu
+                document.addEventListener('click', function(event) {
+                    if (!contextMenu.contains(event.target)) {
+                        contextMenu.remove();
+                    }
                 });
             }
 
-            function editData(nip) {
-                // Implement your edit logic here
-                alert('Edit data with NIP: ' + nip);
-            }
-
-            function deleteData(nip) {
-                // Implement your delete logic here
-                alert('Delete data with NIP: ' + nip);
+            function hapusData(nip) {
+                if (confirm('Apakah Anda yakin ingin menghapus data dengan NIP ' + nip + '?')) {
+                    // Lakukan aksi hapus data
+                    // Misalnya, buat AJAX request untuk menghapus data pada sisi server
+                    alert('Data dengan NIP ' + nip + ' telah dihapus');
+                }
             }
         </script>
 
