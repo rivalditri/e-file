@@ -111,6 +111,9 @@
 
                     <div id="formDialog2" class="easyui-dialog " title="Tambah Dokumen" style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons" closable="false">
                         <form id="ff2" method="post">
+                        <div style="margin-bottom:20px">
+                                <input class="easyui-textbox" name="nip" style="width:90%" data-options="label:'NIP:',required:true">
+                            </div>
                             <div style="margin-bottom:20px">
                                 <input class="easyui-textbox" name="kodejenisdokumen" style="width:90%" data-options="label:'Kode Jenis Dokumen:',required:true">
                             </div>
@@ -235,7 +238,26 @@
                 </thead>
                 <tbody>
                     <?php foreach ($dokumen as $dok) : ?>
-                        <tr oncontextmenu="showContextMenu(event, '<?= $dok['kode_jenis_dokumen']; ?>')">
+                        <tr>
+                            <div id="mm" class="easyui-menu" style="width:120px;">
+                                <div onclick="javascript:alert('open')">open</div>
+
+                                <div data-options="iconCls:'icon-edit'">edit</div>
+                                <div data-options="iconCls:'icon-delete'">delete</div>
+                                <!-- <div data-options="iconCls:'icon-print',disabled:true">Print</div> -->
+
+                            </div>
+                            <script>
+                                $(function() {
+                                    $(document).bind('contextmenu', function(e) {
+                                        e.preventDefault();
+                                        $('#mm').menu('show', {
+                                            left: e.pageX,
+                                            top: e.pageY
+                                        });
+                                    });
+                                });
+                            </script>
                             <td>
                                 <?= $dok['kode_jenis_dokumen']; ?>
                             </td>
@@ -271,36 +293,6 @@
             function doSearch(value, name) {
                 alert('You input: ' + value + '(' + name + ')');
             }
-
-            function showContextMenu(event, nip) {
-                event.preventDefault();
-
-                // Tampilkan menu konteks saat klik kanan
-                var contextMenu = document.createElement('div');
-                contextMenu.classList.add('context-menu');
-                contextMenu.innerHTML = '<a href="menu_dokumen.php?id=' + nip + '">Edit</a> | <a href="#" onclick="hapusData(\'' + nip + '\')">Hapus</a>';
-                contextMenu.style.position = 'absolute';
-                contextMenu.style.left = event.clientX + 'px';
-                contextMenu.style.top = event.clientY + 'px';
-
-                // Tambahkan menu konteks ke dalam body
-                document.body.appendChild(contextMenu);
-
-                // Tambahkan event listener untuk menutup menu konteks saat diklik di luar menu
-                document.addEventListener('click', function(event) {
-                    if (!contextMenu.contains(event.target)) {
-                        contextMenu.remove();
-                    }
-                });
-            }
-
-            function hapusData(nip) {
-                if (confirm('Apakah Anda yakin ingin menghapus data dengan NIP ' + nip + '?')) {
-                    // Lakukan aksi hapus data
-                    // Misalnya, buat AJAX request untuk menghapus data pada sisi server
-                    alert('Data dengan NIP ' + nip + ' telah dihapus');
-                }
-            }
         </script>
 
 
@@ -311,6 +303,28 @@
 
 
     </div>
+
+<!-- 
+
+    <div id="mm" class="easyui-menu" style="width:120px;">
+        <div onclick="javascript:alert('open')">open</div>
+
+        <div data-options="iconCls:'icon-edit'">edit</div>
+        <div data-options="iconCls:'icon-delete'">delete</div>
+        <div data-options="iconCls:'icon-print',disabled:true">Print</div>
+
+    </div>
+    <script>
+        $(function() {
+            $(document).bind('contextmenu', function(e) {
+                e.preventDefault();
+                $('#mm').menu('show', {
+                    left: e.pageX,
+                    top: e.pageY
+                });
+            });
+        });
+    </script> -->
 
 
 </body>
