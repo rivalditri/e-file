@@ -200,7 +200,7 @@
                     <div data-options="name:'all',iconCls:'icon-ok'">All </div>
                     <div data-options="name:'sports',iconCls:'icon-man'">NIP</div>
                     <div data-options="name:'sports',iconCls:'icon-man'">Nama</div>
-                    <div data-options="name:'sports',iconCls:'icon-man'">Jenis dokumen</div>
+                    <!-- <div data-options="name:'sports',iconCls:'icon-man'">Jenis dokumen</div> -->
                 </div>
             </div>
             <table class="easyui-datagrid"
@@ -213,13 +213,14 @@
                         </th>
                         <th field="nama" width="50" editor="{type:'validatebox',options:{required:true}}">Nama Karyawan
                         </th>
+                        <th field="kodejabatan" width="50" editor="text">Kode Jabatan</th>
                         <th field="jabatan" width="50" editor="text">Jabatan</th>
                         <!-- <th field="email" width="50" editor="{type:'validatebox',options:{validType:'email'}}">Email</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($karyawan as $k): ?>
-                        <tr>
+                        <tr onclick="window.location.href = 'menu_dokumen.php?id=<?= $k['nip']; ?>'">
                             <td>
                                 <?= $k['nip']; ?>
                             </td>
