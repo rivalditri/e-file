@@ -28,7 +28,7 @@
                 <a href="#" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
                 <div id="mm2" style="width:100px;">
                     <div>Profil</div>
-                    <div>LogOut</div>
+                    <div><a href="<?= base_url('auth/logout') ?>">LogOut</a></div>
                 </div>
             </div>
         </div>

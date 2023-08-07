@@ -26,11 +26,11 @@
                 Perumda Tugu Tirta
             </div>
             <div style="float: right;">
-                <a href="<?= base_url('admin/LogOut') ?>" class="easyui-menubutton"
+                <a href="<?= base_url('') ?>" class="easyui-menubutton"
                     data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
                 <div id="mm2" style="width:100px;">
                     <div style="float: center;">
-                        <a href="<?= base_url('admin/LogOut') ?>">LogOut</a>
+                        <a href="<?= base_url('auth/logout') ?>">LogOut</a>
                     </div>
                 </div>
             </div>
@@ -74,9 +74,9 @@
                         style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
 
                     <div id="formDialog" class="easyui-dialog" title="Register"
-                        style="width:400px;height:300px;padding:30px;" closed="true" buttons="#formButtons"
+                        style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons"
                         closable="false">
-                        <form id="ff" method="post">
+                        <form id="ff" method="post" action="<?= base_url('admin/registration') ?>">
                             <table>
                                 <tr>
                                     <td><label for="nama">Nama:</label></td>
@@ -108,16 +108,15 @@
                                     </td>
                                 </tr>
                             </table>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()"
+                                style="width:80px; padding:5px; margin:10px;">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
+                                style="width:80px; padding:5px; margin:10px">Clear</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm()"
+                                style="width:80px; padding:5px; margin:10px">Close</a>
                         </form>
                     </div>
-                    <div id="formButtons" style="text-align:center;padding:5px 0">
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()"
-                            style="width:80px">Submit</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
-                            style="width:80px">Clear</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeForm()"
-                            style="width:80px">Close</a>
-                    </div>
+
 
                     <div id="formDialog1" class="easyui-dialog" title="Register"
                         style="width:450px;height:200px;padding:30px;" closed="true" buttons="#formButtons"
@@ -173,7 +172,7 @@
 
                         function submitForm() {
                             $('#ff').form('submit');
-                            // $.messager.alert('notif','Data Berhasil Disimpan', 'info');
+                            $.messager.alert('notif', 'Data Berhasil Disimpan', 'info');
                             $('#formDialog').dialog('close');
                             modal.css('filter', 'none');
 
@@ -217,37 +216,39 @@
                 </div>
             </div>
             <table class="easyui-datagrid"
-                data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true"
+                data-options="url:'<?= base_url('karyawan') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true"
                 toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true"
                 singleSelect="true">
                 <thead>
                     <tr>
+                        <div id="mm" class="easyui-menu" style="width:120px;">
+                            <div href="<?= base_url('#') ?>">open</div>
+
+                            <div data-options="iconCls:'icon-edit'">edit</div>
+                            <div data-options="iconCls:'icon-delete'">delete</div>
+                            <!-- <div data-options="iconCls:'icon-print',disabled:true">Print</div> -->
+
+                        </div>
+                        <script>
+                            $(function () {
+                                $(document).bind('contextmenu', function (e) {
+                                    e.preventDefault();
+                                    $('#mm').menu('show', {
+                                        left: e.pageX,
+                                        top: e.pageY
+                                    });
+                                });
+                            });
+                        </script>
                         <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP
                         </th>
-                        <th field="nama" width="50" editor="{type:'validatebox',options:{required:true}}">Nama Karyawan
+                        <th field="nama_karyawan" width="50" editor="{type:'validatebox',options:{required:true}}">Nama
+                            Karyawan
                         </th>
-                        <th field="kodejabatan" width="50" editor="text">Kode Jabatan</th>
+                        <th field="kode_jabatan" width="50" editor="text">Kode Jabatan</th>
                         <th field="jabatan" width="50" editor="text">Jabatan</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ($karyawan as $k): ?>
-                        <tr>
-                            <td>
-                                <?= $k['nip']; ?>
-                            </td>
-                            <td>
-                                <?= $k['nama_karyawan']; ?>
-                            </td>
-                            <td>
-                                <?= $k['kode_jabatan']; ?>
-                            </td>
-                            <td>
-                                <?= $k['jabatan']; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
             </table>
         </div>
         <style>

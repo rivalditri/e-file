@@ -38,11 +38,11 @@ https://templatemo.com/tm-581-kind-heart-charity
                     Helllo, User
                     <small>Direktur Utama(Jabatan)</small>
                 </span>
-              
+
                 <div id="mm2" style="width:100px;">
 
-                    <div style="float: center;">                   
-                    <a href="<?= base_url('admin/LogOut') ?>">LogOut</a>
+                    <div style="float: center;">
+                        <a href="<?= base_url('auth/logout') ?>">LogOut</a>
                     </div>
                 </div>
             </a>
@@ -67,7 +67,8 @@ https://templatemo.com/tm-581-kind-heart-charity
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="#" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png" class="featured-block-image img-fluid" alt="">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png"
+                                    class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"> Data <strong>Pribadi</strong></p>
                             </a>
@@ -76,8 +77,9 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                        <a href="<?= base_url('sk') ?>" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png" class="featured-block-image img-fluid" alt="">
+                            <a href="<?= base_url('sk') ?>" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png"
+                                    class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"> Surat <strong>Keputusan</strong></p>
                             </a>
@@ -119,18 +121,20 @@ https://templatemo.com/tm-581-kind-heart-charity
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="menu_sk" class="d-block">
-                            <a href="menu_sk.php" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png" class="featured-block-image img-fluid" alt="">
+                                <a href="menu_sk.php" class="d-block">
+                                    <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png"
+                                        class="featured-block-image img-fluid" alt="">
 
-                                <p class="featured-block-text"> <strong> Ijazah</strong></p>
-                            </a>
+                                    <p class="featured-block-text"> <strong> Ijazah</strong></p>
+                                </a>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a href="detail_data.html" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder2.png" class="featured-block-image img-fluid" alt="">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/folder2.png"
+                                    class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"> <strong>Sertifikat</strong></p>
                             </a>

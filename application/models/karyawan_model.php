@@ -17,13 +17,13 @@ class karyawan_model extends CI_Model
     public function get_karyawan_by_id($id)
     {
         $query = $this->db->get_where('karyawan', ['id' => $id]);
-        return $query->row_array();
+        return $query->result_array();
     }
 
     public function get_karyawan_by_nip($nip)
     {
         $query = $this->db->get_where('karyawan', ['nip' => $nip]);
-        return $query->row_array();
+        return $query->result_array();
     }
 
     public function get_karyawan_by_role($role)
