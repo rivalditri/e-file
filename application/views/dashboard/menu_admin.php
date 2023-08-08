@@ -1,3 +1,15 @@
+<?php
+//if session nip is not set, redirect to auth
+if (!isset($_SESSION['nip'])) {
+    redirect('auth');
+} else {
+    //if session nip is set, check role_id
+    if ($_SESSION['role_id'] != 1) {
+        redirect('user');
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -16,9 +28,7 @@
 </head>
 
 <body>
-    <?= $this->session->flashdata('message') ?>
     <div class="easyui-layout modalBox" style="width:100%;height: 675px;">
-        <!-- <div class="easyui-layout " data-options="fit:true"> -->
         <!-- header menu -->
         <div class="modalContent" data-options="region:'north'"
             style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
@@ -35,9 +45,7 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- <div data-options="region:'east',split:true" title="East" style="width:100px;"></div> -->
+        <!-- nav menu -->
         <div data-options="region:'west',split:true" title="Menu" style="width:15%;">
             <div class="easyui-accordion" data-options="fit:true,border:false">
 
@@ -73,10 +81,11 @@
                     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openFormDialog1()"
                         style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
 
+                    <!-- form register user -->
                     <div id="formDialog" class="easyui-dialog" title="Register"
                         style="width:400px;height:400px;padding:30px;" closed="true" buttons="#formButtons"
                         closable="false">
-                        <form id="ff" method="post" action="<?= base_url('admin/registration') ?>">
+                        <form id="ff" method="post">
                             <table>
                                 <tr>
                                     <td><label for="nama">Nama:</label></td>
@@ -216,7 +225,7 @@
                 </div>
             </div>
             <table class="easyui-datagrid"
-                data-options="url:'<?= base_url('karyawan') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true"
+                data-options="url:'<?= base_url('api/karyawan') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true"
                 toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true"
                 singleSelect="true">
                 <thead>

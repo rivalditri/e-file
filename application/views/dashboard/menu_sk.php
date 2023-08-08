@@ -1,3 +1,15 @@
+<?php
+//if session nip is not set, redirect to auth
+if (!isset($_SESSION['nip'])) {
+    redirect('auth');
+} else {
+    //if session nip is set, check role_id
+    if ($_SESSION['role_id'] != 0) {
+        redirect('admin');
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -9,7 +21,7 @@
     <meta name="author" content="">
 
     <title>E-Filling Perumda Tugu Tirta</title>
-    
+
     <!-- CSS FILES -->
     <link href="<?= base_url('vendor/user/') ?>css/bootstrap.min.css" rel="stylesheet">
 

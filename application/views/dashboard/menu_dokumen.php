@@ -1,3 +1,15 @@
+<?php
+//if session nip is not set, redirect to auth
+if (!isset($_SESSION['nip'])) {
+    redirect('auth');
+} else {
+    //if session nip is set, check role_id
+    if ($_SESSION['role_id'] != 1) {
+        redirect('user');
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 

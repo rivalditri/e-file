@@ -28,8 +28,8 @@ class Auth extends CI_Controller
         $user = $this->db->get_where('user', ['nip' => $nip, 'password' => $pwd])->row_array();
         if ($user) {
             $data = [
+                'role_id' => $user['role_id'],
                 'nip' => $user['nip'],
-                'nama' => $user['nama'],
             ];
             $this->session->set_userdata($data);
             if ($user['role_id'] == 1) {
