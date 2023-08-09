@@ -14,7 +14,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'admin e-link perumda tugu tirta';
         $data['karyawan'] = $this->karyawan_model->get_karyawan();
-        $this->load->view('dashboard/menu_admin', $data);
+        $this->load->view('dashboard/admin/menu', $data);
     }
 
     public function registration()
@@ -42,11 +42,4 @@ class Admin extends CI_Controller
         $data['title'] = 'admin - e-link perumda tugu tirta';
         $this->load->view('auth/login_view', $data);
     }
-
-    // public function profile()
-    // {
-    //     $data['title'] = 'admin - e-link perumda tugu tirta';
-    //     $data['dokumen'] = $this->dokumen_model->get_dokumen();
-    //     $this->load->view('dashboard/menu_user', $data);
-    // }
 }

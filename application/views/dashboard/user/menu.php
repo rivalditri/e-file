@@ -20,7 +20,9 @@ if (!isset($_SESSION['nip'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>E-Filling Perumda Tugu Tirta</title>
+    <title>
+        <?= $title ?>
+    </title>
 
     <!-- CSS FILES -->
     <link href="<?= base_url('vendor/user/') ?>css/bootstrap.min.css" rel="stylesheet">
@@ -45,21 +47,16 @@ https://templatemo.com/tm-581-kind-heart-charity
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <img src="<?= base_url('vendor/user/') ?>images/logo.png" class="logo img-fluid"
-                    alt="Kind Heart Charity">
+                    alt="E-link Perumda Tugu Tirta">
                 <span>
                     Helllo, User
                     <small>Direktur Utama(Jabatan)</small>
                 </span>
-
-                <div id="mm2" style="width:100px;">
-
-                    <div style="float: center;">
-                        <a href="<?= base_url('auth/logout') ?>">LogOut</a>
-                    </div>
-                </div>
             </a>
 
-
+            <div class="col-3" style="width:100px;">
+                <a class="btn btn-primary" href="<?= base_url('auth/logout') ?>">LogOut</a>
+            </div>
         </div>
     </nav>
 
@@ -78,7 +75,7 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="#" class="d-block">
+                            <a href="<?= base_url('user/identitas') ?>" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png"
                                     class="featured-block-image img-fluid" alt="">
 
@@ -89,7 +86,7 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="<?= base_url('sk') ?>" class="d-block">
+                            <a href="<?= base_url('user/sk') ?>" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/folder1.png"
                                     class="featured-block-image img-fluid" alt="">
 
@@ -98,53 +95,20 @@ https://templatemo.com/tm-581-kind-heart-charity
                         </div>
                     </div>
 
-                    <!-- <div class="col-lg-2 col-md-6 col-8 mb-4 ">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="#" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/data1.png"
-                                    class="featured-block-image img-fluid" alt="">
-
-                                <p class="featured-block-text"> Data <strong>1</strong></p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-6 col-12 mb-4 ">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="#" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/data2.png"
-                                    class="featured-block-image img-fluid" alt="">
-
-                                <p class="featured-block-text"> Data <strong>1</strong></p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-12 mb-4 ">
-                        <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="#" class="d-block">
-                                <img src="<?= base_url('vendor/user/') ?>images/icons/data.png"
-                                    class="featured-block-image img-fluid" alt="">
-
-                                <p class="featured-block-text"> Data <strong>1</strong></p>
-                            </a>
-                        </div>
-                    </div> -->
-
                     <div class="col-lg-3 col-md-6 col-12 mb-4 ">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="menu_sk" class="d-block">
-                                <a href="menu_sk.php" class="d-block">
-                                    <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png"
-                                        class="featured-block-image img-fluid" alt="">
+                            <a href="<?= base_url('user/ijazah') ?>" class="d-block">
+                                <img src="<?= base_url('vendor/user/') ?>images/icons/surat.png"
+                                    class="featured-block-image img-fluid" alt="">
 
-                                    <p class="featured-block-text"> <strong> Ijazah</strong></p>
-                                </a>
+                                <p class="featured-block-text"> <strong> Ijazah</strong></p>
+                            </a>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
-                            <a href="detail_data.html" class="d-block">
+                            <a href="<?= base_url('user/sertifikat') ?>" class="d-block">
                                 <img src="<?= base_url('vendor/user/') ?>images/icons/folder2.png"
                                     class="featured-block-image img-fluid" alt="">
 

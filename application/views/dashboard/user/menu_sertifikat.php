@@ -20,7 +20,9 @@ if (!isset($_SESSION['nip'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>E-Filling Perumda Tugu Tirta</title>
+    <title>
+        <?= $title ?>
+    </title>
 
     <!-- CSS FILES -->
     <link href="<?= base_url('vendor/user/') ?>css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +47,8 @@ https://templatemo.com/tm-581-kind-heart-charity
     <nav class="navbar navbar-expand-lg bg-light shadow-lg">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="logo.png" class="logo img-fluid" alt="Kind Heart Charity">
+                <img src="<?= base_url('vendor/user/') ?>images/logo.png" class="logo img-fluid"
+                    alt="E-link Perumda Tugu Tirta">
                 <span>
                     Helllo, User
                     <small>Direktur Utama(Jabatan)</small>
@@ -62,14 +65,13 @@ https://templatemo.com/tm-581-kind-heart-charity
                 <div class="row">
 
                     <div class="col-lg-12 col-8 text-center mx-auto">
-                        <h2 class="mb-5">Surat Keputusan Perumda Tugu Tirta</h2>
+                        <h2 class="mb-5">File Sertifikat Perumda Tugu Tirta</h2>
                     </div>
 
                     <table id="datatables" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Nama Dokumen</th>
-                                <th>Jenis Dokumen</th>
                                 <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Kode Jabatan</th>
@@ -77,49 +79,30 @@ https://templatemo.com/tm-581-kind-heart-charity
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>SK-Kenaikan Gaji</td>
-                                <td>SK</td>
-                                <td>12345678</td>
-                                <td>Andi</td>
-                                <td>A8</td>
-                                <td>Karyawan</td>
-                            </tr>
-                            <tr>
-                                <td>Ijazah</td>
-                                <td>Sertifikat</td>
-                                <td>12345679</td>
-                                <td>Adi</td>
-                                <td>A9</td>
-                                <td>Karyawan</td>
-                            </tr>
-                            <tr>
-                                <td>SK-Kenaikan Gaji</td>
-                                <td>SK</td>
-                                <td>12345677</td>
-                                <td>Santi</td>
-                                <td>A7</td>
-                                <td>Karyawan</td>
-                            </tr>
-                            <tr>
-                                <td>Ijazah</td>
-                                <td>Sertifikat</td>
-                                <td>12345676</td>
-                                <td>Eka</td>
-                                <td>A5</td>
-                                <td>Karyawan</td>
-                            </tr>
-                            <tr>
-                                <td>SK-Kenaikan Gaji</td>
-                                <td>SK</td>
-                                <td>12345671</td>
-                                <td>Didi</td>
-                                <td>A3</td>
-                                <td>Karyawan</td>
-                            </tr>
+                            <?php foreach ($dokumen as $dok): ?>
+                                <tr>
+                                    <td>
+                                        <?= $dok['nama_dokumen'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $dok['nip'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $dok['nama_karyawan'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $dok['kode_jabatan'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $dok['jabatan'] ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
-
+                </div>
+            </div>
+        </section>
     </main>
 
 
