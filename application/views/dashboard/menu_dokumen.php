@@ -183,6 +183,7 @@ if (!isset($_SESSION['nip'])) {
                                 <tr>
                                     <td style="text-align: left;"><label for="file">Unggah File:</label></td>
                                     <td><input id="file" class="easyui-filebox" style="width: 80%;" name="file"></td>
+                                    
                                 </tr>
                             </table>
                         </form>
@@ -303,6 +304,7 @@ if (!isset($_SESSION['nip'])) {
                         <th field="kodejabatan" width="50" editor="text">Kode Jabatan</th>
                         <th field="jabatan" width="50" editor="text">jabatan</th>
                     </tr>
+                   
                 </thead>
                 <tbody>
                     <?php foreach ($dokumen as $dok): ?>
@@ -364,10 +366,15 @@ if (!isset($_SESSION['nip'])) {
         </style>
 
         <script>
-            function doSearch(value, name) {
-                alert('You input: ' + value + '(' + name + ')');
+            function doSearch(val) {
+                var $dg = $('#dg'),
+                prevQueryParams = $dg.datagrid('option') ['queryParams'],
+                newQueryParams = $.extend(prevQueryParams, {cari:val} );
+
+                $dg.datagrid('load',newQueryParams);
             }
         </script>
+
 
 
     </div>

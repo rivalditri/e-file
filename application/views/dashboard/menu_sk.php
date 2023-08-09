@@ -8,6 +8,9 @@ if (!isset($_SESSION['nip'])) {
         redirect('admin');
     }
 }
+$connect = mysqli_connect("localhost", "root", "", "master_dokumen");  
+ $query ="SELECT * FROM karyawan ORDER BY nama_karyawan DESC";  
+ $result = mysqli_query($connect, $query); 
 ?>
 
 <!doctype html>
@@ -76,51 +79,145 @@ https://templatemo.com/tm-581-kind-heart-charity
                                 <th>Jabatan</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>SK-Kenaikan Gaji</td>
-                                <td>SK</td>
-                                <td>12345678</td>
-                                <td>Andi</td>
-                                <td>A8</td>
-                                <td>Karyawan</td>
-                            </tr>
-                            <tr>
-                                <td>Ijazah</td>
-                                <td>Sertifikat</td>
-                                <td>12345679</td>
-                                <td>Adi</td>
-                                <td>A9</td>
-                                <td>Karyawan</td>
-                            </tr>
-                            <tr>
-                                <td>SK-Kenaikan Gaji</td>
-                                <td>SK</td>
-                                <td>12345677</td>
-                                <td>Santi</td>
-                                <td>A7</td>
-                                <td>Karyawan</td>
-                            </tr>
-                            <tr>
-                                <td>Ijazah</td>
-                                <td>Sertifikat</td>
-                                <td>12345676</td>
-                                <td>Eka</td>
-                                <td>A5</td>
-                                <td>Karyawan</td>
-                            </tr>
-                            <tr>
-                                <td>SK-Kenaikan Gaji</td>
-                                <td>SK</td>
-                                <td>12345671</td>
-                                <td>Didi</td>
-                                <td>A3</td>
-                                <td>Karyawan</td>
-                            </tr>
-                        </tbody>
+                        
+                        <!-- <?php  
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo '  
+                               <tr>  
+                                    <td>'.$row["nama_dokumen"].'</td>  
+                                    <td>'.$row["jenis_dokumen"].'</td>  
+                                    <td>'.$row["nip"].'</td>  
+                                    <td>'.$row["nama"].'</td>  
+                                    <td>'.$row["kode_jabatan"].'</td>  
+                                    <td>'.$row["jabatan"].'</td>  
+                               </tr>  
+                               ';  
+                          }  
+                          ?> -->
                     </table>
 
     </main>
+    <footer class="site-footer">
+
+<div class="section  container clearfix mx-auto nomargin nopadding">
+    <style>
+        #kantorperumdatugutirta { width: 100%; height: 300px;}
+    </style>
+    <div class="row col-mb-50">
+            <div class="col-lg-4">
+                 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+                   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+                   crossorigin=""/>
+                   
+                <!-- Make sure you put this AFTER Leaflet's CSS -->
+                 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                   crossorigin=""></script>
+                   
+                <div id="kantorperumdatugutirta"></div>
+                <script>
+                     
+                    var map = L.map('kantorperumdatugutirta').setView([-7.9679572,112.6519638], 13);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+                    
+                    L.marker([-7.966977,112.6374427])
+                    .addTo(map)
+                    .bindPopup('Kantor Unit Panglima Sudirman.')
+                    .openPopup();
+                    
+                    L.marker([-7.9711973,112.6677675])
+                    .addTo(map)
+                    .bindPopup('Kantor Pusat Sawojajar.')
+                    .openPopup();
+                </script>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <h5 class="site-footer-title mb-3">Link Terkait</h5>
+
+                <ul class="footer-menu">
+                    <li class="footer-menu-item"><a href="http://www.malangkota.go.id/" alt="Pemerintah Kota Malang">Pemerintah Kota Malang</a></li>
+
+                    <li class="footer-menu-item"><a href="http://sambat.malangkota.go.id/" alt="Sambat Kota Malang">Sambat Online Kota Malang</a></li>
+
+                    <li class="footer-menu-item"><a href="http://www.lapor.go.id/" alt="lapor.go.id">Lapor.go.id</a></li>
+
+                    <li class="footer-menu-item"><a href="http://lpse.pdamkotamalang.com/" alt="LPSE Perumda Tugu Tirta Kota Malang">LPSE Perumda Tugu Tirta Kota Malang</a></li>
+
+                    <li class="footer-menu-item"><a href="https://cettar.jatimprov.go.id/" alt="Cettar Pemprov Jatim">Cettar Pemprov Jatim</a></li>
+                </ul>
+            </div>            
+
+
+<div class="col-lg-3 col-md-6 col-12 mx-auto">
+    <h5 class="site-footer-title mb-3">Contact Infomation</h5>
+
+    <p class="text-white d-flex mb-2">
+        <i class="bi-telephone me-2"></i>
+
+        <a href="tel: (+62) 0341-715-103" class="site-footer-link">
+            (+62) 0341-715-103
+        </a>
+    </p>
+
+    <p class="text-white d-flex">
+        <i class="bi-envelope me-2"></i>
+
+        <a href="mailto:humas@perumdatugutirta.co.id" class="site-footer-link">
+            humas@perumdatugutirta.co.id
+        </a>
+    </p>
+
+    <p class="text-white d-flex mt-3">
+        <i class="bi-geo-alt me-2"></i>
+        Jl. Terusan Danau Sentani no. 100 Kota Malang - Jawa Timur, Indonesia.
+    </p>
+
+    <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+</div>
+</div>
+</div>
+
+<div class="site-footer-bottom">
+<div class="container">
+<div class="row">
+    <div id="copyrights">
+        <div class="container">
+            
+            <div class="row col-mb-30">
+                <div class="col-md-6 text-center text-md-left">
+                    Copyrights &copy; 2020 All Rights Reserved by PERUMDA Air Minum Tugu Tirta<br>
+                    <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+                </div>
+
+
+    <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+        <ul class="social-icon">
+            <li class="social-icon-item">
+                <a href="https://twitter.com/tugutirtamalang" class="social-icon-link bi-twitter"></a>
+            </li>
+
+            <li class="social-icon-item">
+                <a href="https://www.facebook.com/profile.php?id=100010269646736" class="social-icon-link bi-facebook"></a>
+            </li>
+
+            <li class="social-icon-item">
+                <a href="https://www.instagram.com/perumdatugutirta/" class="social-icon-link bi-instagram"></a>
+            </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+            <li class="social-icon-item">
+                <a href="https://www.youtube.com/channel/UCcEKUrpMLqX_r4aoNCkyz3g" class="social-icon-link bi-youtube"></a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+</div>
+</div>
+                </footer>
 
 
 

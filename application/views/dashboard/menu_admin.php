@@ -274,10 +274,25 @@ if (!isset($_SESSION['nip'])) {
             }
         </style>
 
+        <script> 
+        function NIP(){
+            $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'NIP');
+            $('#fm').form('clear');
+        } 
+        </script>      
+
         <script>
-            function doSearch() {
-                alert('You input: ' + value + '(' + name + ')');
-            }
+            // function doSearch(val) {
+            //     var $dg = $('#dg'),
+            //     prevQueryParams = $dg.datagrid('option') ['queryParams'],
+            //     newQueryParams = $.extend(prevQueryParams, {cari:val} );
+
+            //     $dg.datagrid('load',newQueryParams);
+            // }
+            function doSearch(value, NIP) {
+            // You can implement your custom search logic here
+            alert('You searched for: ' + value + ' using option: ' + NIP);
+        }
         </script>
 
 
