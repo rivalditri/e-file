@@ -18,6 +18,14 @@ class dokumen_model extends CI_Model
         return $query->result_array();
     }
 
+    public function get_jenis()
+    {
+        $query = $this->db->select('*')
+            ->from('jenis_dokumen')
+            ->get();
+        return $query->result_array();
+    }
+
     public function get_dokumenIdentitas()
     {
         $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')

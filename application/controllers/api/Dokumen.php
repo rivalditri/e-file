@@ -24,10 +24,13 @@ class dokumen extends RestController
         }
     }
 
-    public function getByNip()
-    {
-        $data = html_entity_decode($this->input->get('nip'));
-        $data = $this->dokumen_model->get_dokumen_by_nip($data);
-        echo json_encode($data);
+    public function jenis_get(){
+        $jenis = $this->dokumen->get_jenis();
+        if ($jenis) {
+            $this->response(
+                $jenis,
+                RestController::HTTP_OK
+            );
+        }
     }
 }
