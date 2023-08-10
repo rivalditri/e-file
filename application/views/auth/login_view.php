@@ -15,65 +15,67 @@
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('vendor/'); ?>fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 
     <!-- Custom styles for this template-->
-    <link href="<?= base_url(); ?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>css/login.css" rel="stylesheet">
 
+    
 </head>
 
 <body class="bg-gradient-primary">
 
-    <div class="container">
-
-        <!-- Outer Row -->
+    <div class="wrapper">
+                    <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+<div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block">
-                                <img src="<?= base_url(); ?>logo.png" style="width: 100%;">
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">SDM - Perumda Air Minum Tugu Tirta</h1>
-                                    </div>
-                                    <?= $this->session->flashdata('message') ?>
-                                    <form action="<?= base_url('auth') ?>" method="post" name="login_form" class="user">
-                                        <div class="form-group">
-                                            <input name="nip" type="text" class="form-control form-control-user"
-                                                id="inputUser" placeholder="NIP" value="<?= set_value('nip') ?>">
-                                            <?= form_error('nip', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
-                                        </div>
-                                        <div class="form-group">
-                                            <input name="password" type="password"
-                                                class="form-control form-control-user" id="inputPassword"
-                                                placeholder="Password">
-                                            <?= form_error('password', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
-                                        </div>
-                                        <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                
+                
+                <div class="col-lg-6">
 
+                <div class="p-5">
+                        
+
+            <?= $this->session->flashdata('message') ?>
+            <form action="<?= base_url('auth') ?>" method="post" name="login_form" class="user">
+            <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">E-FILLING</h1>
             </div>
 
-        </div>
 
+            <div class="input-box">
+            <input name="nip" type="text" class="form-control form-control-user"
+            id="inputUser" placeholder="NIP" value="<?= set_value('nip') ?>">
+            <?= form_error('nip', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
+                <i class='bx bxs-user'></i>
+            </div>
+
+            <div class="input-box">
+            <input name="password" type="text" class="form-control form-control-user" 
+            id="inputPassword" placeholder="Password"value="<?= set_value('password') ?>">
+            <?= form_error('password', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">Login</button>
+        </form>
     </div>
 
+    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
