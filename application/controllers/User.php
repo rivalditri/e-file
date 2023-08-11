@@ -43,5 +43,10 @@ class User extends CI_Controller
         $data['dokumen'] = $this->dokumen_model->get_dokumenSertifikat();
         $this->load->view('dashboard/user/menu_sertifikat', $data);
     }
-
+    public function back()
+    {
+        $data['title'] = 'User - e-link perumda tugu tirta';
+        $this->load->view('dashboard/user/menu', $data);
+        redirect('User');
+    }
 }

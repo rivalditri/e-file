@@ -26,8 +26,19 @@
     
 </head>
 
-<body class="bg-gradient-primary">
+<div class="navbar">
+            <image src="logo2.png" alt="" width="200">
+</div>
 
+
+<body class="bg-gradient-primary">
+<!-- <div class="hero">
+            <nav>
+                <img src="logo2.png" alt="Logo Perusahaan">
+            </nav>
+</div> -->
+        
+        <!-- Menu navigasi dan elemen header lainnya -->
     <div class="wrapper">
                     <!-- Outer Row -->
         <div class="row justify-content-center">

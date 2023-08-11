@@ -32,6 +32,8 @@ if (!isset($_SESSION['nip'])) {
     <link href="<?= base_url('vendor/user/') ?>css/templatemo-kind-heart-charity.css" rel="stylesheet">
 
     <link href="<?= base_url('vendor/user/') ?>css/datatables.min.css" rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!--
 
 TemplateMo 581 Kind Heart Charity
@@ -45,8 +47,12 @@ https://templatemo.com/tm-581-kind-heart-charity
 <body id="section_1">
 
     <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+    <div class="col-3" style="width:0px;">
+                <a class="bx bxs-left-arrow" href="<?= base_url('User') ?>">Back</a>
+            </div>
+
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="<?= base_url('User') ?>">
                 <img src="<?= base_url('vendor/user/') ?>images/logo.png" class="logo img-fluid"
                     alt="E-link Perumda Tugu Tirta">
                 <span>

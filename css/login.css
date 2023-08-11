@@ -7,12 +7,21 @@
     font-family: "Poppins", sans-serif;
 }
 
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 410px;
+    margin-right: 1120px;
+    padding: 0px 0;
+    }
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('tugu.jpg');
+    background: url('tower.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -27,6 +36,7 @@ body {
     color: white;
     border-radius: 10px;
     padding: 30px 40px;
+    position: absolute;
 }
 
 .wrapper h1 {
