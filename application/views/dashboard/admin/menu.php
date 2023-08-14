@@ -293,7 +293,7 @@ if (!isset($_SESSION['nip'])) {
 
                         }
 
-                      
+
                         function openFormDialog1() {
                             $('#formDialog1').dialog('open');
                             modal.css('filter', 'blur(5px)');
@@ -355,26 +355,17 @@ if (!isset($_SESSION['nip'])) {
             </div>
             <table id="dg" class="easyui-datagrid" data-options="url:'<?= base_url('api/karyawan') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
                 <thead>
+
                     <tr>
                         <div id="mm" class="easyui-menu" style="width:120px;">
-                            <div href="<?= base_url('#') ?>">open</div>
-
-                            <div data-options="iconCls:'icon-edit'">edit</div>
-                            <div data-options="iconCls:'icon-delete'">delete</div>
+                            <div data-options="iconCls:'icon-open'" onclick="openRow()">Open</div>
+                            <div class="menu-sep"></div>
+                            <div data-options="iconCls:'icon-edit'" onclick="editRow()">Edit</div>
+                            <div data-options="iconCls:'icon-remove'" onclick="removeRow()">Remove</div>
                             <!-- <div data-options="iconCls:'icon-print',disabled:true">Print</div> -->
 
                         </div>
-                        <script>
-                            $(function() {
-                                $(document).bind('contextmenu', function(e) {
-                                    e.preventDefault();
-                                    $('#mm').menu('show', {
-                                        left: e.pageX,
-                                        top: e.pageY
-                                    });
-                                });
-                            });
-                        </script>
+
                         <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP
                         </th>
                         <th field="nama_karyawan" width="50" editor="{type:'validatebox',options:{required:true}}">Nama
@@ -386,6 +377,90 @@ if (!isset($_SESSION['nip'])) {
                 </thead>
             </table>
         </div>
+
+        <script type="text/javascript">
+            var editIndex = undefined;
+
+            $('#dg').datagrid({
+                onRowContextMenu: function(e, index, row) {
+                    e.preventDefault();
+                    $('#mm').menu('show', {
+                        left: e.pageX,
+                        top: e.pageY
+                    });
+                    $('#dg').datagrid('selectRow', index);
+                }
+            });
+
+            function openRow() {
+                var row = $('#dg').datagrid('getSelected');
+                if (row) {
+                    $('#w').window('open');
+
+                }
+            }
+
+            function editRow() {
+                var row = $('#dg').datagrid('getSelected');
+                if (row) {
+                    var index = $('#dg').datagrid('getRowIndex', row);
+                    onClickCell(index, 'nama_karyawan');
+                }
+            }
+
+            function removeRow() {
+                var row = $('#dg').datagrid('getSelected');
+                if (row) {
+                    var index = $('#dg').datagrid('getRowIndex', row);
+                    $('#dg').datagrid('cancelEdit', index).datagrid('deleteRow', index);
+                    editIndex = undefined;
+                }
+            }
+            var editIndex = undefined;
+
+            function endEditing() {
+                if (editIndex == undefined) {
+                    return true
+                }
+                if ($('#dg').datagrid('validateRow', editIndex)) {
+                    $('#dg').datagrid('endEdit', editIndex);
+                    editIndex = undefined;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function onClickCell(index, field) {
+                if (editIndex != index) {
+                    if (endEditing()) {
+                        $('#dg').datagrid('selectRow', index)
+                            .datagrid('beginEdit', index);
+                        var ed = $('#dg').datagrid('getEditor', {
+                            index: index,
+                            field: field
+                        });
+                        if (ed) {
+                            ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+                        }
+                        editIndex = index;
+                    } else {
+                        setTimeout(function() {
+                            $('#dg').datagrid('selectRow', editIndex);
+                        }, 0);
+                    }
+                }
+            }
+
+            function onEndEdit(index, row) {
+                var ed = $(this).datagrid('getEditor', {
+                    index: index,
+                    field: 'productid'
+                });
+                row.productname = $(ed.target).combobox('getText');
+            }
+        </script>
+
         <script type="text/javascript">
             function getSelected() {
                 var row = $('#dg').datagrid('getSelected');
