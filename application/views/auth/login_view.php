@@ -71,7 +71,7 @@
             </div>
 
             <div class="input-box">
-            <input name="password" type="text" class="form-control form-control-user" 
+            <input name="password" type="password" class="form-control form-control-user" 
             id="inputPassword" placeholder="Password"value="<?= set_value('password') ?>">
             <?= form_error('password', '<small style="color:red;padding-left:5px;">', '</small>'); ?>
                 <i class='bx bxs-lock-alt'></i>
