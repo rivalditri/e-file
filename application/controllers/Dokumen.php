@@ -15,11 +15,4 @@ class dokumen extends CI_Controller
         $this->load->view('dashboard/menu_dokumen', $data);
     }
 
-    public function getDokumenByNip()
-    {
-        // $nip = $this->input->post('nip');
-        $nip = 87654321;
-        $data = $this->dokumen_model->getDokumenByNip($nip);
-        echo json_encode($data);
-    }
 }

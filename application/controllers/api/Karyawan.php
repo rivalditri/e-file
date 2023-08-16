@@ -23,11 +23,4 @@ class karyawan extends RestController
             );
         }
     }
-
-    public function getByNip()
-    {
-        $data = html_entity_decode($this->input->get('nip'));
-        $data = $this->karyawan_model->get_karyawan_by_nip($data);
-        echo json_encode($data);
-    }
 }

@@ -117,5 +117,26 @@ class dokumen_model extends CI_Model
         return $query->result_array();
     }
 
+    public function insert_dokumen($data)
+    {
+        //inisialisasi data dokumen
+        $dokumen = array(
+            'id_jenis_dokumen' => $data['id_jenis_dokumen'],
+            'nama_dokumen' => $data['nama_dokumen'],
+            'path' => $data['path'],
+        );
+        //insert data dokumen
+        $this->db->insert('dokumen', $dokumen);
+        //get id dokumen
+        $id_dokumen = $this->db->insert_id();
+        //inisialisasi data penyimpanan
+        $penyimpanan = array(
+            'id_dokumen' => $id_dokumen,
+            'id_karyawan' => $data['id_karyawan'],
+        );
+        //insert data penyimpanan
+        $this->db->insert('penyimpanan', $penyimpanan);
+    }
+
 
 }

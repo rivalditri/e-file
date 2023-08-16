@@ -32,33 +32,28 @@ class user_model extends CI_Model
         return $query->result_array();
     }
 
-    public function create_user()
+    public function create_user($data)
     {
-        $data = [
-            'nip' => htmlspecialchars($this->input->post('nip', true)),
-            'nama' => htmlspecialchars($this->input->post('nama', true)),
-            'role_id' => $this->input->post('role', true),
-            'password' => md5($this->input->post('password1')),
-        ];
-        $this->db->insert('user', $data);
+        $existing_data = $this->db->get_where('user', ['nip' => $data['nip']])->row();
+        if (!$existing_data) {
+            // Data is unique, proceed with insert
+            return $this->db->insert('user', $data);
+        } else {
+            $error = array('error_message' => 'NIP sudah terdaftar');
+            return $error;
+        }
     }
 
-    public function update_user($id)
+    public function update_user($data, $nip)
     {
-        $data = [
-            'nip' => htmlspecialchars($this->input->post('nip', true)),
-            'nama' => htmlspecialchars($this->input->post('nama', true)),
-            'role_id' => $this->input->post('role', true),
-            'password' => md5($this->input->post('password1')),
-        ];
-        $this->db->where('id', $id);
-        $this->db->update('user', $data);
+        $this->db->where('nip', $nip);
+        return $this->db->update('user', $data);
     }
 
-    public function delete_user($id)
+    public function delete_user($nip)
     {
-        $this->db->where('id', $id);
-        $this->db->delete('user');
+        $this->db->where('nip', $nip);
+        return $this->db->delete('user');
     }
 
 
