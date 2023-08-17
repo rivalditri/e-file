@@ -28,23 +28,20 @@
     
 </head>
 
-<div class="navbar">
-            <image src="logo2.png" alt="" width="200">
-</div>
+
 
 
 <body class="bg-gradient-primary">
-<!-- <div class="hero">
-            <nav>
-                <img src="logo2.png" alt="Logo Perusahaan">
-            </nav>
-</div> -->
         
         <!-- Menu navigasi dan elemen header lainnya -->
+
     <div class="wrapper">
                     <!-- Outer Row -->
         <div class="row justify-content-center">
 
+        <div class="navbar">
+        <image src="Logo2.png" style=width:380px;height:230px;padding:30;margin-bottom:-35px;>
+ </div>
 <div class="col-xl-10 col-lg-12 col-md-9">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
@@ -61,7 +58,7 @@
             <?= $this->session->flashdata('message') ?>
             <form action="<?= base_url('auth') ?>" method="post" name="login_form" class="user">
             <div class="text-center">
-            <h1 class="h4 text-gray-900 mb-4">E-FILLING</h1>
+            <!-- <h1 class="h4 text-gray-900 mb-4">E-FILLING</h1> -->
             </div>
 
 
@@ -79,10 +76,7 @@
                 <i class='bx bxs-lock-alt'></i>
             </div>
 
-            <div class="remember-forgot">
-                <label><input type="checkbox"> Remember me</label>
-                <a href="#">Forgot Password?</a>
-            </div>
+            
 
             <button type="submit" name="submit" class="btn btn-primary btn-user btn-block" onclick="signIn()">Login</button>
         </form>
