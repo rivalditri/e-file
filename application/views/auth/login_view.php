@@ -18,7 +18,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    <script src="<?=base_url('vendor/sweetalert/')?>sweetalert2.all.min.js"></script>
+    <script src="<?=base_url('vendor/sweetalert/')?>sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="<?base_url('vendor/sweetalert/')?>sweetalert2.min.css">
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>css/login.css" rel="stylesheet">
@@ -87,13 +89,13 @@
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    
     <script type="text/javascript">
         function signIn() {
             // Simulate sign-in process
             // Replace this with your actual sign-in logic
 
-            // If sign-in is successful, show toast
+            // If sign-in  is successful, show toast
             Toast.fire({
                 icon: 'success',
                 title: 'Signed in successfully'
