@@ -7,14 +7,14 @@
     font-family: "Poppins", sans-serif;
 }
 
-.navbar {
+/* .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 410px;
-    margin-right: 1120px;
+    margin-bottom: 110px;
+    margin-right: 120px;
     padding: 0px 0;
-    }
+    } */
 
 body {
     display: flex;
@@ -28,15 +28,18 @@ body {
 }
 
 .wrapper{
-    width: 420px;
+    width: 450px;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 1px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: white;
     border-radius: 10px;
-    padding: 30px 40px;
+    padding: 10px 30px;
     position: absolute;
+    margin-top: 85px;
+    top: 1%;
+    bottom: 10%;
 }
 
 .wrapper h1 {

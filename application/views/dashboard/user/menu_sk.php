@@ -47,9 +47,7 @@ https://templatemo.com/tm-581-kind-heart-charity
 <body id="section_1">
     <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     
-    <div class="col-3" style="width:0px;">
-    <a class="bx bxs-log-out" href="<?= base_url('User') ?>">Back</a>
-    </div>
+    
 
         <div class="container">
             <a class="navbar-brand" href="<?= base_url('User') ?>">
