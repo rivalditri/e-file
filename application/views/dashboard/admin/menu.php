@@ -43,10 +43,11 @@ if (!isset($_SESSION['nip'])) {
                 </div>
             </div>
         </div>
+        <!-- close header menu -->
         <!-- nav menu -->
         <div data-options="region:'west',split:true" title="Menu" style="width:15%;">
             <div class="easyui-accordion" data-options="fit:true,border:false">
-
+                <!-- tree -->
                 <ul class="easyui-tree">
                     <li>
                         <span>
@@ -59,27 +60,17 @@ if (!isset($_SESSION['nip'])) {
                             <li><span>Staff</span></li>
                         </ul>
                     </li>
-
-                    <!-- <li>
-                        <span>
-                            <a href="<?= base_url('dokumen') ?>">Dokumen</a>
-                        </span>
-                        <ul>
-                            <li><span>Dokumen 1</span></li>
-                            <li><span>Dokumen 2</span></li>
-                            <li><span>Dokumen 3</span></li>
-                            <li><span>Dokumen 4</span></li>
-                        </ul>
-                    </li> -->
                 </ul>
-
+                <!-- manage admin (button tambah user dan jenis dokumen -->
                 <div title="Manage" data-options="selected:true" style="padding:20px;">
                     <a href="javascript:void(0)" class="easyui-linkbutton" style="width:100%; height: 30px;margin: 5px; " onclick="$('#u').window('open')">Tambah User</a>
                     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#j').window('open')" style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
-                    <!-- <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('open')">Open</a> -->
+                    <!-- close manage admin -->
 
+                    <!-- window user -->
                     <div id="u" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
                         <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
+                            <!-- form user -->
                             <div title="Upload" style="overflow:hidden">
                                 <form id="ff" method="post">
                                     <h1 style="text-align: center;">Registrasi</h1>
@@ -116,6 +107,7 @@ if (!isset($_SESSION['nip'])) {
                                     </div>
                                 </form>
                             </div>
+                            <!-- data grid user -->
                             <div title="Dokumen" style="padding:10px">
                                 <table class="easyui-datagrid" data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
                                     <thead>
@@ -133,9 +125,11 @@ if (!isset($_SESSION['nip'])) {
                             </div>
                         </div>
                     </div>
-
+                    <!-- close window user -->
+                    <!-- window dokumen -->
                     <div id="w" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
                         <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
+                            <!-- form create dokumen -->
                             <div title="Upload" style="overflow:hidden">
                                 <div class="easyui-form" style="width:100%;padding:10px;">
                                     <form id="fd" action="form1_proc.php" method="post" enctype="multipart/form-data">
@@ -196,6 +190,8 @@ if (!isset($_SESSION['nip'])) {
                                 </div>
 
                             </div>
+                            <!-- close form -->
+                            <!-- data grid dokumen -->
                             <div title="Dokumen" style="padding:10px">
                                 <table class="easyui-datagrid" data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
                                     <thead>
@@ -219,9 +215,11 @@ if (!isset($_SESSION['nip'])) {
                             </div>
                         </div>
                     </div>
-
+                    <!-- close window dokumen -->
+                    <!-- window jenis dokumen -->
                     <div id="j" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
                         <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
+                            <!-- tab form jenis dokumen -->
                             <div title="Upload" style="overflow:hidden">
                                 <div class="easyui-form" style="width:100%;padding:10px;">
                                     <form id="fd" action="form1_proc.php" method="post" enctype="multipart/form-data">
@@ -244,6 +242,8 @@ if (!isset($_SESSION['nip'])) {
                                 </div>
 
                             </div>
+                            <!-- close form -->
+                            <!-- data grid jenis dokumen -->
                             <div title="Dokumen" style="padding:10px">
                                 <table class="easyui-datagrid" data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
                                     <thead>
@@ -261,27 +261,9 @@ if (!isset($_SESSION['nip'])) {
                             </div>
                         </div>
                     </div>
+                    <!-- close window jenis dokumen -->
 
                     <script>
-                        var modal = $('.modalBox');
-
-                        function openFormDialog() {
-                            $('#formDialog').dialog('open');
-                            modal.css('filter', 'blur(5px)');
-
-                        }
-
-
-                        function openFormDialog1() {
-                            $('#formDialog1').dialog('open');
-                            modal.css('filter', 'blur(5px)');
-                        }
-
-                        function closeForm1() {
-                            $('#formDialog1').dialog('close');
-                            modal.css('filter', 'none');
-                        }
-
                         function submitForm() {
                             $('#ff').form('submit');
                             $.messager.alert('info', 'Data Berhasil Disimpan', 'info');
@@ -314,6 +296,7 @@ if (!isset($_SESSION['nip'])) {
                 </div>
             </div>
         </div>
+        <!-- close manage user  -->
         <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
             <div id="toolbar">
                 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$('#w').window('open')">Tambah</a>
@@ -437,46 +420,22 @@ if (!isset($_SESSION['nip'])) {
                 });
                 row.productname = $(ed.target).combobox('getText');
             }
-        </script>
 
-        <script type="text/javascript">
             function getSelected() {
                 var row = $('#dg').datagrid('getSelected');
                 if (row) {
                     $.messager.alert('Info', row.nip + ":" + row.nama_karyawan + ":" + row.jabatan);
                 }
             }
-        </script>
-        <style>
-            .sidebar {
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                gap: 10px;
-            }
 
-            .easyui-linkbutton {
-                height: 28px;
-                line-height: 28px;
-            }
-        </style>
-
-        <script>
             function doSearch() {
                 alert('You input: ' + value + '(' + name + ')');
             }
         </script>
 
-
+        
     </div>
-
-    </div>
-    </div>
-
-
-    </div>
-
-
+    
 </body>
 
 </html>
