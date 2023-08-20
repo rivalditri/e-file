@@ -26,6 +26,7 @@ if (!isset($_SESSION['nip'])) {
     <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.easyui.min.js"></script>
     <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.all.min.js"></script>
     <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.min.js"></script>
+    <script type="text/javascript" src="/easyui/datagrid-filter.js"></script>
 
 
 </head>
@@ -94,7 +95,6 @@ if (!isset($_SESSION['nip'])) {
                     <div data-options="name:'all',iconCls:'icon-ok'">All </div>
                     <div data-options="name:'sports',iconCls:'icon-man'">NIP</div>
                     <div data-options="name:'sports',iconCls:'icon-man'">Nama</div>
-                    <!-- <div data-options="name:'sports',iconCls:'icon-man'">Jenis dokumen</div> -->
                 </div>
             </div>
             <table id="dg" class="easyui-datagrid"
@@ -124,7 +124,6 @@ if (!isset($_SESSION['nip'])) {
                 </thead>
             </table>
         </div>
-        <script type="text/javascript" src="/easyui/datagrid-filter.js"></script>
 
         <!-- window user -->
         <div id="u" class="easyui-window" title="User" data-options="modal:true,closed:true,iconCls:'icon-save'"
@@ -345,7 +344,7 @@ if (!isset($_SESSION['nip'])) {
                 <!-- data grid jenis dokumen -->
                 <div title="Dokumen" style="padding:10px">
                     <table class="easyui-datagrid"
-                        data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
+                        data-options="url:'<?= base_url('api/dokumen/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
                         <thead>
                             <tr>
                                 <th field="jenis_dokumen" width="auto"
@@ -507,160 +506,109 @@ if (!isset($_SESSION['nip'])) {
                 $('#formDialog').dialog('close');
 
             }
-        </script>
-    </div>
-    </div>
-    </div>
-    <!-- close manage user  -->
-    <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-        <div id="toolbar">
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-                onclick="$('#w').window('open')">Tambah</a>
-            <!-- <a href="#" class="easyui-linkbutton" onclick="getSelected()">GetSelected</a> -->
-            <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a> -->
-            <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a> -->
-            <!-- <div class="search-container"> -->
-            <input class="easyui-searchbox" data-options="prompt:'Please Input Value',menu:'#mm',searcher:doSearch"
-                style="width: 20%;">
-            <!-- </div> -->
-            <div id="mm">
-                <div data-options="name:'all',iconCls:'icon-ok'">All </div>
-                <div data-options="name:'sports',iconCls:'icon-man'">NIP</div>
-                <div data-options="name:'sports',iconCls:'icon-man'">Nama</div>
-                <!-- <div data-options="name:'sports',iconCls:'icon-man'">Jenis dokumen</div> -->
-            </div>
-        </div>
-        <table id="dg" class="easyui-datagrid"
-            data-options="url:'<?= base_url('api/karyawan') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true"
-            toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
-            <thead>
-                <tr>
-                    <div id="mm" class="easyui-menu" style="width:120px;">
-                        <div data-options="iconCls:'icon-open'" onclick="openRow()">Open</div>
-                        <div class="menu-sep"></div>
-                        <div data-options="iconCls:'icon-edit'" onclick="editRow()">Edit</div>
-                        <div data-options="iconCls:'icon-remove'" onclick="removeRow()">Remove</div>
-                        <!-- <div data-options="iconCls:'icon-print',disabled:true">Print</div> -->
 
-                    </div>
-
-                    <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP
-                    </th>
-                    <th field="nama_karyawan" width="50" editor="{type:'validatebox',options:{required:true}}">Nama
-                        Karyawan
-                    </th>
-                    <th field="kode_jabatan" width="50" editor="text">Kode Jabatan</th>
-                    <th field="jabatan" width="50" editor="text">Jabatan</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-
-    <script type="text/javascript">
-
-        function clearFormJD() {
-            $('#fj').form('clear');
-
-        }
-        var editIndex = undefined;
-
-        $('#dg').datagrid({
-            onRowContextMenu: function (e, index, row) {
-                e.preventDefault();
-                $('#mm').menu('show', {
-                    left: e.pageX,
-                    top: e.pageY
-                });
-                $('#dg').datagrid('selectRow', index);
-            }
-        });
-
-        function openRow() {
-            var row = $('#dg').datagrid('getSelected');
-            if (row) {
-                $('#w').window('open');
+            function clearFormJD() {
+                $('#fj').form('clear');
 
             }
-        }
+            var editIndex = undefined;
 
-        function editRow() {
-            var row = $('#dg').datagrid('getSelected');
-            if (row) {
-                var index = $('#dg').datagrid('getRowIndex', row);
-                onClickCell(index, 'nama_karyawan');
-            }
-        }
-
-        function removeRow() {
-            var row = $('#dg').datagrid('getSelected');
-            if (row) {
-                var index = $('#dg').datagrid('getRowIndex', row);
-                $('#dg').datagrid('cancelEdit', index).datagrid('deleteRow', index);
-                editIndex = undefined;
-            }
-        }
-        var editIndex = undefined;
-
-        function endEditing() {
-            if (editIndex == undefined) {
-                return true
-            }
-            if ($('#dg').datagrid('validateRow', editIndex)) {
-                $('#dg').datagrid('endEdit', editIndex);
-                editIndex = undefined;
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        function acceptit() {
-            if (endEditing()) {
-                $('#dg').datagrid('acceptChanges');
-            }
-        }
-
-        function onClickCell(index, field) {
-            if (editIndex != index) {
-                if (endEditing()) {
-                    $('#dg').datagrid('selectRow', index)
-                        .datagrid('beginEdit', index);
-                    var ed = $('#dg').datagrid('getEditor', {
-                        index: index,
-                        field: field
+            $('#dg').datagrid({
+                onRowContextMenu: function (e, index, row) {
+                    e.preventDefault();
+                    $('#mm').menu('show', {
+                        left: e.pageX,
+                        top: e.pageY
                     });
-                    if (ed) {
-                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
-                    }
-                    editIndex = index;
-                } else {
-                    setTimeout(function () {
-                        $('#dg').datagrid('selectRow', editIndex);
-                    }, 0);
+                    $('#dg').datagrid('selectRow', index);
+                }
+            });
+
+            function openRow() {
+                var row = $('#dg').datagrid('getSelected');
+                if (row) {
+                    $('#w').window('open');
+
                 }
             }
-        }
 
-        function onEndEdit(index, row) {
-            var ed = $(this).datagrid('getEditor', {
-                index: index,
-                field: 'productid'
-            });
-            row.productname = $(ed.target).combobox('getText');
-        }
-
-        function getSelected() {
-            var row = $('#dg').datagrid('getSelected');
-            if (row) {
-                $.messager.alert('Info', row.nip + ":" + row.nama_karyawan + ":" + row.jabatan);
+            function editRow() {
+                var row = $('#dg').datagrid('getSelected');
+                if (row) {
+                    var index = $('#dg').datagrid('getRowIndex', row);
+                    onClickCell(index, 'nama_karyawan');
+                }
             }
-        }
 
-        function doSearch() {
-            alert('You input: ' + value + '(' + name + ')');
-        }
-    </script>
+            function removeRow() {
+                var row = $('#dg').datagrid('getSelected');
+                if (row) {
+                    var index = $('#dg').datagrid('getRowIndex', row);
+                    $('#dg').datagrid('cancelEdit', index).datagrid('deleteRow', index);
+                    editIndex = undefined;
+                }
+            }
+            var editIndex = undefined;
+
+            function endEditing() {
+                if (editIndex == undefined) {
+                    return true
+                }
+                if ($('#dg').datagrid('validateRow', editIndex)) {
+                    $('#dg').datagrid('endEdit', editIndex);
+                    editIndex = undefined;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function acceptit() {
+                if (endEditing()) {
+                    $('#dg').datagrid('acceptChanges');
+                }
+            }
+
+            function onClickCell(index, field) {
+                if (editIndex != index) {
+                    if (endEditing()) {
+                        $('#dg').datagrid('selectRow', index)
+                            .datagrid('beginEdit', index);
+                        var ed = $('#dg').datagrid('getEditor', {
+                            index: index,
+                            field: field
+                        });
+                        if (ed) {
+                            ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+                        }
+                        editIndex = index;
+                    } else {
+                        setTimeout(function () {
+                            $('#dg').datagrid('selectRow', editIndex);
+                        }, 0);
+                    }
+                }
+            }
+
+            function onEndEdit(index, row) {
+                var ed = $(this).datagrid('getEditor', {
+                    index: index,
+                    field: 'productid'
+                });
+                row.productname = $(ed.target).combobox('getText');
+            }
+
+            function getSelected() {
+                var row = $('#dg').datagrid('getSelected');
+                if (row) {
+                    $.messager.alert('Info', row.nip + ":" + row.nama_karyawan + ":" + row.jabatan);
+                }
+            }
+
+            function doSearch() {
+                alert('You input: ' + value + '(' + name + ')');
+            }
+        </script>
 
 
     </div>
