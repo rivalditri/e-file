@@ -21,6 +21,14 @@ class karyawan extends RestController
                 $karyawan,
                 RestController::HTTP_OK
             );
+        } else {
+            $this->response(
+                array(
+                    "status" => "failed",
+                    "message" => "data karyawan tidak ditemukan",
+                ),
+                RestController::HTTP_NOT_FOUND
+            );
         }
     }
 }

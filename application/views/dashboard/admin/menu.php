@@ -24,18 +24,23 @@ if (!isset($_SESSION['nip'])) {
     <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/') ?>easyui/demo/demo.css">
     <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.easyui.min.js"></script>
+    <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.all.min.js"></script>
+    <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.min.js"></script>
+
 
 </head>
 
 <body>
     <div class="easyui-layout modalBox" style="width:100%;height: 675px;">
         <!-- header menu -->
-        <div class="modalContent" data-options="region:'north'" style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
+        <div class="modalContent" data-options="region:'north'"
+            style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
             <div style="float: left;">
                 Perumda Tugu Tirta
             </div>
             <div style="float: right;">
-                <a href="<?= base_url('') ?>" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
+                <a href="<?= base_url('') ?>" class="easyui-menubutton"
+                    data-options="menu:'#mm2',iconCls:'icon-help'">Setting</a>
                 <div id="mm2" style="width:100px;">
                     <div style="float: center;">
                         <a href="<?= base_url('auth/logout') ?>">LogOut</a>
@@ -63,61 +68,78 @@ if (!isset($_SESSION['nip'])) {
                 </ul>
                 <!-- manage admin (button tambah user dan jenis dokumen -->
                 <div title="Manage" data-options="selected:true" style="padding:20px;">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" style="width:100%; height: 30px;margin: 5px; " onclick="$('#u').window('open')">Tambah User</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#j').window('open')" style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton"
+                        style="width:100%; height: 30px;margin: 5px; " onclick="$('#u').window('open')">Tambah User</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#j').window('open')"
+                        style="width:100%; height: 50px;margin: 5px; ">Tambah Jenis Dokumen</a>
                     <!-- close manage admin -->
 
                     <!-- window user -->
-                    <div id="u" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
+                    <div id="u" class="easyui-window" title="Modal Window"
+                        data-options="modal:true,closed:true,iconCls:'icon-save'"
+                        style="width:50%;height:500px;padding:10px;">
                         <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
                             <!-- form user -->
-                            <div title="Upload" style="overflow:hidden">
-                                <form id="ff" method="post">
+                            <div title="Register" style="overflow:hidden">
+                                <form id="register" action="<?= base_url('api/user') ?>" method="post">
                                     <h1 style="text-align: center;">Registrasi</h1>
                                     <table style="width: 100%; margin-right: 100px;">
                                         <tr>
-                                            <td><label for="nip" style="width: 80%; margin-right: 50px;">NIP:</label></td>
-                                            <td><input id="nip" class="easyui-textbox" style="width: 80%;" name="nip" data-options="required:true"></td>
+                                            <td><label for="nip" style="width: 80%; margin-right: 50px;">NIP:</label>
+                                            </td>
+                                            <td><input id="nip" class="easyui-textbox" style="width: 80%;" name="nip"
+                                                    data-options="required:true"></td>
                                         </tr>
                                         <tr>
-                                            <td><label for="kodejenisdokumen" style="width: 80%">Nama:</label></td>
-                                            <td><input id="kodejenisdokumen" class="easyui-textbox" style="width: 80%;" name="kodejenisdokumen" data-options="required:true"></td>
+                                            <td><label for="nama" style="width: 80%">Nama:</label></td>
+                                            <td><input id="nama" class="easyui-textbox" style="width: 80%;" name="nama"
+                                                    data-options="required:true"></td>
                                         </tr>
                                         <tr>
-                                            <td><label for="jenisdokumen" style="width: 80%">password:</label></td>
-                                            <td><input id="jenisdokumen" class="easyui-textbox" style="width: 80%;" name="jenisdokumen" data-options="required:true"></td>
+                                            <td><label for="password1" style="width: 80%">password:</label></td>
+                                            <td><input id="password1" class="easyui-textbox" style="width: 80%;"
+                                                    name="password1" data-options="required:true"></td>
                                         </tr>
                                         <tr>
-                                            <td><label for="namadokumen" style="width: 80%">re-password:</label></td>
-                                            <td><input id="namadokumen" class="easyui-textbox" style="width: 80%;" name="namadokumen" data-options="required:true"></td>
+                                            <td><label for="password2" style="width: 80%">re-password:</label></td>
+                                            <td><input id="password2" class="easyui-textbox" style="width: 80%;"
+                                                    name="password2" data-options="required:true"></td>
                                         </tr>
                                         <tr>
-                                            <td><label for="role" style="width: 80%">Role User:</label></td>
+                                            <td><label for="role_id" style="width: 80%">Role User:</label></td>
                                             <td>
-                                                <select id="role" class="easyui-combobox" name="role" style="width:80%">
-                                                    <option value="aa">Administrator</option>
-                                                    <option value="ab">Admin</option>
+                                                <select id="role_id" class="easyui-combobox" name="role"
+                                                    style="width:80%">
+                                                    <option value="1">Administrator</option>
+                                                    <option value="0">Admin</option>
                                                 </select>
                                             </td>
                                         </tr>
                                     </table>
                                     <div style="text-align: center; margin-top: 10px;">
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm1()" style="width:80px; text-align:center;padding:5px 0">Submit</a>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm1()" style="width:80px; text-align:center;padding:5px 0">Clear</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton"
+                                            onclick="submitFormUser()"
+                                            style="width:80px; text-align:center;padding:5px 0">Submit</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm1()"
+                                            style="width:80px; text-align:center;padding:5px 0">Clear</a>
                                     </div>
                                 </form>
                             </div>
                             <!-- data grid user -->
                             <div title="Dokumen" style="padding:10px">
-                                <table class="easyui-datagrid" data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
+                                <table class="easyui-datagrid"
+                                    data-options="url:'<?= base_url('api/user') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
                                     <thead>
                                         <tr>
-                                            <th field="nip" width="auto" editor="{type:'validatebox',options:{required:true}}">NIP
+                                            <th field="nip" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">NIP
                                             </th>
-                                            <th field="nama_karyawan" width="auto" editor="{type:'validatebox',options:{required:true}}">Nama
+                                            <th field="nama" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">Nama
                                                 Karyawan
                                             </th>
-                                            <th field="role" width="auto" editor="{type:'validatebox',options:{required:true}}">Role User
+                                            <th field="role_id" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">Role User
                                             </th>
                                         </tr>
                                     </thead>
@@ -127,64 +149,75 @@ if (!isset($_SESSION['nip'])) {
                     </div>
                     <!-- close window user -->
                     <!-- window dokumen -->
-                    <div id="w" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
+                    <div id="w" class="easyui-window" title="Modal Window"
+                        data-options="modal:true,closed:true,iconCls:'icon-save'"
+                        style="width:50%;height:400px;padding:10px;">
                         <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
                             <!-- form create dokumen -->
                             <div title="Upload" style="overflow:hidden">
                                 <div class="easyui-form" style="width:100%;padding:10px;">
-                                    <form id="fd" action="form1_proc.php" method="post" enctype="multipart/form-data">
+                                    <form id="fd" action="<?= base_url('api/dokumen') ?>" method="post"
+                                        enctype="multipart/form-data">
                                         <table style="width: 100%; margin-right: 10%">
                                             <tr>
-                                                <td style="text-align: left;"><label for="nama" style="width: 60%">nama:</label></td>
+                                                <td style="text-align: left;">
+                                                    <label style="width: 60%">nama:</label>
+                                                </td>
                                                 <td>
-                                                    <select class="easyui-combogrid" style="width:80%" data-options="
-                                                            idField: 'nama_karyawan',
-                                                            textField: 'nama_karyawan',
-                                                            url: '<?= base_url('api/karyawan') ?>',
-                                                            method: 'get',
-                                                            columns: [[
-                                                                {field:'nip',title:'NIP',width:10},
-                                                                {field:'nama_karyawan',title:'Nama',width:15},
-                                                                {field:'jabatan',title:'Jabatan',width:10}
-                                                                 ]],
-                                                            fitColumns: true,
-                                                            mode:'local'
-                                                        ">
-                                                    </select>
+                                                    <input id="name" style="width:80%"></input>
+                                                    <script type="text/javascript">
+                                                        $(function () {
+                                                            $('#name').combogrid({
+                                                                url: '<?= base_url('api/karyawan') ?>',
+                                                                method: 'get',
+                                                                idField: 'id_karyawan',
+                                                                textField: 'nama_karyawan',
+                                                                fitColumns: true,
+                                                                columns: [[
+                                                                    { field: 'nip', title: 'NIP', width: 10 },
+                                                                    { field: 'nama_karyawan', title: 'Nama', width: 15 },
+                                                                    { field: 'jabatan', title: 'Jabatan', width: 15 }
+                                                                ]],
+                                                            });
+                                                        });
+                                                    </script>
                                                 </td>
                                             </tr>
 
                                             <tr>
-                                                <td><label for="role" style="width: 60%">Jenis Dokumen:</label></td>
+                                                <td><label style="width: 60%">Jenis Dokumen:</label></td>
                                                 <td>
-                                                    <select class="easyui-combogrid" style="width:80%" data-options="
-                                                            idField: 'jenis_dokumen',
-                                                            textField: 'jenis_dokumen',
-                                                            url: '<?= base_url('api/dokumen/jenis') ?>',
-                                                            method: 'get',
-                                                            columns: [[
-                                                                {field:'kode_jenis_dokumen',title:'Kode Jenis Dokumen',width:5},
-                                                                {field:'jenis_dokumen',title:'Jenis Dokumen',width:10}
-                                                                 ]],
-                                                            fitColumns: true
-                                                        ">
-                                                    </select>
+                                                    <input id="jenis" style="width:80%"></input>
+                                                    <script type="text/javascript">
+                                                        $(function () {
+                                                            $('#jenis').combogrid({
+                                                                url: '<?= base_url('api/dokumen/jenis') ?>',
+                                                                method: 'get',
+                                                                idField: 'id_jenis_dokumen',
+                                                                textField: 'jenis_dokumen',
+                                                                fitColumns: true,
+                                                                columns: [[
+                                                                    { field: 'kode_jenis_dokumen', title: 'Kode', width: 5 },
+                                                                    { field: 'jenis_dokumen', title: 'Jenis Dokumen', width: 15 }
+                                                                ]],
+                                                            });
+                                                        });
+                                                    </script>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: left;"><label for="namadokumen" style="width: 60%;">Nama Dokumen:</label></td>
-                                                <td><input id="namadokumen" class="easyui-textbox" style="width: 80%;" name="namadokumen" data-options="required:true"></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="text-align: left;"><label for="file" style="width: 60%;">Unggah File:</label></td>
-                                                <td><input id="file" class="easyui-filebox" style="width: 80%;" name="file"></td>
+                                                <td style="text-align: left;"><label for="file"
+                                                        style="width: 60%;">Unggah File:</label></td>
+                                                <td><input id="file" class="easyui-filebox" style="width: 80%;"
+                                                        name="file"></td>
                                             </tr>
                                         </table>
                                     </form>
                                     <div style="text-align: center; margin-top: 20px;">
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton"
+                                            onclick="submitFormDokumen()" style="width:80px">Submit</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
+                                            style="width:80px">Clear</a>
 
                                     </div>
                                 </div>
@@ -193,20 +226,27 @@ if (!isset($_SESSION['nip'])) {
                             <!-- close form -->
                             <!-- data grid dokumen -->
                             <div title="Dokumen" style="padding:10px">
-                                <table class="easyui-datagrid" data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
+                                <table class="easyui-datagrid"
+                                    data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
                                     <thead>
                                         <tr>
-                                            <th field="nama_dokumen" width="auto" editor="{type:'validatebox',options:{required:true}}">
+                                            <th field="nama_dokumen" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">
                                                 Nama Dokumen</th>
-                                            <th field="jenis_dokumen" width="auto" editor="{type:'validatebox',options:{required:true}}">
+                                            <th field="jenis_dokumen" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">
                                                 Jenis Dokumen</th>
-                                            <th field="nip" width="auto" editor="{type:'validatebox',options:{required:true}}">NIP
+                                            <th field="nip" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">NIP
                                             </th>
-                                            <th field="nama_karyawan" width="auto" editor="{type:'validatebox',options:{required:true}}">Nama
+                                            <th field="nama_karyawan" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">Nama
                                                 Karyawan
                                             </th>
-                                            <th field="kode_jabatan" width="auto" editor="{type:'validatebox',options:{required:true}}">Kode Jabatan</th>
-                                            <th field="jabatan" width="auto" editor="{type:'validatebox',options:{required:true}}">Jabatan</th>
+                                            <th field="kode_jabatan" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">Kode Jabatan</th>
+                                            <th field="jabatan" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">Jabatan</th>
                                         </tr>
                                     </thead>
 
@@ -217,26 +257,34 @@ if (!isset($_SESSION['nip'])) {
                     </div>
                     <!-- close window dokumen -->
                     <!-- window jenis dokumen -->
-                    <div id="j" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
+                    <div id="j" class="easyui-window" title="Modal Window"
+                        data-options="modal:true,closed:true,iconCls:'icon-save'"
+                        style="width:50%;height:400px;padding:10px;">
                         <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
                             <!-- tab form jenis dokumen -->
                             <div title="Upload" style="overflow:hidden">
                                 <div class="easyui-form" style="width:100%;padding:10px;">
-                                    <form id="fd" action="form1_proc.php" method="post" enctype="multipart/form-data">
+                                    <form id="jenisDokumen" action="<? base_url('api/dokumen/jenis') ?>" method="post"
+                                        enctype="multipart/form-data">
                                         <table style="width: 100%; margin-right: 10%">
                                             <tr>
                                                 <td><label for="jenisdokumen">Jenis Dokumen:</label></td>
-                                                <td><input id="jenisdokumen" class="easyui-textbox" name="jenisdokumen" style="width:100%" data-options="required:true"></td>
+                                                <td><input id="jenisdokumen" class="easyui-textbox" name="jenisdokumen"
+                                                        style="width:100%" data-options="required:true"></td>
                                             </tr>
                                             <tr>
                                                 <td><label for="kodejenisdokumen">Kode Jenis Dokumen:</label></td>
-                                                <td><input id="kodejenisdokumen" class="easyui-textbox" name="kodejenisdokumen" style="width:100%" data-options="required:true"></td>
+                                                <td><input id="kodejenisdokumen" class="easyui-textbox"
+                                                        name="kodejenisdokumen" style="width:100%"
+                                                        data-options="required:true"></td>
                                             </tr>
                                         </table>
                                     </form>
                                     <div style="text-align: center; margin-top: 20px;">
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm1()" style="width:80px">Submit</a>
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm1()" style="width:80px">Clear</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton"
+                                            onclick="submitFormJenis()" style="width:80px">Submit</a>
+                                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm1()"
+                                            style="width:80px">Clear</a>
 
                                     </div>
                                 </div>
@@ -245,12 +293,15 @@ if (!isset($_SESSION['nip'])) {
                             <!-- close form -->
                             <!-- data grid jenis dokumen -->
                             <div title="Dokumen" style="padding:10px">
-                                <table class="easyui-datagrid" data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
+                                <table class="easyui-datagrid"
+                                    data-options="url:'<?= base_url('api/dokumen/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
                                     <thead>
                                         <tr>
-                                            <th field="jenis_dokumen" width="auto" editor="{type:'validatebox',options:{required:true}}">
+                                            <th field="jenis_dokumen" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">
                                                 Jenis Dokumen</th>
-                                            <th field="kode_jenis_dokumen" width="auto" editor="{type:'validatebox',options:{required:true}}">
+                                            <th field="kode_jenis_dokumen" width="auto"
+                                                editor="{type:'validatebox',options:{required:true}}">
                                                 Kode Jenis Dokumen</th>
 
                                         </tr>
@@ -264,18 +315,132 @@ if (!isset($_SESSION['nip'])) {
                     <!-- close window jenis dokumen -->
 
                     <script>
-                        function submitForm() {
-                            $('#ff').form('submit');
-                            $.messager.alert('info', 'Data Berhasil Disimpan', 'info');
-                            $('#formDialog').dialog('close');
-                            modal.css('filter', 'none');
-
+                        function submitFormDokumen() {
+                            var formData = new FormData();
+                            // Dapatkan elemen form
+                            var form = $('#fd')[0];
+                            // Dapatkan nilai dari input dengan ID tertentu
+                            var idValue = $('#name').combogrid('getValue');
+                            var jenisValue = $('#jenis').combogrid('getValue');
+                            // Tambahkan nilai-nilai ke dalam objek FormData
+                            formData.append('id', idValue);
+                            formData.append('jenis', jenisValue);
+                            // Dapatkan nilai dari input file
+                            var fileInput = $('#file').next().find('input[type="file"]')[0];
+                            var file = fileInput.files[0];
+                            if (file) {
+                                formData.append('file', file);
+                            } else {
+                                alert('File tidak boleh kosong');
+                                return false;
+                            }
+                            // Kirimkan object FormData ke server
+                            $.ajax({
+                                url: '<?= base_url('api/dokumen') ?>',
+                                type: 'post',
+                                data: formData,
+                                contentType: false,
+                                processData: false,
+                                success: function (response) {
+                                    //close popup
+                                    $('#w').window('close');
+                                    // Tampilkan pesan berhasil
+                                    Swal.fire(
+                                        response.message,
+                                        'success'
+                                    )
+                                    // Kosongkan input file
+                                    $('#file').filebox('clear');
+                                    // Muat ulang datagrid
+                                    $('#dg').datagrid('reload');
+                                }
+                            });
                         }
 
-                        function submitForm1() {
-                            $('#ff1').form('submit');
-                            $('#formDialog1').dialog('close');
-                            modal.css('filter', 'none');
+                        function submitFormUser() {
+                            var nip = $('#nip').val();
+                            var nama = $('#nama').val();
+                            var password1 = $('#password1').val();
+                            var password2 = $('#password2').val();
+                            var role_id = $('#role_id').val();
+                            if (nip == '' || nama == '' || password1 == '' || password2 == '' || role_id == '') {
+                                $('#u').window('close');
+                                Swal.fire(
+                                    'Data tidak boleh kosong',
+                                    'error'
+                                )
+                                return false;
+                            } else if (password1 != password2) {
+                                $('#u').window('close');
+                                Swal.fire(
+                                    'Password tidak sama',
+                                    'error'
+                                )
+                                return false;
+                            } else {
+                                var formData = new FormData();
+                                // Dapatkan elemen form
+                                var form = $('#register')[0];
+                                // Tambahkan nilai-nilai ke dalam objek FormData
+                                formData.append('nip', nip);
+                                formData.append('nama', nama);
+                                formData.append('password1', password1);
+                                formData.append('role_id', role_id);
+                                // Kirimkan object FormData ke server
+                                $.ajax({
+                                    url: '<?= base_url('api/user') ?>',
+                                    type: 'post',
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function (response) {
+                                        //close popup
+                                        $('#u').window('close');
+                                        // Tampilkan pesan berhasil
+                                        Swal.fire(
+                                            response.message,
+                                            'success'
+                                        );
+                                    }
+                                });
+                            }
+                        }
+
+                        function submitFormJenis() {
+                            var jenisdokumen = $('#jenisdokumen').val();
+                            var kodejenisdokumen = $('#kodejenisdokumen').val();
+                            if (jenisdokumen == '' || kodejenisdokumen == '') {
+                                $('#j').window('close');
+                                Swal.fire(
+                                    'Data tidak boleh kosong',
+                                    'error'
+                                )
+                                return false;
+                            } else {
+                                var formData = new FormData();
+                                // Dapatkan elemen form
+                                var form = $('#register')[0];
+                                // Tambahkan nilai-nilai ke dalam objek FormData
+                                formData.append('jenisdokumen', jenisdokumen);
+                                formData.append('kodejenisdokumen', kodejenisdokumen);
+                                // Kirimkan object FormData ke server
+                                $.ajax({
+                                    url: '<?= base_url('api/dokumen/jenis') ?>',
+                                    type: 'post',
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function (response) {
+                                        //close popup
+                                        $('#j').window('close');
+                                        // Tampilkan pesan berhasil
+                                        Swal.fire(
+                                            response.message,
+                                            'success'
+                                        );
+                                    }
+                                });
+                            }
                         }
 
                         function clearForm() {
@@ -299,13 +464,15 @@ if (!isset($_SESSION['nip'])) {
         <!-- close manage user  -->
         <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
             <div id="toolbar">
-                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$('#w').window('open')">Tambah</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+                    onclick="$('#w').window('open')">Tambah</a>
                 <!-- <a href="#" class="easyui-linkbutton" onclick="getSelected()">GetSelected</a> -->
                 <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Destroy</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Save</a> -->
                 <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a> -->
                 <!-- <div class="search-container"> -->
-                <input class="easyui-searchbox" data-options="prompt:'Please Input Value',menu:'#mm',searcher:doSearch" style="width: 20%;">
+                <input class="easyui-searchbox" data-options="prompt:'Please Input Value',menu:'#mm',searcher:doSearch"
+                    style="width: 20%;">
                 <!-- </div> -->
                 <div id="mm">
                     <div data-options="name:'all',iconCls:'icon-ok'">All </div>
@@ -314,7 +481,10 @@ if (!isset($_SESSION['nip'])) {
                     <!-- <div data-options="name:'sports',iconCls:'icon-man'">Jenis dokumen</div> -->
                 </div>
             </div>
-            <table id="dg" class="easyui-datagrid" data-options="url:'<?= base_url('api/karyawan') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
+            <table id="dg" class="easyui-datagrid"
+                data-options="url:'<?= base_url('api/karyawan') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true"
+                toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true"
+                singleSelect="true">
                 <thead>
 
                     <tr>
@@ -343,7 +513,7 @@ if (!isset($_SESSION['nip'])) {
             var editIndex = undefined;
 
             $('#dg').datagrid({
-                onRowContextMenu: function(e, index, row) {
+                onRowContextMenu: function (e, index, row) {
                     e.preventDefault();
                     $('#mm').menu('show', {
                         left: e.pageX,
@@ -406,7 +576,7 @@ if (!isset($_SESSION['nip'])) {
                         }
                         editIndex = index;
                     } else {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $('#dg').datagrid('selectRow', editIndex);
                         }, 0);
                     }
@@ -433,9 +603,9 @@ if (!isset($_SESSION['nip'])) {
             }
         </script>
 
-        
+
     </div>
-    
+
 </body>
 
 </html>

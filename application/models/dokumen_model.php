@@ -135,7 +135,15 @@ class dokumen_model extends CI_Model
             'id_karyawan' => $data['id_karyawan'],
         );
         //insert data penyimpanan
-        $this->db->insert('penyimpanan', $penyimpanan);
+        return $this->db->insert('penyimpanan', $penyimpanan);
+    }
+    public function insert_jenis($data)
+    {
+        $jenis = array(
+            'kode_jenis_dokumen' => $data['kode_jenis_dokumen'],
+            'jenis_dokumen' => $data['jenis_dokumen'],
+        );
+        return $this->db->insert('jenis_dokumen', $jenis);
     }
 
 

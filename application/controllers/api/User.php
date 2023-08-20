@@ -13,6 +13,22 @@ class user extends RestController
         $this->load->model('user_model', 'user');
     }
 
+    public function index_get()
+    {
+        $user = $this->user->get_user();
+        if ($user) {
+            $this->response(
+                $user,
+                RestController::HTTP_OK
+            );
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Data tidak ditemukan',
+            ], RestController::HTTP_NOT_FOUND);
+        }
+    }
+
     public function index_post()
     {
         $nip = $this->post('nip');
@@ -20,27 +36,36 @@ class user extends RestController
         $pw = $this->post('password1');
         $role_id = $this->post('role_id');
 
-        $password = md5($pw);
-        $data = [
-            'nip' => $nip,
-            'nama' => $nama,
-            'role_id' => $role_id,
-            'password' => $password
-        ];
-        $row = $this->user->create_user($data);
-        if ($row === true) {
-            $this->response([
-                'status' => true,
-                'message' => 'Data berhasil ditambahkan',
-                'data' => $data,
-            ], RestController::HTTP_CREATED);
-        } else {
+        if (!$nip || !$nama || !$pw || !$role_id) {
             $this->response([
                 'status' => false,
                 'message' => 'Data gagal ditambahkan',
-                'error' => $row,
+                'error' => 'Data tidak boleh kosong',
             ], RestController::HTTP_BAD_REQUEST);
+        } else {
+            $password = md5($pw);
+            $data = [
+                'nip' => $nip,
+                'nama' => $nama,
+                'role_id' => $role_id,
+                'password' => $password
+            ];
+            $row = $this->user->create_user($data);
+            if ($row === true) {
+                $this->response([
+                    'status' => true,
+                    'message' => 'Data berhasil ditambahkan',
+                    'data' => $data,
+                ], RestController::HTTP_CREATED);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Data gagal ditambahkan',
+                    'error' => $row,
+                ], RestController::HTTP_BAD_REQUEST);
+            }
         }
+
     }
 
     public function update_post()

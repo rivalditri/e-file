@@ -79,6 +79,23 @@ class dokumen extends RestController
         }
     }
 
+    public function jenis_post()
+    {
+        $jenis = $this->post('jenisdokumen');
+        $kode = $this->post('kodejenisdokumen');
+        $data['kode_jenis_dokumen'] = $kode;
+        $data['jenis_dokumen'] = $jenis;
+        $this->dokumen->insert_jenis($data);
+        $this->response(
+            array(
+                "status" => "success",
+                "message" => "jenis berhasil ditambahkan",
+                "data" => array($data),
+            ),
+            RestController::HTTP_CREATED
+        );
+    }
+
     public function jenis_get()
     {
         $jenis = $this->dokumen->get_jenis();
