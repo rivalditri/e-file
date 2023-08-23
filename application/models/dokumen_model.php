@@ -10,7 +10,7 @@ class dokumen_model extends CI_Model
 
     public function get_dokumen()
     {
-        $query = $this->db->select('dk.id_dokumen, dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
+        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
             ->from('dokumen AS dk')
             ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
             ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
