@@ -10,11 +10,10 @@ class dokumen_model extends CI_Model
 
     public function get_dokumen()
     {
-        $query = $this->db->select('dk.id_dokumen, dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
+        $query = $this->db->select('dk.id_dokumen, dk.nama_dokumen, jk.jenis_dokumen, dk.path, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
             ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
             ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')->get();
+            ->join('karyawan AS k', '(dk.id_karyawan = k.id_karyawan)')->get();
         return $query->result_array();
     }
 
@@ -30,9 +29,8 @@ class dokumen_model extends CI_Model
     {
         $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
             ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
             ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->join('karyawan AS k', '(dk.id_karyawan = k.id_karyawan)')
             ->where('jk.id_jenis_dokumen', 4)
             ->get();
         return $query->result_array();
@@ -42,9 +40,8 @@ class dokumen_model extends CI_Model
     {
         $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
             ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
             ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->join('karyawan AS k', '(dk.id_karyawan = k.id_karyawan)')
             ->where('jk.id_jenis_dokumen', 1)
             ->get();
         return $query->result_array();
@@ -53,9 +50,8 @@ class dokumen_model extends CI_Model
     {
         $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
             ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
             ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->join('karyawan AS k', '(dk.id_karyawan = k.id_karyawan)')
             ->where('jk.id_jenis_dokumen', 2)
             ->get();
         return $query->result_array();
@@ -65,9 +61,8 @@ class dokumen_model extends CI_Model
     {
         $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
             ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
             ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->join('karyawan AS k', '(dk.id_karyawan = k.id_karyawan)')
             ->where('jk.id_jenis_dokumen', 3)
             ->get();
         return $query->result_array();
@@ -86,35 +81,20 @@ class dokumen_model extends CI_Model
 
     public function get_dokumenByJenisDokumen($jenis_dokumen)
     {
-        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
-            ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
-            ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
-            ->where('jk.jenis_dokumen', $jenis_dokumen)->get();
-        return $query->result_array();
+        $id_jenis = $this->db->select('id_jenis_dokumen')->like('jenis_dokumen', $jenis_dokumen, 'both')->from('jenis_dokumen');
+        return $this->db->get_where('dokumen', ['id_jenis_dokumen' => $id_jenis])->result_array();
     }
 
     public function get_dokumenByNamaDokumen($nama_dokumen)
     {
-        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
-            ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
-            ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
-            ->where('dk.nama_dokumen', $nama_dokumen)->get();
-        return $query->result_array();
+        $this->db->like('nama_dokumen', $nama_dokumen, 'both');
+        return $this->db->get('dokumen')->result_array();
     }
 
     public function get_dokumenByNamaKaryawan($nama_karyawan)
     {
-        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
-            ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
-            ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
-            ->where('k.nama_karyawan', $nama_karyawan)->get();
-        return $query->result_array();
+        $id_karyawan = $this->db->select('id_karyawan')->like('nama_karyawan', $nama_karyawan, 'both')->from('karyawan');
+        return $this->db->get_where('dokumen', ['id_karyawan' => $id_karyawan])->result_array();
     }
 
     public function insert_dokumen($data)
@@ -122,21 +102,22 @@ class dokumen_model extends CI_Model
         //inisialisasi data dokumen
         $dokumen = array(
             'id_jenis_dokumen' => $data['id_jenis_dokumen'],
+            'id_karyawan' => $data['id_karyawan'],
             'nama_dokumen' => $data['nama_dokumen'],
             'path' => $data['path'],
         );
         //insert data dokumen
         $this->db->insert('dokumen', $dokumen);
-        //get id dokumen
-        $id_dokumen = $this->db->insert_id();
-        //inisialisasi data penyimpanan
-        $penyimpanan = array(
-            'id_dokumen' => $id_dokumen,
-            'id_karyawan' => $data['id_karyawan'],
-        );
-        //insert data penyimpanan
-        return $this->db->insert('penyimpanan', $penyimpanan);
+        //return id dokumen
+        return $this->db->insert_id();
     }
+
+    public function delete_dokumen($id_dokumen)
+    {
+        $this->db->where('id_dokumen', $id_dokumen);
+        return $this->db->delete('dokumen');
+    }
+
     public function insert_jenis($data)
     {
         $jenis = array(

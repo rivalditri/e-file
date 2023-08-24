@@ -16,64 +16,121 @@ class dokumen extends RestController
 
     public function index_get()
     {
-        $dokumen = $this->dokumen->get_dokumen();
+        $data = null;
+        $dokumen = $this->input->get('nama_dokumen');
+        $jenis = $this->input->get('jenis_dokumen');
+        $karyawan = $this->input->get('nama_karyawan');
         if ($dokumen) {
+            $data = $this->dokumen->get_dokumenByNamaDokumen($dokumen);
+        } else if ($jenis) {
+            $data = $this->dokumen->get_dokumenByJenisDokumen($jenis);
+        } else if ($karyawan) {
+            $data = $this->dokumen->get_dokumenByNamaKaryawan($karyawan);
+        } else {
+            $data = $this->dokumen->get_dokumen();
+        }
+        if ($data) {
             $this->response(
-                $dokumen,
+                $data,
                 RestController::HTTP_OK
+            );
+        } else {
+            $this->response(
+                array(
+                    "status" => "error",
+                    "message" => "data dokumen tidak ditemukan",
+                ),
+                RestController::HTTP_NOT_FOUND
             );
         }
     }
     public function index_post()
     {
-        $id = $this->post('id');
+        $id = $this->post('id_karyawan');
         $jenis = $this->post('jenis');
         if (!$id) {
             $this->response(
                 array(
-                    "status" => "failed",
-                    "message" => "id tidak boleh kosong"
+                    "status" => "error",
+                    "message" => "Nama Tidak Ditemukan"
                 ),
                 RestController::HTTP_BAD_REQUEST
             );
         } else if (!$jenis) {
             $this->response(
                 array(
-                    "status" => "failed",
-                    "message" => "jenis tidak boleh kosong"
+                    "status" => "error",
+                    "message" => "Jenis Dokumen Tidak Ditemukan"
                 ),
                 RestController::HTTP_BAD_REQUEST
             );
         } else {
             $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'pdf|doc|docx|jpg|png|jpeg';
             $config['max_size'] = 10000;
             $this->load->library('upload', $config);
+            $this->upload->set_allowed_types('*');
             if (!$this->upload->do_upload('file')) {
-                $error = array('error' => $this->upload->display_errors());
+                $error = $this->upload->display_errors();
                 $this->response(
                     array(
-                        "status" => "failed",
-                        "message" => "dokumen gagal ditambahkan",
-                        "data" => array($error),
+                        "status" => "error",
+                        "message" => "Dokumen Gagal Ditambahkan",
+                        "error" => $error,
                     ),
                     RestController::HTTP_BAD_REQUEST
                 );
             } else {
                 $uploaded_data = $this->upload->data();
-                $file_ext = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
                 $data['nama_dokumen'] = $uploaded_data['file_name'];
-                $data['path'] = $uploaded_data['full_path'];
+                $data['path'] = 'uploads/' . $uploaded_data['file_name'];
                 $data['id_karyawan'] = $id;
                 $data['id_jenis_dokumen'] = $jenis;
                 $this->dokumen->insert_dokumen($data);
                 $this->response(
                     array(
                         "status" => "success",
-                        "message" => "dokumen berhasil ditambahkan",
+                        "message" => "Dokumen Berhasil Ditambahkan",
                         "data" => array($data),
                     ),
                     RestController::HTTP_CREATED
+                );
+            }
+        }
+    }
+    public function index_delete()
+    {
+        $id_dokumen = $this->input->get('id_dokumen');
+        $data = $this->db->get_where('dokumen', ['id_dokumen' => $id_dokumen])->row_array();
+        $path = $data['path'];
+        if ($this->db->get_where('dokumen', ['id_dokumen' => $id_dokumen])->row_array() == null) {
+            $this->response(
+                array(
+                    "status" => "error",
+                    "title" => "Dokumen Gagal Dihapus",
+                    "message" => "dokumen tidak ditemukan",
+                ),
+                RestController::HTTP_BAD_REQUEST
+            );
+        } else {
+            $result = $this->dokumen->delete_dokumen($id_dokumen);
+            unlink($path);
+            if ($result) {
+                $this->response(
+                    array(
+                        "status" => "success",
+                        "title" => "Dokumen Berhasil Dihapus",
+                        "message" => "dokumen " . $data['nama_dokumen'] . " berhasil dihapus",
+                    ),
+                    RestController::HTTP_OK
+                );
+            } else {
+                $this->response(
+                    array(
+                        "status" => "error",
+                        "title" => "Dokumen Gagal Dihapus",
+                        "message" => "something went wrong",
+                    ),
+                    RestController::HTTP_INTERNAL_ERROR
                 );
             }
         }
@@ -85,15 +142,26 @@ class dokumen extends RestController
         $kode = $this->post('kodejenisdokumen');
         $data['kode_jenis_dokumen'] = $kode;
         $data['jenis_dokumen'] = $jenis;
-        $this->dokumen->insert_jenis($data);
-        $this->response(
-            array(
-                "status" => "success",
-                "message" => "jenis berhasil ditambahkan",
-                "data" => array($data),
-            ),
-            RestController::HTTP_CREATED
-        );
+        $result = $this->dokumen->insert_jenis($data);
+        if ($result) {
+            $this->response(
+                array(
+                    "status" => "success",
+                    "message" => "jenis berhasil ditambahkan",
+                    "data" => array($data),
+                ),
+                RestController::HTTP_CREATED
+            );
+        } else {
+            $this->response(
+                array(
+                    "status" => "error",
+                    "message" => "jenis gagal ditambahkan",
+                    "error" => "something went wrong",
+                ),
+                RestController::HTTP_BAD_REQUEST
+            );
+        }
     }
 
     public function jenis_get()

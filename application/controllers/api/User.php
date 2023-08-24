@@ -53,16 +53,19 @@ class user extends RestController
             $row = $this->user->create_user($data);
             if ($row === true) {
                 $this->response([
-                    'status' => true,
+                    'status' => 'success',
                     'message' => 'Data berhasil ditambahkan',
                     'data' => $data,
                 ], RestController::HTTP_CREATED);
             } else {
-                $this->response([
-                    'status' => false,
-                    'message' => 'Data gagal ditambahkan',
-                    'error' => $row,
-                ], RestController::HTTP_BAD_REQUEST);
+                $this->response(
+                    array(
+                        'status' => 'error',
+                        'message' => 'Data gagal ditambahkan',
+                        'error' => 'something went wrong',
+                    )
+                    , RestController::HTTP_BAD_REQUEST
+                );
             }
         }
 

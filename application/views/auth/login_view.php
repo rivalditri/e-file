@@ -21,7 +21,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.all.min.js"></script>
     <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<? base_url('vendor/sweetalert/') ?>sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/sweetalert/') ?>sweetalert2.min.css">
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>css/login.css" rel="stylesheet">

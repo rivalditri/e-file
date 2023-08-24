@@ -22,14 +22,14 @@ class karyawan_model extends CI_Model
 
     public function get_karyawan_by_nip($nip)
     {
-        $query = $this->db->get_where('karyawan', ['nip' => $nip]);
-        return $query->result_array();
+        $this->db->like('nip', $nip, 'both');
+        return $this->db->get('karyawan')->result_array();
     }
 
-    public function get_karyawan_by_role($role)
+    public function get_karyawan_by_nama($nama)
     {
-        $query = $this->db->get_where('karyawan', ['role_id' => $role]);
-        return $query->result_array();
+        $this->db->like('nama_karyawan', $nama, 'both');
+        return $this->db->get('karyawan')->result_array();
     }
 
     public function update_karyawan($id)
@@ -46,10 +46,19 @@ class karyawan_model extends CI_Model
 
     public function delete_karyawan($id)
     {
-        $this->db->where('id', $id);
-        $this->db->delete('karyawan');
+        $this->db->where('id_karyawan', $id);
+        return $this->db->delete('karyawan');
     }
 
-
-
+    public function create_karyawan($data)
+    {
+        $existing_data = $this->db->get_where('karyawan', ['nip' => $data['nip']])->row();
+        if (!$existing_data) {
+            // Data is unique, proceed with insert
+            return $this->db->insert('karyawan', $data);
+        } else {
+            $error = array('error_message' => 'NIP sudah terdaftar');
+            return $error;
+        }
+    }
 }

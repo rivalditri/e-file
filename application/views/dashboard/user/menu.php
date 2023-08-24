@@ -4,7 +4,7 @@ if (!isset($_SESSION['nip'])) {
     redirect('auth');
 } else {
     //if session nip is set, check role_id
-    if ($_SESSION['role_id'] != 0) {
+    if ($_SESSION['role_id'] != 'user') {
         redirect('admin');
     }
 }
