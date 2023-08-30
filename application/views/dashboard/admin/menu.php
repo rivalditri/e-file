@@ -61,12 +61,12 @@ if (!isset($_SESSION['nip'])) {
                         <span>
                             <a href="<?= base_url('admin') ?>">Karyawan</a>
                         </span>
-                        <ul>
+                        <!-- <ul>
                             <li><span>Bagian / Manajer</span></li>
                             <li><span>Asisten Manajer</span></li>
                             <li><span>Supervisor</span></li>
                             <li><span>Staff</span></li>
-                        </ul>
+                        </ul> -->
                     </li>
                 </ul>
                 <!-- manage admin (button tambah user dan jenis dokumen -->
@@ -133,13 +133,13 @@ if (!isset($_SESSION['nip'])) {
 
                         </div>
 
-                        <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP
+                        <th field="nip" width="50" sortable="true" editor="{type:'validatebox',options:{required:true}}">NIP
                         </th>
-                        <th field="nama_karyawan" width="50" editor="{type:'validatebox',options:{required:true}}">Nama
+                        <th field="nama_karyawan" width="50" sortable="true" editor="{type:'validatebox',options:{required:true}}">Nama
                             Karyawan
                         </th>
-                        <th field="kode_jabatan" width="50" editor="text">Kode Jabatan</th>
-                        <th field="jabatan" width="50" editor="text">Jabatan</th>
+                        <th field="kode_jabatan" width="50" sortable="true" editor="text">Kode Jabatan</th>
+                        <th field="jabatan" width="50" sortable="true" editor="text">Jabatan</th>
                     </tr>
                 </thead>
             </table>
@@ -437,6 +437,16 @@ if (!isset($_SESSION['nip'])) {
             }
 
             var editIndex = undefined;
+
+            $(document).ready(function () {
+            $('#karyawan').datagrid({
+            onDblClickRow  : function (index, row) {
+            openKaryawan(index, 'nama_karyawan');
+            
+                 }
+            });
+            });
+            
             function editKaryawan() {
                 var row = $('#karyawan').datagrid('getSelected');
                 if (row) {
@@ -465,11 +475,22 @@ if (!isset($_SESSION['nip'])) {
                 }
                 //get selected row data
                 var rows = $('#karyawan').datagrid('getSelections');
+                var formdata = new FormData();
+                var idValue = $("#name").combogrid("getValue");
+                formData.append("id_karyawan",idValue);
+                formData.append("jenis",jenisValue);
+                var fileInput = $("#file").next().find('input[type="file"]')[0];
                 //get edit row index
                 //save to variable
                 //var edited column = rows[0].column_name;
                 //.ajax call to update edited column
-                //$.ajax({url: '<?= base_url('api/karyawan/edit') ?>',method: 'post', data: {column: edited_column, value: edited_value, id: edited_id}, success: function(result){}});
+                $.ajax({
+                    url: base_url + "api/karyawam/edit",
+                    type: "post", 
+                    data: formData,
+                    contenType:false,
+                    processData:false,
+                    success: function(result){}});
 
 
             }

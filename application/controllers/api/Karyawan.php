@@ -40,6 +40,46 @@ class karyawan extends RestController
         }
     }
 
+    //api/karyawan/edit
+    //method post
+    public function edit_post(){
+        $id = $this->post('id');
+        $nip = $this->post('nip');
+        $nama_karyawan = $this->post('nama_karyawan');
+        $kode_jabatan = $this->post('kode_jabatan');
+        $jabatan = $this->post('jabatan');
+
+        $data = [
+            'id' =>$id,
+            'nip' =>$nip,
+            'nama_karyawan' => $nama_karyawan,
+            'kode_jabatan' => $kode_jabatan,
+            'jabatan' => $jabatan,
+        ];
+
+        $this->karyawan->update_karyawan($data);
+
+        if($this->db->affected_rows() > 0){
+            $this->response(
+                array(
+                    'status' => 'success',
+                    'message' => 'Data berhasil diubah',
+                    'data' => $data,
+                ),
+                RestController::HTTP_OK
+            );
+        }else{
+            $this->response(
+                array(
+                    'status' => 'error',
+                    'message' => 'Data gagal diubah',
+                    'data' => $data,
+                ),
+                RestController::HTTP_BAD_REQUEST
+            );
+        }
+    }
+
     public function index_post()
     {
         $nip = $this->post('nip');
@@ -85,6 +125,31 @@ class karyawan extends RestController
         }
 
     }
+
+    public function update_karyawan($data)
+    {
+        // $id = $data['id'];
+        // $nip = $data['nip'];
+        // $nama_karyawan = $data['nama_karyawan'];
+        // $kode_jabatan = $data['kode_jabatan'];
+        // $jabatan = $data['jabatan'];
+
+        // $data_update[
+        //     'nip' =>$nip,
+        //     'nama_karyawan' => $nama_karyawan,
+        //     'kode_jabatan' => $kode_jabatan,
+        //     'jabatan' => $jabatan,
+        // ];
+        // $data = [
+        //     // 'nip'=> htmlspecialchars($this->input->post('nip',true)),
+        //     // 'nama'=> htmlspecialchars($this->input->post('nama',true)),
+        //     // 'kode_jabatan'=> htmlspecialchars($this->input->post('kode_jabatan',true)),
+        //     // 'jabatan'=> htmlspecialchars($this->input->post('jabatan',true)),
+        // ];
+        $this->db->where('id_karyawan',$data['id']);
+        return $this->db->update('karyawan',$data);
+    }
+
     public function index_delete()
     {
         $id_karyawan = $this->input->get('id_karyawan');
