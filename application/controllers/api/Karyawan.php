@@ -126,30 +126,6 @@ class karyawan extends RestController
 
     }
 
-    public function update_karyawan($data)
-    {
-        // $id = $data['id'];
-        // $nip = $data['nip'];
-        // $nama_karyawan = $data['nama_karyawan'];
-        // $kode_jabatan = $data['kode_jabatan'];
-        // $jabatan = $data['jabatan'];
-
-        // $data_update[
-        //     'nip' =>$nip,
-        //     'nama_karyawan' => $nama_karyawan,
-        //     'kode_jabatan' => $kode_jabatan,
-        //     'jabatan' => $jabatan,
-        // ];
-        // $data = [
-        //     // 'nip'=> htmlspecialchars($this->input->post('nip',true)),
-        //     // 'nama'=> htmlspecialchars($this->input->post('nama',true)),
-        //     // 'kode_jabatan'=> htmlspecialchars($this->input->post('kode_jabatan',true)),
-        //     // 'jabatan'=> htmlspecialchars($this->input->post('jabatan',true)),
-        // ];
-        $this->db->where('id_karyawan',$data['id']);
-        return $this->db->update('karyawan',$data);
-    }
-
     public function index_delete()
     {
         $id_karyawan = $this->input->get('id_karyawan');
