@@ -435,18 +435,60 @@ if (!isset($_SESSION['nip'])) {
                 // Membuka window
                 $('#dokumenWindow').window('open');
             }
-
             var editIndex = undefined;
 
             $(document).ready(function () {
             $('#karyawan').datagrid({
-            onDblClickRow  : function (index, row) {
-            openKaryawan(index, 'nama_karyawan');
+            onClickRow: function (index, row) {
+            // Ambil data dari baris yang digandakan klik
+            var nip = row.nip;
+            var namaKaryawan = row.nama_karyawan;
+            var kodeJabatan = row.kode_jabatan;
+            var jabatan = row.jabatan;
+
             
-                 }
+            // // Misalnya, buka dokumen atau lakukan operasi lain
+             openKaryawan(nip, namaKaryawan, kodeJabatan, jabatan);
+               $('#dokumenGrid').window('open')            
+            }
+                });
             });
-            });
+            function openKaryawan(nip, namaKaryawan, kodeJabatan, jabatan) {
+                // Contoh sederhana: Membuka alert dengan data
+                  alert("NIP: " + nip + "\nNama: " + namaKaryawan + "\nKode Jabatan: " + kodeJabatan + "\nJabatan: " + jabatan);
+         
+            }
+
             
+            // $(document).ready(function () {
+            // $('#karyawan').datagrid({
+            // onDblClickRow  : function (index, row) {
+            // openKaryawan(index,'nip', 'nama_karyawan','kode_jabatan','jabatan');
+            //         }   
+            //     }
+            // );
+            // });
+
+//             $(document).ready(function () {
+//     $('#karyawan').datagrid({
+//         onDblClickRow: function (index, row) {
+//             var nip = row.nip; // Ganti "nip" dengan nama field yang ingin Anda ambil
+//             var namaKaryawan = row.nama_karyawan; // Ganti "nama_karyawan" dengan nama field yang ingin Anda ambil
+//             var kodeJabatan = row.kode_jabatan; // Ganti "kode_jabatan" dengan nama field yang ingin Anda ambil
+//             var jabatan = row.jabatan; // Ganti "jabatan" dengan nama field yang ingin Anda ambil
+
+//             // Buat URL atau path dokumen yang ingin Anda arahkan
+//             var dokumenURL = 'api/dokumen?nip=' + nip + '&nama=' + namaKaryawan + '&jabatan=' + jabatan;
+
+//             // Redirect ke dokumen yang telah dibuat
+//             window.location.href = dokumenURL;
+//         }
+//     });
+// });
+
+
+
+
             function editKaryawan() {
                 var row = $('#karyawan').datagrid('getSelected');
                 if (row) {
@@ -469,31 +511,56 @@ if (!isset($_SESSION['nip'])) {
                 }
             }
 
-            function acceptit() {
-                if (endEditing()) {
-                    $('#karyawan').datagrid('acceptChanges');
-                }
-                //get selected row data
-                var rows = $('#karyawan').datagrid('getSelections');
-                var formdata = new FormData();
-                var idValue = $("#name").combogrid("getValue");
-                formData.append("id_karyawan",idValue);
-                formData.append("jenis",jenisValue);
-                var fileInput = $("#file").next().find('input[type="file"]')[0];
-                //get edit row index
-                //save to variable
-                //var edited column = rows[0].column_name;
-                //.ajax call to update edited column
-                $.ajax({
-                    url: base_url + "api/karyawam/edit",
-                    type: "post", 
-                    data: formData,
-                    contenType:false,
-                    processData:false,
-                    success: function(result){}});
+            // $('#karyawan').datagrid({
+            //     onEndEditing: function(index, row, change){
+            //         console.log(index, ' | ', row, ' | ', change);
+            //     }
+            // });
 
+    function acceptit() {
+    if (endEditing()) {
+        $('#karyawan').datagrid('acceptChanges');
+    }
+    // Mengambil data baris yang dipilih
+    var rows = $('#karyawan').datagrid('getSelections');
+    
+    // Pastikan ada baris yang dipilih sebelum melanjutkan
+    if (rows.length === 0) {
+        alert('Pilih setidaknya satu baris untuk diedit.');
+        return;
+    }
 
-            }
+    // Ambil nilai NIP dari baris yang pertama (misalnya, jika NIP ada di kolom "nip")
+    var NIP = rows[0].NIP; // Gantilah "nip" dengan nama kolom yang sesuai
+    
+
+    // Lakukan panggilan AJAX untuk mengirim data ke server
+    $.ajax({
+        url: base_url + "api/karyawan/edit",
+        method: "POST",
+        data: { NIP: NIP }, // Kirim data NIP ke server
+        dataType: 'json',
+        success: function(response) {
+            // Menutup popup atau window
+            $("#dokumenGrid").window("close");
+            
+            // Menampilkan pesan berhasil
+            Swal.fire("Success", response.message, "success");
+            
+            // Membersihkan form
+            clearForm();
+            
+            // Memuat ulang datagrid
+            $("#datadokumen").datagrid("reload");
+        },
+        error: function(xhr, status, error) {
+            // Menangani kesalahan jika terjadi
+            console.error(error);
+            Swal.fire("Error", "Terjadi kesalahan", "error");
+        }
+    });
+}
+
 
             function onClickCell(index, field) {
                 if (editIndex != index) {
@@ -660,6 +727,8 @@ if (!isset($_SESSION['nip'])) {
             function doSearch(nip) {
                 alert('You input: ');
             }
+
+            
         </script>
     </div>
 

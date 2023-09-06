@@ -125,7 +125,11 @@ class karyawan extends RestController
         }
 
     }
-
+    public function update_karyawan($data)
+    {
+        $this->db->where('id_karyawan',$data['id']);
+        return $this->db->update('karyawan',$data);
+    }
     public function index_delete()
     {
         $id_karyawan = $this->input->get('id_karyawan');
