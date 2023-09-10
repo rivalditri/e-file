@@ -34,8 +34,9 @@ class karyawan_model extends CI_Model
 
     public function update_karyawan($data)
     {
-        $this->db->where('id_karyawan',$data['id']);
-        return $this->db->update('karyawan',$data);
+        $this->db->where('id_karyawan', $data['id_karyawan']);
+        $this->db->update('karyawan', $data);
+        return $this->db->affected_rows();
     }
 
 

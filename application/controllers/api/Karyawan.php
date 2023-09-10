@@ -42,7 +42,8 @@ class karyawan extends RestController
 
     //api/karyawan/edit
     //method post
-    public function edit_post(){
+    public function edit_post()
+    {
         $id = $this->post('id');
         $nip = $this->post('nip');
         $nama_karyawan = $this->post('nama_karyawan');
@@ -50,16 +51,16 @@ class karyawan extends RestController
         $jabatan = $this->post('jabatan');
 
         $data = [
-            'id' =>$id,
-            'nip' =>$nip,
+            'id_karyawan' => $id,
+            'nip' => $nip,
             'nama_karyawan' => $nama_karyawan,
             'kode_jabatan' => $kode_jabatan,
             'jabatan' => $jabatan,
         ];
 
-        $this->karyawan->update_karyawan($data);
+        $response = $this->karyawan->update_karyawan($data);
 
-        if($this->db->affected_rows() > 0){
+        if ($response) {
             $this->response(
                 array(
                     'status' => 'success',
@@ -68,7 +69,7 @@ class karyawan extends RestController
                 ),
                 RestController::HTTP_OK
             );
-        }else{
+        } else {
             $this->response(
                 array(
                     'status' => 'error',
@@ -127,8 +128,8 @@ class karyawan extends RestController
     }
     public function update_karyawan($data)
     {
-        $this->db->where('id_karyawan',$data['id']);
-        return $this->db->update('karyawan',$data);
+        $this->db->where('id_karyawan', $data['id']);
+        return $this->db->update('karyawan', $data);
     }
     public function index_delete()
     {
