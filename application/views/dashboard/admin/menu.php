@@ -216,7 +216,7 @@ if (!isset($_SESSION['nip'])) {
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="removeRow()">Hapus</a>
+                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
                     </div>
@@ -382,7 +382,7 @@ if (!isset($_SESSION['nip'])) {
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="removeRow()">Hapus</a>
+                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
                     </div>
@@ -438,30 +438,65 @@ if (!isset($_SESSION['nip'])) {
                 $('#dokumenWindow').window('open');
             }
             var editIndex = undefined;
-
-
             $(document).ready(function () {
-                $('#karyawan').datagrid({
-                    onClickRow: function (index, row) {
-                        // Ambil data dari baris yang digandakan klik
-                        var id = row.id_karyawan;
-                        var nip = row.nip;
-                        var namaKaryawan = row.nama_karyawan;
-                        var kodeJabatan = row.kode_jabatan;
-                        var jabatan = row.jabatan;
+            $('#karyawan').datagrid({
+            onDblClickRow: function (index, row) {
+            // Ambil data dari baris yang digandakan klik
+            var id = row.id_karyawan;
+            var nip = row.nip;
+            var namaKaryawan = row.nama_karyawan;
+            var kodeJabatan = row.kode_jabatan;
+            var jabatan = row.jabatan;
+            // Menyimpan data dalam objek
+            var dataKaryawan = {
+                id: id,
+                nip: nip,
+                namaKaryawan: namaKaryawan,
+                kodeJabatan: kodeJabatan,
+                jabatan: jabatan
+            };
+            // Menampilkan data dalam jendela dialog dengan ID "dokumenGrid"
+            $('#dokumenGrid').window('open');
+            var pathToContent = 'api/karyawan';
 
-
-                        // // Misalnya, buka dokumen atau lakukan operasi lain
-                        openKaryawan(id, nip, namaKaryawan, kodeJabatan, jabatan);
-                        //    $('#dokumenGrid').window('open')            
+            // Memuat konten dari path ke dalam jendela dialog
+            $('#dokumenGrid').panel({
+                href: pathToContent,
+                onLoad: function () {
+                            // Set data ke dalam elemen-elemen di dalam jendela dialog
+                            $('#dokumenGrid').find('#id').text(id);
+                            $('#dokumenGrid').find('#nip').text(nip);
+                            $('#dokumenGrid').find('#namaKaryawan').text(namaKaryawan);
+                            $('#dokumenGrid').find('#kodeJabatan').text(kodeJabatan);
+                            $('#dokumenGrid').find('#jabatan').text(jabatan);
+                             }
+                        });
                     }
                 });
             });
-            function openKaryawan(id, nip, namaKaryawan, kodeJabatan, jabatan) {
-                // Contoh sederhana: Membuka alert dengan data
-                alert("ID: " + id + "\nNIP: " + nip + "\nNama: " + namaKaryawan + "\nKode Jabatan: " + kodeJabatan + "\nJabatan: " + jabatan);
 
-            }
+            // $(document).ready(function () {
+            //     $('#karyawan').datagrid({
+            //         onClickRow: function (index, row) {
+            //             // Ambil data dari baris yang digandakan klik
+            //             var id = row.id_karyawan;
+            //             var nip = row.nip;
+            //             var namaKaryawan = row.nama_karyawan;
+            //             var kodeJabatan = row.kode_jabatan;
+            //             var jabatan = row.jabatan;
+
+
+            //             // // Misalnya, buka dokumen atau lakukan operasi lain
+            //             openKaryawan(id, nip, namaKaryawan, kodeJabatan, jabatan);
+            //             //    $('#dokumenGrid').window('open')            
+            //         }
+            //     });
+            // });
+            // function openKaryawan(id, nip, namaKaryawan, kodeJabatan, jabatan) {
+            //     // Contoh sederhana: Membuka alert dengan data
+            //     alert("ID: " + id + "\nNIP: " + nip + "\nNama: " + namaKaryawan + "\nKode Jabatan: " + kodeJabatan + "\nJabatan: " + jabatan);
+
+            // }
 
 
             // $(document).ready(function () {
