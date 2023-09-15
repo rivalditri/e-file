@@ -324,68 +324,84 @@ function deleteDokumen() {
 }
 
 //user
-function deleteUser() {
-	var row = $("#datauser").datagrid("getSelected");
-	if (row) {
-		var url = base_url + "api/user?nip=" + row.nip;
-		$("#tbuser").window("close");
-		Swal.fire({
-			title: "Are you sure?",
-			text: "You won't be able to revert this!",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Yes, delete it!",
-		}).then((result) => {
-			if (result.isConfirmed) {
-				fetch(url, {
-					method: "DELETE",
-				})
-					.then((response) => response.json())
-					.then((data) => {
-						Swal.fire(data.message, "success");
-						$("#datauser").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
-					})
-					.catch((error) => {
-						console.error("Terjadi kesalahan:", error);
-					});
-				Swal.fire("Deleted!", "Your file has been deleted.", "success");
-			}
-		});
-	}
-}
+// function deleteUser() {
+//     var row = $("#datauser").datagrid("getSelected");
+//     if (row && row.nip) {
+//         var url = base_url + "api/user?nip=" + row.nip;
+//         $("#userWindow").window("close");
+//         Swal.fire({
+//             title: "Are you sure?",
+//             text: "You won't be able to revert this!",
+//             icon: "warning",
+//             showCancelButton: true,
+//             confirmButtonColor: "#3085d6",
+//             cancelButtonColor: "#d33",
+//             confirmButtonText: "Yes, delete it!",
+//         }).then((result) => {
+//             if (result.isConfirmed) {
+//                 fetch(url, {
+//                     method: "DELETE",
+//                 })
+//                 .then((response) => {
+//                     if (response.ok) {
+//                         return response.json();
+//                     } else {
+//                         throw new Error("HTTP status " + response.status);
+//                     }
+//                 })
+//                 .then((data) => {
+//                     Swal.fire(data.message, "success");
+//                     $("#datauser").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+//                 })
+//                 .catch((error) => {
+//                     console.error("Terjadi kesalahan:", error);
+//                     Swal.fire("Error", "An error occurred while deleting the user.", "error");
+//                 });
+//             }
+//         });
+//     } else {
+//         Swal.fire("Error", "No user selected for deletion.", "error");
+//     }
+// }
 
-//jenis
-function removeJenis() {
-	var row = $("#datajenis").datagrid("getSelected");
-	if (row) {
-		var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
-		$("#tbjen").window("close");
-		Swal.fire({
-			title: "Are you sure?",
-			text: "You won't be able to revert this!",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Yes, delete it!",
-		}).then((result) => {
-			if (result.isConfirmed) {
-				fetch(url, {
-					method: "DELETE",
-				})
-					.then((response) => response.json())
-					.then((data) => {
-						Swal.fire(data.message, "success");
-						$("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
-					})
-					.catch((error) => {
-						console.error("Terjadi kesalahan:", error);
-					});
-				Swal.fire("Deleted!", "Your file has been deleted.", "success");
-			}
-		});
-	}
+
+function deleteJenis() {
+    var row = $("#datajenis").datagrid("getSelected");
+    if (row && row.nip) {
+        var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+        $("#jenisDokumenWindow").window("close");
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(url, {
+                    method: "DELETE",
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("HTTP status " + response.status);
+                    }
+                })
+                .then((data) => {
+                    Swal.fire(data.message, "success");
+                    $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+                })
+                .catch((error) => {
+                    console.error("Terjadi kesalahan:", error);
+                    Swal.fire("Error", "An error occurred while deleting the user.", "error");
+                });
+            }
+        });
+    } else {
+        Swal.fire("Error", "No user selected for deletion.", "error");
+    }
 }
 
