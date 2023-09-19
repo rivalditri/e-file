@@ -382,7 +382,7 @@ if (!isset($_SESSION['nip'])) {
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
+                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenisDokumen()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
                     </div>
@@ -437,10 +437,10 @@ if (!isset($_SESSION['nip'])) {
                 }
             }
 
-            function deleteJenis() {
+            function deleteJenisDokumen() {
                 var row = $("#datajenis").datagrid("getSelected");
-                if (row && row.nip) {
-                    var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+                if (row && row.jenis_dokumen) {
+                    var url = base_url + "api/dokumen?jenis_dokumen=" + row.jenis_dokumen;
                     $("#jenisDokumenWindow").window("close");
                     Swal.fire({
                         title: "Are you sure?",
