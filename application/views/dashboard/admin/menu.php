@@ -382,7 +382,7 @@ if (!isset($_SESSION['nip'])) {
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenisDokumen()">Hapus</a>
+                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
                     </div>
@@ -437,10 +437,13 @@ if (!isset($_SESSION['nip'])) {
                 }
             }
 
-            function deleteJenisDokumen() {
+            function deleteJenis() {
                 var row = $("#datajenis").datagrid("getSelected");
                 if (row && row.jenis_dokumen) {
-                    var url = base_url + "api/dokumen?jenis_dokumen=" + row.jenis_dokumen;
+                    var index = $("#datajenis").datagrid("getRowIndex", row);
+                    $("#datajenis").datagrid("cancelEdit", index).datagrid("deleteRow", index);
+                    editIndex = undefined;
+                    var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
                     $("#jenisDokumenWindow").window("close");
                     Swal.fire({
                         title: "Are you sure?",
@@ -455,25 +458,17 @@ if (!isset($_SESSION['nip'])) {
                             fetch(url, {
                                 method: "DELETE",
                             })
-                            .then((response) => {
-                                if (response.ok) {
-                                    return response.json();
-                                } else {
-                                    throw new Error("HTTP status " + response.status);
-                                }
-                            })
-                            .then((data) => {
-                                Swal.fire(data.message, "success");
-                                $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
-                            })
-                            .catch((error) => {
-                                console.error("Terjadi kesalahan:", error);
-                                Swal.fire("Error", "An error occurred while deleting the user.", "error");
-                            });
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    Swal.fire(data.message, "success");
+                                    $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+                                })
+                                .catch((error) => {
+                                    console.error("Terjadi kesalahan:", error);
+                                });
+                            Swal.fire("Deleted!", "Your file has been deleted.", "success");
                         }
                     });
-                } else {
-                    Swal.fire("Error", "No user selected for deletion.", "error");
                 }
             }
 
