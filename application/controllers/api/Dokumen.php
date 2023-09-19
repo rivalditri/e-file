@@ -174,4 +174,38 @@ class dokumen extends RestController
             );
         }
     }
+    public function jenis_delete()
+    {
+        $jenis_dokumen = $this->input->get('jenis_dokumen');
+        if (!$jenis_dokumen) {
+            $this->response([
+                'status' => false,
+                'message' => 'Data gagal dihapus',
+                'error' => 'jenis tidak boleh kosong',
+            ], RestController::HTTP_BAD_REQUEST);
+        } else if ($this->db->get_where('jenis_dokumen', ['jenis_dokumen' => $jenis_dokumen])->row_array() == null) {
+            $this->response([
+                'status' => false,
+                'message' => 'Data gagal dihapus',
+                'error' => 'jenis tidak ditemukan',
+            ], RestController::HTTP_BAD_REQUEST);
+        } else {
+            $data = $this->db->get_where('jenis_dokumen', ['jenis_dokumen' => $jenis_dokumen])->row_array();
+            $row = $this->jenis_dokumen->delete_jenis($jenis_dokumen);
+            if ($row === true) {
+                $this->response([
+                    'status' => true,
+                    'message' => 'Data berhasil dihapus',
+                    'data' => array($data)
+                ], RestController::HTTP_CREATED);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Data gagal dihapus',
+                    'error' => $row,
+                ], RestController::HTTP_BAD_REQUEST);
+            }
+        }
+    }
+    
 }
