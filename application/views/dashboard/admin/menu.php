@@ -473,7 +473,6 @@ if (!isset($_SESSION['nip'])) {
             }
 
 
-
             //klik kanan pada datadokumen
             $('#datadokumen').datagrid({
                 onRowContextMenu: function (e, index, row) {
