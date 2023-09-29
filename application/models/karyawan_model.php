@@ -38,12 +38,6 @@ class karyawan_model extends CI_Model
         $this->db->update('karyawan', $data);
         return $this->db->affected_rows();
     }
-<<<<<<< HEAD
-    
-=======
-
-
->>>>>>> a9c8dd64fb8ea8e8280a04ab9d3ba5c6f769a058
     public function delete_karyawan($id)
     {
         $this->db->where('id_karyawan', $id);
