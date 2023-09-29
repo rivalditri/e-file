@@ -44,10 +44,11 @@ class user_model extends CI_Model
         }
     }
 
-    public function update_user($data, $nip)
+    public function update_user($data)
     {
-        $this->db->where('nip', $nip);
-        return $this->db->update('user', $data);
+        $this->db->where('nip', $data['nip']);
+        $this->db->update('user', $data);
+        return $this->db->affected_rows();
     }
 
     public function deleteUser($nip)

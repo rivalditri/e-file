@@ -215,10 +215,12 @@ if (!isset($_SESSION['nip'])) {
                         </thead>
                     </table>
                     <div id="tbuser" style="height:auto">
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
+                            data-options="iconCls:'icon-remove',plain:true" onclick="removeRow()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
                     </div>
@@ -423,10 +425,12 @@ if (!isset($_SESSION['nip'])) {
                         </thead>
                     </table>
                     <div id="tbjen" style="height:auto">
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
+                            data-options="iconCls:'icon-remove',plain:true" onclick="removeRow()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
                     </div>
