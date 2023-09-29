@@ -135,8 +135,7 @@ class dokumen extends RestController
             }
         }
     }
-<<<<<<< HEAD
-=======
+
 
     public function jenis_post()
     {
