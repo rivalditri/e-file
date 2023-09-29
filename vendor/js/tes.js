@@ -40,7 +40,7 @@ $(function () {
 
 $(function () {
 	$("#jenis").combogrid({
-		url: base_url + "api/dokumen/jenis",
+		url: base_url + "api/jenis",
 		method: "get",
 		idField: "id_jenis_dokumen",
 		textField: "jenis_dokumen",
@@ -226,7 +226,7 @@ function submitFormJenis() {
 		formData.append("kodejenisdokumen", kodejenisdokumen);
 		// Kirimkan object FormData ke server
 		$.ajax({
-			url: base_url + "api/dokumen/jenis",
+			url: base_url + "api/jenis",
 			type: "post",
 			data: formData,
 			contentType: false,

@@ -24,6 +24,7 @@ if (!isset($_SESSION['nip'])) {
     <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/') ?>easyui/demo/demo.css">
     <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.propertygrid.js"></script>
     <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.all.min.js"></script>
     <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.min.js"></script>
     <script type="text/javascript" src="<?= base_url('vendor/easyui/datagrid-filter.js') ?>"></script>
@@ -88,7 +89,9 @@ if (!isset($_SESSION['nip'])) {
                 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
                     onclick="$('#dokumenGrid').window('open')">Dokumen</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
-                    onclick="acceptit()">Accept</a>
+                    onclick=acceptit()>Accept</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+                    onclick="$('#tambahWindow').window('open')">Tambah</a>
                 <input class="easyui-searchbox karyawan-filter"
                     data-options="prompt:'Please Input Value',menu:'#filterKaryawan'" style="width: 20%;">
                 <div id="filterKaryawan">
@@ -133,11 +136,9 @@ if (!isset($_SESSION['nip'])) {
 
                         </div>
 
-                        <th field="nip" width="50" sortable="true"
-                            editor="{type:'validatebox',options:{required:true}}">NIP
+                        <th field="nip" width="50" sortable="true" editor="{type:'validatebox',options:{required:true}}">NIP
                         </th>
-                        <th field="nama_karyawan" width="50" sortable="true"
-                            editor="{type:'validatebox',options:{required:true}}">Nama
+                        <th field="nama_karyawan" width="50" sortable="true" editor="{type:'validatebox',options:{required:true}}">Nama
                             Karyawan
                         </th>
                         <th field="kode_jabatan" width="50" sortable="true" editor="text">Kode Jabatan</th>
@@ -146,6 +147,7 @@ if (!isset($_SESSION['nip'])) {
                 </thead>
             </table>
         </div>
+
         <!-- window user -->
         <div id="userWindow" class="easyui-window" title="User"
             data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
@@ -213,8 +215,8 @@ if (!isset($_SESSION['nip'])) {
                         </thead>
                     </table>
                     <div id="tbuser" style="height:auto">
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
@@ -327,6 +329,49 @@ if (!isset($_SESSION['nip'])) {
             </div>
         </div>
         <!-- close window dokumen -->
+
+        <!-- window tambah -->
+        <!-- <div id="tambahWindow" class="easyui-window" title="Karyawan"
+            data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
+            <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
+                form karyawan
+                <div title="Form Karyawan" style="overflow:hidden">
+                    <form id="register" action="<?= base_url('api/karyawan') ?>" method="post">
+                        <h1 style="text-align: center;">Registrasi</h1>
+                        <table style="width: 100%; margin-right: 100px;">
+                            <tr>
+                                <td><label for="nip" style="width: 80%; margin-right: 50px;">NIP:</label>
+                                </td>
+                                <td><input id="nip" class="easyui-textbox" style="width: 80%;" name="nip"
+                                        data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="nama_karyawan" style="width: 80%">Nama:</label></td>
+                                <td><input id="nama_karyawan" class="easyui-textbox" style="width: 80%;" name="nama"
+                                        data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="kode_jabatan" style="width: 80%">Kode Jabatan:</label></td>
+                                <td><input id="kode_jabatan" class="easyui-textbox" style="width: 80%;"
+                                        name="kode_jabatan" data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="jabatan" style="width: 80%">Jabatan:</label></td>
+                                <td><input id="jabatan" class="easyui-textbox" style="width: 80%;"
+                                        name="jabatan" data-options="required:true"></td>
+                            </tr>
+                        </table>
+                        <div style="text-align: center; margin-top: 10px;">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormKaryawan()"
+                                style="width:80px; text-align:center;padding:5px 0">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormKaryawan()"
+                                style="width:80px; text-align:center;padding:5px 0">Clear</a>
+                        </div>
+                    </form>
+                </div> -->
+
+
+
         <!-- window jenis dokumen -->
         <div id="jenisDokumenWindow" class="easyui-window" title="Jenis Dokumen"
             data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
@@ -334,8 +379,7 @@ if (!isset($_SESSION['nip'])) {
                 <!-- tab form jenis dokumen -->
                 <div title="Form Jenis Dokumen" style="overflow:hidden">
                     <div class="easyui-form" style="width:100%;padding:10px;">
-                        <form id="jenisDokumen" action="<? base_url('api/dokumen/jenis') ?>" method="post"
-                            enctype="multipart/form-data">
+                        <form id="jenisDokumen" action="<? base_url('api/jenis') ?>" method="post">
                             <table style="width: 100%; margin-right: 10%">
                                 <tr>
                                     <td><label style="width: 20%">Nama Jenis Dokumen:</label></td>
@@ -364,7 +408,7 @@ if (!isset($_SESSION['nip'])) {
                 <!-- data grid jenis dokumen -->
                 <div title="Jenis Dokumen" style="padding:10px">
                     <table id="datajenis" class="easyui-datagrid"
-                        data-options="url:'<?= base_url('api/dokumen/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true"
+                        data-options="url:'<?= base_url('api/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true"
                         toolbar="#tbjen">
                         <thead>
                             <tr>
@@ -379,8 +423,8 @@ if (!isset($_SESSION['nip'])) {
                         </thead>
                     </table>
                     <div id="tbjen" style="height:auto">
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
@@ -397,6 +441,154 @@ if (!isset($_SESSION['nip'])) {
         </div>
 
         <script>
+            //klik kanan pada datadokumen
+            $('#datadokumen').datagrid({
+                onRowContextMenu: function (e, index, row) {
+                    e.preventDefault();
+                    $('#mmdd').menu('show', {
+                        left: e.pageX,
+                        top: e.pageY
+                    });
+                    $('#datadokumen').datagrid('selectRow', index);
+                }
+            });
+
+            // klik kanan pada datakaryawan
+            $('#karyawan').datagrid({
+                onRowContextMenu: function (e, index, row) {
+                    e.preventDefault();
+                    $('#menuKaryawan').menu('show', {
+                        left: e.pageX,
+                        top: e.pageY
+                    });
+                    $('#karyawan').datagrid('selectRow', index);
+                }
+            });
+
+            //show dokumen
+            function showDokumen(id) {
+
+                $.ajax({
+                    url: base_url + "/api/dokumen", // Gantilah dengan URL yang sesuai
+                    method: 'GET', // Sesuaikan metode sesuai kebutuhan Anda
+                    // data: { 'id': id }, // Kirim ID pengguna sebagai parameter
+                    dataType: 'json', // Tipe data yang diharapkan dari respons
+
+                success: function(data) {
+                    console.log(data);
+                    const filterData = data.filter(function (item) {
+                        return item.nip == id
+                    })
+                    console.log(filterData);
+                    if (filterData) {
+                         // Gantilah dengan nama field yang sesuai
+                        var path = filterData[0].path; // Gantilah dengan nama field yang sesuai
+
+
+                
+                $('#dokumenWindow').window({
+                    title: 'Dokumen',
+                    width: 800,
+                    height: 600,
+                    content: '<iframe src="' + base_url + path + '" style="width: 100%; height: 100%; border: 0;"></iframe>',
+                    modal: true,
+                    collapsible: false,
+                    minimizable: false,
+                    maximizable: false
+                });
+                // Membuka window
+                // $('#dokumenGrid').window('open');
+                } else {
+                alert('Data dokumen tidak ditemukan.'); // Pesan jika data tidak ditemukan
+                    }
+                },
+
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan: ' + error); // Tangani kesalahan jika ada
+                }
+                })
+                };
+
+
+            $(document).ready(function () {
+                $('#karyawan').datagrid({
+                    onDblClickRow  : function (index, row) {
+                        var id = row.nip;
+                        showDokumen(id);
+            
+                 }
+            });
+            });
+            
+            function editKaryawan() {
+                var row = $('#karyawan').datagrid('getSelected');
+                if (row) {
+                    var index = $('#karyawan').datagrid('getRowIndex', row);
+                    onClickCell(index, 'nama_karyawan');
+                }
+            }
+            var editIndex = undefined;
+
+            function endEditing() {
+                if (editIndex == undefined) {
+                    return true
+                }
+                if ($('#karyawan').datagrid('validateRow', editIndex)) {
+                    $('#karyawan').datagrid('endEdit', editIndex);
+                    editIndex = undefined;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+
+            function acceptit() {
+                if (endEditing()) {
+                    $('#karyawan').datagrid('acceptChanges');
+                }
+                // Mengambil data baris yang dipilih
+                var rows = $('#karyawan').datagrid('getSelections');
+                // Pastikan ada baris yang dipilih sebelum melanjutkan
+                if (rows.length === 0) {
+                    alert('Pilih setidaknya satu baris untuk diedit.');
+                    return;
+                }
+                // Ambil nilai NIP dari baris yang pertama (misalnya, jika NIP ada di kolom "nip")
+                var id = rows[0].id_karyawan;
+                var nip = rows[0].nip;
+                var namaKaryawan = rows[0].nama_karyawan;
+                var kodeJabatan = rows[0].kode_jabatan;
+                var jabatan = rows[0].jabatan;
+                var data = {
+                    id: id,
+                    nip: nip,
+                    nama_karyawan: namaKaryawan,
+                    kode_jabatan: kodeJabatan,
+                    jabatan: jabatan
+                };
+                // Lakukan panggilan AJAX untuk mengirim data ke server
+                $.ajax({
+                    url: base_url + "api/karyawan/edit",
+                    method: "POST",
+                    data: data, // Kirim data NIP ke server
+                    dataType: 'json',
+                    success: function (response) {
+                        // Menutup popup atau window
+                        $("#dokumenGrid").window("close");
+                        // Menampilkan pesan berhasil
+                        Swal.fire("Success", response.message, "success");
+                        // Memuat ulang datagrid
+                        $("#datadokumen").datagrid("reload");
+                    },
+                    error: function (xhr, status, error) {
+                        // Menangani kesalahan jika terjadi
+                        console.error(error);
+                        Swal.fire("Error", "Terjadi kesalahan", "error");
+                    }
+                });
+            }
+
             function deleteUser() {
                 var row = $("#datauser").datagrid("getSelected");
                 if (row && row.nip) {
@@ -436,14 +628,15 @@ if (!isset($_SESSION['nip'])) {
                     Swal.fire("Error", "No user selected for deletion.", "error");
                 }
             }
-
+            
             function deleteJenis() {
                 var row = $("#datajenis").datagrid("getSelected");
                 if (row && row.jenis_dokumen) {
                     var index = $("#datajenis").datagrid("getRowIndex", row);
                     $("#datajenis").datagrid("cancelEdit", index).datagrid("deleteRow", index);
                     editIndex = undefined;
-                    var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+                    console.log(row);
+                    var url = base_url + "api/jenis?id_jenis_dokumen=" + row.id_jenis_dokumen;
                     $("#jenisDokumenWindow").window("close");
                     Swal.fire({
                         title: "Are you sure?",
@@ -458,266 +651,58 @@ if (!isset($_SESSION['nip'])) {
                             fetch(url, {
                                 method: "DELETE",
                             })
-                                .then((response) => response.json())
+                                .then((response) => {
+                                    if (!response.ok) {
+                                        throw new Error("Network response was not ok");
+                                    }
+                                    return response.json();
+                                })
                                 .then((data) => {
                                     Swal.fire(data.message, "success");
                                     $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
                                 })
                                 .catch((error) => {
                                     console.error("Terjadi kesalahan:", error);
+                                    Swal.fire("Error!", "There was an error deleting the file.", "error");
                                 });
-                            Swal.fire("Deleted!", "Your file has been deleted.", "success");
                         }
                     });
                 }
             }
 
 
-            //klik kanan pada datadokumen
-            $('#datadokumen').datagrid({
-                onRowContextMenu: function (e, index, row) {
-                    e.preventDefault();
-                    $('#mmdd').menu('show', {
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                    $('#datadokumen').datagrid('selectRow', index);
-                }
-            });
-
-            // klik kanan pada datakaryawan
-            $('#karyawan').datagrid({
-                onRowContextMenu: function (e, index, row) {
-                    e.preventDefault();
-                    $('#menuKaryawan').menu('show', {
-                        left: e.pageX,
-                        top: e.pageY
-                    });
-                    $('#karyawan').datagrid('selectRow', index);
-                }
-            });
-
-            //show dokumen
-            function showDokumen(id) {
-                var path = id;
-                $('#dokumenWindow').window({
-                    title: 'Dokumen',
-                    width: 800,
-                    height: 600,
-                    content: '<iframe src="<?= base_url() ?>' + path + '" style="width: 100%; height: 100%; border: 0;"></iframe>',
-                    modal: true,
-                    collapsible: false,
-                    minimizable: false,
-                    maximizable: false
-                });
-                // Membuka window
-                $('#dokumenWindow').window('open');
-            }
-            var editIndex = undefined;
-            $(document).ready(function () {
-            $('#karyawan').datagrid({
-            onDblClickRow: function (index, row) {
-            // Ambil data dari baris yang digandakan klik
-            var id = row.id_karyawan;
-            var nip = row.nip;
-            var namaKaryawan = row.nama_karyawan;
-            var kodeJabatan = row.kode_jabatan;
-            var jabatan = row.jabatan;
-            // Menyimpan data dalam objek
-            var dataKaryawan = {
-                id: id,
-                nip: nip,
-                namaKaryawan: namaKaryawan,
-                kodeJabatan: kodeJabatan,
-                jabatan: jabatan
-            };
-            // Menampilkan data dalam jendela dialog dengan ID "dokumenGrid"
-            $('#dokumenGrid').window('open');
-            var pathToContent = 'api/karyawan';
-
-            // Memuat konten dari path ke dalam jendela dialog
-            $('#dokumenGrid').panel({
-                href: pathToContent,
-                onLoad: function () {
-                            // Set data ke dalam elemen-elemen di dalam jendela dialog
-                            $('#dokumenGrid').find('#id').text(id);
-                            $('#dokumenGrid').find('#nip').text(nip);
-                            $('#dokumenGrid').find('#namaKaryawan').text(namaKaryawan);
-                            $('#dokumenGrid').find('#kodeJabatan').text(kodeJabatan);
-                            $('#dokumenGrid').find('#jabatan').text(jabatan);
-                             }
-                        });
-                    }
-                });
-            });
-
-            // $(document).ready(function () {
-            //     $('#karyawan').datagrid({
-            //         onClickRow: function (index, row) {
-            //             // Ambil data dari baris yang digandakan klik
-            //             var id = row.id_karyawan;
-            //             var nip = row.nip;
-            //             var namaKaryawan = row.nama_karyawan;
-            //             var kodeJabatan = row.kode_jabatan;
-            //             var jabatan = row.jabatan;
-
-
-            //             // // Misalnya, buka dokumen atau lakukan operasi lain
-            //             openKaryawan(id, nip, namaKaryawan, kodeJabatan, jabatan);
-            //             //    $('#dokumenGrid').window('open')            
-            //         }
-            //     });
-            // });
-            // function openKaryawan(id, nip, namaKaryawan, kodeJabatan, jabatan) {
-            //     // Contoh sederhana: Membuka alert dengan data
-            //     alert("ID: " + id + "\nNIP: " + nip + "\nNama: " + namaKaryawan + "\nKode Jabatan: " + kodeJabatan + "\nJabatan: " + jabatan);
-
+            // function deleteJenis() {
+            //     var row = $("#datajenis").datagrid("getSelected");
+            //     if (row) {
+            //         var url = base_url + "api/jenis?jenis_dokumen=" + row.jenis_dokumen;
+            //         $("#jenisDokumenWindow").window("close");
+            //         Swal.fire({
+            //             title: "Are you sure?",
+            //             text: "You won't be able to revert this!",
+            //             icon: "warning",
+            //             showCancelButton: true,
+            //             confirmButtonColor: "#3085d6",
+            //             cancelButtonColor: "#d33",
+            //             confirmButtonText: "Yes, delete it!",
+            //         }).then((result) => {
+            //             if (result.isConfirmed) {
+            //                 fetch(url, {
+            //                     method: "DELETE",
+            //                 })
+            //                     .then((response) => response.json())
+            //                     .then((data) => {
+            //                         Swal.fire(data.message, "success");
+            //                         $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+            //                     })
+            //                     .catch((error) => {
+            //                         console.error("Terjadi kesalahan:", error);
+            //                     });
+            //                 Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            //             }
+            //         });
+            //     }
             // }
 
-
-            // $(document).ready(function () {
-            // $('#karyawan').datagrid({
-            // onDblClickRow  : function (index, row) {
-            // openKaryawan(index,'nip', 'nama_karyawan','kode_jabatan','jabatan');
-            //         }   
-            //     }
-            // );
-            // });
-
-            //             $(document).ready(function () {
-            //     $('#karyawan').datagrid({
-            //         onDblClickRow: function (index, row) {
-            //             var nip = row.nip; // Ganti "nip" dengan nama field yang ingin Anda ambil
-            //             var namaKaryawan = row.nama_karyawan; // Ganti "nama_karyawan" dengan nama field yang ingin Anda ambil
-            //             var kodeJabatan = row.kode_jabatan; // Ganti "kode_jabatan" dengan nama field yang ingin Anda ambil
-            //             var jabatan = row.jabatan; // Ganti "jabatan" dengan nama field yang ingin Anda ambil
-
-            //             // Buat URL atau path dokumen yang ingin Anda arahkan
-            //             var dokumenURL = 'api/dokumen?nip=' + nip + '&nama=' + namaKaryawan + '&jabatan=' + jabatan;
-
-            //             // Redirect ke dokumen yang telah dibuat
-            //             window.location.href = dokumenURL;
-            //         }
-            //     });
-            // });
-
-            //editrow
-            $(document).ready(function () {
-                $('#karyawan').datagrid({
-                    // Konfigurasi tabel datagrid
-                });
-            });
-
-            function editRow() {
-                // Fungsi ini akan dipanggil saat tombol "Edit" diklik
-                var row = $('#karyawan').datagrid('getSelected');
-
-                if (row) {
-                    // Jika ada baris yang dipilih, Anda dapat melakukan pengeditan di sini
-                    var namaDokumen = row.nama_dokumen;
-                    var jenisDokumen = row.jenis_dokumen;
-                    var nip = row.nip;
-                    var namaKaryawan = row.nama_karyawan;
-
-                    var jabatan = row.jabatan;
-
-                    // Lakukan pengeditan sesuai kebutuhan
-                    // Misalnya, tampilkan data dalam form untuk diedit
-                    $('#nama_DokumenField').val(namaDokumen);
-                    $('#jenis_DokumenField').val(jenisDokumen);
-                    $('#nipField').val(nip);
-                    $('#nama_KaryawanField').val(namaKaryawan);
-
-                    $('#jabatanField').val(jabatan);
-
-                    // Kemudian, Anda dapat menampilkan modifikasi formulir atau dialog
-                    // sesuai dengan kebutuhan Anda untuk pengeditan
-                    $('#editDialog').dialog('open');
-                } else {
-                    alert('Pilih baris yang akan diedit.');
-                }
-            }
-
-
-            function editKaryawan() {
-                var row = $('#karyawan').datagrid('getSelected');
-                if (row) {
-                    var index = $('#karyawan').datagrid('getRowIndex', row);
-                    onClickCell(index, 'nama_karyawan');
-                }
-            }
-            var editIndex = undefined;
-
-            function endEditing() {
-                if (editIndex == undefined) {
-                    return true
-                }
-                if ($('#karyawan').datagrid('validateRow', editIndex)) {
-                    $('#karyawan').datagrid('endEdit', editIndex);
-                    editIndex = undefined;
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            // $('#karyawan').datagrid({
-            //     onEndEditing: function(index, row, change){
-            //         console.log(index, ' | ', row, ' | ', change);
-            //     }
-            // });
-
-            function acceptit() {
-                if (endEditing()) {
-                    $('#karyawan').datagrid('acceptChanges');
-                }
-                // Mengambil data baris yang dipilih
-                var rows = $('#karyawan').datagrid('getSelections');
-
-                // Pastikan ada baris yang dipilih sebelum melanjutkan
-                if (rows.length === 0) {
-                    alert('Pilih setidaknya satu baris untuk diedit.');
-                    return;
-                }
-
-                // Ambil nilai NIP dari baris yang pertama (misalnya, jika NIP ada di kolom "nip")
-                var id = rows[0].id_karyawan;
-                var nip = rows[0].nip;
-                var namaKaryawan = rows[0].nama_karyawan;
-                var kodeJabatan = rows[0].kode_jabatan;
-                var jabatan = rows[0].jabatan;
-
-                var data = {
-                    id: id,
-                    nip: nip,
-                    nama_karyawan: namaKaryawan,
-                    kode_jabatan: kodeJabatan,
-                    jabatan: jabatan
-                };
-
-                // Lakukan panggilan AJAX untuk mengirim data ke server
-                $.ajax({
-                    url: base_url + "api/karyawan/edit",
-                    method: "POST",
-                    data: data, // Kirim data NIP ke server
-                    dataType: 'json',
-                    success: function (response) {
-                        // Menutup popup atau window
-                        $("#dokumenGrid").window("close");
-
-                        // Menampilkan pesan berhasil
-                        Swal.fire("Success", response.message, "success");
-
-                        // Memuat ulang datagrid
-                        $("#datadokumen").datagrid("reload");
-                    },
-                    error: function (xhr, status, error) {
-                        // Menangani kesalahan jika terjadi
-                        console.error(error);
-                        Swal.fire("Error", "Terjadi kesalahan", "error");
-                    }
-                });
-            }
 
 
             function onClickCell(index, field) {
@@ -885,8 +870,6 @@ if (!isset($_SESSION['nip'])) {
             function doSearch(nip) {
                 alert('You input: ');
             }
-
-
         </script>
     </div>
 
