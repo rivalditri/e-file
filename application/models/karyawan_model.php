@@ -32,18 +32,13 @@ class karyawan_model extends CI_Model
         return $this->db->get('karyawan')->result_array();
     }
 
-    public function update_karyawan($id)
+    public function update_karyawan($data)
     {
-        $data = [
-            'nip' => htmlspecialchars($this->input->post('nip', true)),
-            'nama' => htmlspecialchars($this->input->post('nama', true)),
-            'role_id' => $this->input->post('role', true),
-            'password' => md5($this->input->post('password1')),
-        ];
-        $this->db->where('id', $id);
+        $this->db->where('id_karyawan', $data['id_karyawan']);
         $this->db->update('karyawan', $data);
+        return $this->db->affected_rows();
     }
-
+    
     public function delete_karyawan($id)
     {
         $this->db->where('id_karyawan', $id);

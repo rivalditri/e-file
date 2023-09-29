@@ -379,8 +379,7 @@ if (!isset($_SESSION['nip'])) {
                 <!-- tab form jenis dokumen -->
                 <div title="Form Jenis Dokumen" style="overflow:hidden">
                     <div class="easyui-form" style="width:100%;padding:10px;">
-                        <form id="jenisDokumen" action="<? base_url('api/dokumen/jenis') ?>" method="post"
-                            enctype="multipart/form-data">
+                        <form id="jenisDokumen" action="<? base_url('api/jenis') ?>" method="post">
                             <table style="width: 100%; margin-right: 10%">
                                 <tr>
                                     <td><label style="width: 20%">Nama Jenis Dokumen:</label></td>
@@ -409,7 +408,7 @@ if (!isset($_SESSION['nip'])) {
                 <!-- data grid jenis dokumen -->
                 <div title="Jenis Dokumen" style="padding:10px">
                     <table id="datajenis" class="easyui-datagrid"
-                        data-options="url:'<?= base_url('api/dokumen/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true"
+                        data-options="url:'<?= base_url('api/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true"
                         toolbar="#tbjen">
                         <thead>
                             <tr>
@@ -472,28 +471,33 @@ if (!isset($_SESSION['nip'])) {
                 $.ajax({
                     url: base_url + "/api/dokumen", // Gantilah dengan URL yang sesuai
                     method: 'GET', // Sesuaikan metode sesuai kebutuhan Anda
-                    data: { 'id': id }, // Kirim ID pengguna sebagai parameter
+                    // data: { 'id': id }, // Kirim ID pengguna sebagai parameter
                     dataType: 'json', // Tipe data yang diharapkan dari respons
 
                 success: function(data) {
-                    if (data && data.path) {
+                    console.log(data);
+                    const filterData = data.filter(function (item) {
+                        return item.nip == id
+                    })
+                    console.log(filterData);
+                    if (filterData) {
                          // Gantilah dengan nama field yang sesuai
-                        var path = data.path; // Gantilah dengan nama field yang sesuai
+                        var path = filterData[0].path; // Gantilah dengan nama field yang sesuai
 
 
-                var path = id;
+                
                 $('#dokumenWindow').window({
                     title: 'Dokumen',
                     width: 800,
                     height: 600,
-                    content: '<iframe src="<?= base_url() ?>' + path + '" style="width: 100%; height: 100%; border: 0;"></iframe>',
+                    content: '<iframe src="' + base_url + path + '" style="width: 100%; height: 100%; border: 0;"></iframe>',
                     modal: true,
                     collapsible: false,
                     minimizable: false,
                     maximizable: false
                 });
                 // Membuka window
-                $('#dokumenWindow').window('open');
+                // $('#dokumenGrid').window('open');
                 } else {
                 alert('Data dokumen tidak ditemukan.'); // Pesan jika data tidak ditemukan
                     }
@@ -509,7 +513,7 @@ if (!isset($_SESSION['nip'])) {
             $(document).ready(function () {
                 $('#karyawan').datagrid({
                     onDblClickRow  : function (index, row) {
-                        var id = row.id;
+                        var id = row.nip;
                         showDokumen(id);
             
                  }
@@ -538,8 +542,6 @@ if (!isset($_SESSION['nip'])) {
                 }
             }
 
-
-           
 
             function acceptit() {
                 if (endEditing()) {
@@ -633,7 +635,8 @@ if (!isset($_SESSION['nip'])) {
                     var index = $("#datajenis").datagrid("getRowIndex", row);
                     $("#datajenis").datagrid("cancelEdit", index).datagrid("deleteRow", index);
                     editIndex = undefined;
-                    var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+                    console.log(row);
+                    var url = base_url + "api/jenis?id_jenis_dokumen=" + row.id_jenis_dokumen;
                     $("#jenisDokumenWindow").window("close");
                     Swal.fire({
                         title: "Are you sure?",
@@ -648,24 +651,30 @@ if (!isset($_SESSION['nip'])) {
                             fetch(url, {
                                 method: "DELETE",
                             })
-                                .then((response) => response.json())
+                                .then((response) => {
+                                    if (!response.ok) {
+                                        throw new Error("Network response was not ok");
+                                    }
+                                    return response.json();
+                                })
                                 .then((data) => {
                                     Swal.fire(data.message, "success");
                                     $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
                                 })
                                 .catch((error) => {
                                     console.error("Terjadi kesalahan:", error);
+                                    Swal.fire("Error!", "There was an error deleting the file.", "error");
                                 });
-                            Swal.fire("Deleted!", "Your file has been deleted.", "success");
                         }
                     });
                 }
             }
 
+
             // function deleteJenis() {
             //     var row = $("#datajenis").datagrid("getSelected");
             //     if (row) {
-            //         var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+            //         var url = base_url + "api/jenis?jenis_dokumen=" + row.jenis_dokumen;
             //         $("#jenisDokumenWindow").window("close");
             //         Swal.fire({
             //             title: "Are you sure?",
