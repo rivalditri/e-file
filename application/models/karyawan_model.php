@@ -43,7 +43,6 @@ class karyawan_model extends CI_Model
 =======
 
 
->>>>>>> origin/main
     public function delete_karyawan($id)
     {
         $this->db->where('id_karyawan', $id);

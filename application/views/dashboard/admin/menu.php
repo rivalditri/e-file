@@ -218,11 +218,6 @@ if (!isset($_SESSION['nip'])) {
                         <!-- <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-<<<<<<< HEAD
-                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-=======
->>>>>>> origin/main
                             data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
@@ -431,11 +426,6 @@ if (!isset($_SESSION['nip'])) {
                         <!-- <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-<<<<<<< HEAD
-                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-=======
->>>>>>> origin/main
                             data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
