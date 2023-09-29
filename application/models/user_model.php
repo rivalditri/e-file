@@ -50,10 +50,12 @@ class user_model extends CI_Model
         return $this->db->update('user', $data);
     }
 
-    public function delete_user($nip)
+    public function deleteUser($nip)
     {
         $this->db->where('nip', $nip);
-        return $this->db->delete('user');
+        $result = $this->db->delete('user');
+
+        return $result;
     }
 
 
