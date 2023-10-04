@@ -82,10 +82,21 @@ if (!isset($_SESSION['nip'])) {
         <!-- close menu -->
         <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
             <div id="toolbar">
+<<<<<<< HEAD
                 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="openAndReloadDokumen()">Dokumen</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick=acceptit()>Accept</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="$('#tambahWindow').window('open')">Tambah</a>
                 <input class="easyui-searchbox karyawan-filter" data-options="prompt:'Please Input Value',menu:'#filterKaryawan'" style="width: 20%;">
+=======
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+                    onclick="$('#dokumenGrid').window('open')">Dokumen</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+                    onclick=acceptit()>Accept</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+                    onclick="$('#tambahWindow').window('open')">Tambah</a>
+                <input class="easyui-searchbox karyawan-filter"
+                    data-options="prompt:'Please Input Value',menu:'#filterKaryawan'" style="width: 20%;">
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                 <div id="filterKaryawan">
                     <div data-options="name:'filterNIP',iconCls:'icon-man'">NIP</div>
                     <div data-options="name:'filterNama',iconCls:'icon-man'">Nama</div>
@@ -195,9 +206,18 @@ if (!isset($_SESSION['nip'])) {
                         </thead>
                     </table>
                     <div id="tbuser" style="height:auto">
+<<<<<<< HEAD
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
+=======
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
+                        <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                     </div>
                 </div>
             </div>
@@ -291,7 +311,12 @@ if (!isset($_SESSION['nip'])) {
         <!-- close window dokumen -->
 
         <!-- window tambah -->
+<<<<<<< HEAD
         <div id="tambahWindow" class="easyui-window" title="Karyawan" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
+=======
+        <!-- <div id="tambahWindow" class="easyui-window" title="Karyawan"
+            data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
             <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
                 form karyawan
                 <div title="Form Karyawan" style="overflow:hidden">
@@ -301,6 +326,7 @@ if (!isset($_SESSION['nip'])) {
                             <tr>
                                 <td><label for="nip" style="width: 80%; margin-right: 50px;">NIP:</label>
                                 </td>
+<<<<<<< HEAD
                                 <td><input id="nip_karyawan" class="easyui-textbox" style="width: 80%;" name="nip_karyawan" data-options="required:true"></td>
                             </tr>
                             <tr>
@@ -332,6 +358,35 @@ if (!isset($_SESSION['nip'])) {
                 </div>
             </div>
         </div>
+=======
+                                <td><input id="nip" class="easyui-textbox" style="width: 80%;" name="nip"
+                                        data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="nama_karyawan" style="width: 80%">Nama:</label></td>
+                                <td><input id="nama_karyawan" class="easyui-textbox" style="width: 80%;" name="nama"
+                                        data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="kode_jabatan" style="width: 80%">Kode Jabatan:</label></td>
+                                <td><input id="kode_jabatan" class="easyui-textbox" style="width: 80%;"
+                                        name="kode_jabatan" data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="jabatan" style="width: 80%">Jabatan:</label></td>
+                                <td><input id="jabatan" class="easyui-textbox" style="width: 80%;"
+                                        name="jabatan" data-options="required:true"></td>
+                            </tr>
+                        </table>
+                        <div style="text-align: center; margin-top: 10px;">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormKaryawan()"
+                                style="width:80px; text-align:center;padding:5px 0">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormKaryawan()"
+                                style="width:80px; text-align:center;padding:5px 0">Clear</a>
+                        </div>
+                    </form>
+                </div> -->
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
 
 
 
@@ -365,7 +420,13 @@ if (!isset($_SESSION['nip'])) {
                 <!-- close form -->
                 <!-- data grid jenis dokumen -->
                 <div title="Jenis Dokumen" style="padding:10px">
+<<<<<<< HEAD
                     <table id="datajenis" class="easyui-datagrid" data-options="url:'<?= base_url('api/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true" toolbar="#tbjen">
+=======
+                    <table id="datajenis" class="easyui-datagrid"
+                        data-options="url:'<?= base_url('api/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true"
+                        toolbar="#tbjen">
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                         <thead>
                             <tr>
                                 <th field="jenis_dokumen" width="auto" editor="{type:'validatebox',options:{required:true}}">
@@ -377,9 +438,18 @@ if (!isset($_SESSION['nip'])) {
                         </thead>
                     </table>
                     <div id="tbjen" style="height:auto">
+<<<<<<< HEAD
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
+=======
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
+                        <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton"
+                            data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                     </div>
                 </div>
             </div>
@@ -416,6 +486,7 @@ if (!isset($_SESSION['nip'])) {
                 }
             });
 
+<<<<<<< HEAD
             function openEditDokumen() {
                 var row = $("#datadokumen").datagrid("getSelected");
                 console.log('krik ', row);
@@ -438,16 +509,44 @@ if (!isset($_SESSION['nip'])) {
             }
 
             function showDokumen(path) {
+=======
+            //show dokumen
+            function showDokumen(id) {
+
+                $.ajax({
+                    url: base_url + "/api/dokumen", // Gantilah dengan URL yang sesuai
+                    method: 'GET', // Sesuaikan metode sesuai kebutuhan Anda
+                    // data: { 'id': id }, // Kirim ID pengguna sebagai parameter
+                    dataType: 'json', // Tipe data yang diharapkan dari respons
+
+                success: function(data) {
+                    console.log(data);
+                    const filterData = data.filter(function (item) {
+                        return item.nip == id
+                    })
+                    console.log(filterData);
+                    if (filterData) {
+                         // Gantilah dengan nama field yang sesuai
+                        var path = filterData[0].path; // Gantilah dengan nama field yang sesuai
+
+
+                
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                 $('#dokumenWindow').window({
                     title: 'Dokumen',
                     width: 800,
                     height: 600,
+<<<<<<< HEAD
                     content: '<iframe src="' + base_url + '/uploads/' + path + '" style="width: 100%; height: 100%; border: 0;"></iframe>',
+=======
+                    content: '<iframe src="' + base_url + path + '" style="width: 100%; height: 100%; border: 0;"></iframe>',
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                     modal: true,
                     collapsible: false,
                     minimizable: false,
                     maximizable: false
                 });
+<<<<<<< HEAD
 
                 // $.ajax({
                 //     url: base_url + "/api/dokumen", // Gantilah dengan URL yang sesuai
@@ -497,6 +596,29 @@ if (!isset($_SESSION['nip'])) {
                         showDokumen(row.nama_dokumen);
                     }
                 });
+=======
+                // Membuka window
+                // $('#dokumenGrid').window('open');
+                } else {
+                alert('Data dokumen tidak ditemukan.'); // Pesan jika data tidak ditemukan
+                    }
+                },
+
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan: ' + error); // Tangani kesalahan jika ada
+                }
+                })
+                };
+
+
+            $(document).ready(function () {
+                $('#karyawan').datagrid({
+                    onDblClickRow  : function (index, row) {
+                        var id = row.nip;
+                        showDokumen(id);
+            
+                 }
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
             });
 
             function editKaryawan() {
@@ -552,7 +674,11 @@ if (!isset($_SESSION['nip'])) {
                     method: "POST",
                     data: data, // Kirim data NIP ke server
                     dataType: 'json',
+<<<<<<< HEAD
                     success: function(response) {
+=======
+                    success: function (response) {
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                         // Menutup popup atau window
                         $("#dokumenGrid").window("close");
                         // Menampilkan pesan berhasil
@@ -560,7 +686,11 @@ if (!isset($_SESSION['nip'])) {
                         // Memuat ulang datagrid
                         $("#datadokumen").datagrid("reload");
                     },
+<<<<<<< HEAD
                     error: function(xhr, status, error) {
+=======
+                    error: function (xhr, status, error) {
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                         // Menangani kesalahan jika terjadi
                         console.error(error);
                         Swal.fire("Error", "Terjadi kesalahan", "error");
@@ -584,6 +714,7 @@ if (!isset($_SESSION['nip'])) {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             fetch(url, {
+<<<<<<< HEAD
                                     method: "DELETE",
                                 })
                                 .then((response) => {
@@ -601,13 +732,36 @@ if (!isset($_SESSION['nip'])) {
                                     console.error("Terjadi kesalahan:", error);
                                     Swal.fire("Error", "An error occurred while deleting the user.", "error");
                                 });
+=======
+                                method: "DELETE",
+                            })
+                            .then((response) => {
+                                if (response.ok) {
+                                    return response.json();
+                                } else {
+                                    throw new Error("HTTP status " + response.status);
+                                }
+                            })
+                            .then((data) => {
+                                Swal.fire(data.message, "success");
+                                $("#datauser").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+                            })
+                            .catch((error) => {
+                                console.error("Terjadi kesalahan:", error);
+                                Swal.fire("Error", "An error occurred while deleting the user.", "error");
+                            });
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                         }
                     });
                 } else {
                     Swal.fire("Error", "No user selected for deletion.", "error");
                 }
             }
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
             function deleteJenis() {
                 var row = $("#datajenis").datagrid("getSelected");
                 if (row && row.jenis_dokumen) {
@@ -628,8 +782,13 @@ if (!isset($_SESSION['nip'])) {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             fetch(url, {
+<<<<<<< HEAD
                                     method: "DELETE",
                                 })
+=======
+                                method: "DELETE",
+                            })
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
                                 .then((response) => {
                                     if (!response.ok) {
                                         throw new Error("Network response was not ok");
