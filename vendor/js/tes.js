@@ -78,12 +78,12 @@ function openKaryawan() {
 function openDokumen() {
 	var row = $("#datadokumen").datagrid("getSelected");
 	if (row) {
-<<<<<<< HEAD
+
 		console.log(row);
 		showDokumen(row.nama_dokumen);
-=======
+
 		showDokumen(id);
->>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
+
 	}
 }
 
@@ -222,13 +222,13 @@ function clearFormKaryawan() {
 }
 
 function submitFormKaryawan() {
-<<<<<<< HEAD
+
 	var nip = $("#nip_karyawan").val();
 	var nama = $("#nama_karyawan").val();
 	var kode_jabatan = $("#jabatan").combobox('getValue');;
 	var jabatan = $("#jabatan").combobox('getText');
 	if (nip == "" || nama == "" || kode_jabatan == "" || jabatan == "") {
-=======
+
 	var nip = $("#nip").val();
 	var nama = $("#nama_karyawan").val();
 	var kode_jabatan = $("#kode_jabatan").val();
@@ -239,7 +239,7 @@ function submitFormKaryawan() {
 		kode_jabatan == "" ||
 		jabatan == ""
 	) {
->>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
+
 		$("#tambahWindow").window("close");
 		Swal.fire({
 			icon: "error",
@@ -250,15 +250,15 @@ function submitFormKaryawan() {
 	} else {
 		var formData = new FormData();
 		// Tambahkan nilai-nilai ke dalam objek FormData
-<<<<<<< HEAD
+
 		formData.append("nip_karyawan", nip);
 		formData.append("nama_karyawan", nama);
 		formData.append("kode_jabatan", kode_jabatan);
-=======
+
 		formData.append("nip", nip);
 		formData.append("nama", nama);
 		formData.append("kode jabatan", kode_jabatan);
->>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
+
 		formData.append("jabatan", jabatan);
 		// Kirimkan object FormData ke server
 		$.ajax({
@@ -269,22 +269,22 @@ function submitFormKaryawan() {
 			processData: false,
 			success: function (response) {
 				//close popup
-<<<<<<< HEAD
+
 				$("#tambahWindow").window("close");
-=======
+
 				$("#userWindow").window("close");
->>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
+
 				// Tampilkan pesan berhasil
 				Swal.fire({
 					icon: "success",
 					text: response.message,
 					title: "success",
 				});
-<<<<<<< HEAD
+
 				// clearFormTambah();
-=======
+
 				clearFormTambah();
->>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
+
 				// Muat ulang datagrid
 				$("#karyawan").datagrid("reload");
 			},
@@ -535,4 +535,4 @@ function deleteDokumen() {
 //         Swal.fire("Error", "No user selected for deletion.", "error");
 //     }
 // }
-
+}
