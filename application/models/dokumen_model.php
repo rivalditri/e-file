@@ -133,18 +133,12 @@ class dokumen_model extends CI_Model
         );
         return $this->db->insert('jenis_dokumen', $jenis);
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
     public function delete_jenis($id_jenis_dokumen)
     {
         $this->db->where('id_jenis_dokumen', $id_jenis_dokumen);
         return $this->db->delete('jenis_dokumen');
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
 
 }
