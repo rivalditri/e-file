@@ -1,3 +1,5 @@
+var methodDok = 'post';
+var idDok = 0;
 $(document).ready(function () {
 	var karyawan = $("#karyawan").datagrid();
 	karyawan.datagrid({
@@ -6,7 +8,7 @@ $(document).ready(function () {
 		pageList: [10, 20, 30, 40], // Opsi ukuran halaman yang tersedia
 		remoteFilter: true,
 		rownumbers: true,
-		onLoadSuccess: function (data) {},
+		onLoadSuccess: function (data) { },
 	});
 });
 $(function () {
@@ -40,7 +42,7 @@ $(function () {
 
 $(function () {
 	$("#jenis").combogrid({
-		url: base_url + "api/dokumen/jenis",
+		url: base_url + "api/jenis",
 		method: "get",
 		idField: "id_jenis_dokumen",
 		textField: "jenis_dokumen",
@@ -66,7 +68,9 @@ $(function () {
 function openKaryawan() {
 	var row = $("#karyawan").datagrid("getSelected");
 	if (row) {
+		console.log(row);
 		$("#dokumenGrid").window("open");
+		$('#datadokumen').datagrid('load', { nip: row.nip })
 	}
 }
 
@@ -74,7 +78,8 @@ function openKaryawan() {
 function openDokumen() {
 	var row = $("#datadokumen").datagrid("getSelected");
 	if (row) {
-		showDokumen(row.path);
+		console.log(row);
+		showDokumen(row.nama_dokumen);
 	}
 }
 
@@ -87,11 +92,13 @@ function clearFormDok() {
 function submitFormDok() {
 	var formData = new FormData();
 	// Dapatkan nilai dari input dengan ID tertentu
-	var idValue = $("#name").combogrid("getValue");
+	var idValue = $("#idkaryawan").val();
 	var jenisValue = $("#jenis").combogrid("getValue");
 	// Tambahkan nilai-nilai ke dalam objek FormData
 	formData.append("id_karyawan", idValue);
 	formData.append("jenis", jenisValue);
+	formData.append("action", methodDok);
+	formData.append("id_dokumen", idDok);
 	// Dapatkan nilai dari input file
 	var fileInput = $("#file").next().find('input[type="file"]')[0];
 	var file = fileInput.files[0];
@@ -109,7 +116,7 @@ function submitFormDok() {
 	// Kirimkan object FormData ke server
 	$.ajax({
 		url: base_url + "api/dokumen",
-		type: "post",
+		type: 'post',
 		data: formData,
 		contentType: false,
 		processData: false,
@@ -118,12 +125,14 @@ function submitFormDok() {
 			$("#dokumenGrid").window("close");
 			// Tampilkan pesan berhasil
 			Swal.fire(response.message, "success");
+			methodDok = 'post';
 			clearFormDok();
 			// Muat ulang datagrid
 			$("#datadokumen").datagrid("reload");
 		},
 		error: function (xhr, status, error) {
 			//close popup
+			console.log(xhr);
 			$("#dokumenGrid").window("close");
 			Swal.fire({
 				icon: xhr.responseJSON.status,
@@ -204,6 +213,63 @@ function submitFormUser() {
 	}
 }
 
+function clearFormKaryawan() {
+	$("#karyawan").form("clear");
+}
+
+function submitFormKaryawan() {
+	var nip = $("#nip_karyawan").val();
+	var nama = $("#nama_karyawan").val();
+	var kode_jabatan = $("#jabatan").combobox('getValue');;
+	var jabatan = $("#jabatan").combobox('getText');
+	if (nip == "" || nama == "" || kode_jabatan == "" || jabatan == "") {
+		$("#tambahWindow").window("close");
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "Data tidak boleh kosong",
+		});
+		return false;
+	} else {
+		var formData = new FormData();
+		// Tambahkan nilai-nilai ke dalam objek FormData
+		formData.append("nip_karyawan", nip);
+		formData.append("nama_karyawan", nama);
+		formData.append("kode_jabatan", kode_jabatan);
+		formData.append("jabatan", jabatan);
+		// Kirimkan object FormData ke server
+		$.ajax({
+			url: base_url + "api/karyawan",
+			type: "post",
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function (response) {
+				//close popup
+				$("#tambahWindow").window("close");
+				// Tampilkan pesan berhasil
+				Swal.fire({
+					icon: "success",
+					text: response.message,
+					title: "success",
+				});
+				// clearFormTambah();
+				// Muat ulang datagrid
+				$("#karyawan").datagrid("reload");
+			},
+			error: function (xhr, status, error) {
+				//close popup
+				$("#tambahWindow").window("close");
+				Swal.fire({
+					icon: xhr.responseJSON.status,
+					title: xhr.responseJSON.message,
+					text: xhr.responseJSON.error,
+				});
+			},
+		});
+	}
+}
+
 function clearFormJenis() {
 	$("#jenisDokumen").form("clear");
 }
@@ -225,8 +291,9 @@ function submitFormJenis() {
 		formData.append("jenisdokumen", jenisdokumen);
 		formData.append("kodejenisdokumen", kodejenisdokumen);
 		// Kirimkan object FormData ke server
+		console.log(base_url + "api/jenis");
 		$.ajax({
-			url: base_url + "api/dokumen/jenis",
+			url: base_url + "api/jenis",
 			type: "post",
 			data: formData,
 			contentType: false,
@@ -240,7 +307,7 @@ function submitFormJenis() {
 					text: response.message,
 					title: "success",
 				});
-				clearFormUser();
+				clearFormJenis();
 				// Muat ulang datagrid
 				$("#datajenis").datagrid("reload");
 			},
@@ -281,6 +348,39 @@ function removeKaryawan() {
 					.then((data) => {
 						Swal.fire(data.message, "success");
 						$("#karyawan").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+					})
+					.catch((error) => {
+						console.error("Terjadi kesalahan:", error);
+					});
+				Swal.fire("Deleted!", "Your file has been deleted.", "success");
+			}
+		});
+	}
+}
+
+//user
+function removeUser() {
+	var row = $("#tbuser").datagrid("getSelected");
+	if (row) {
+		var url = base_url + "api/user?nip=" + row.nip;
+		$("#user").window("close");
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				fetch(url, {
+					method: "DELETE",
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						Swal.fire(data.message, "success");
+						$("#tbuser").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
 					})
 					.catch((error) => {
 						console.error("Terjadi kesalahan:", error);

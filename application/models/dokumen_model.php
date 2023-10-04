@@ -70,11 +70,11 @@ class dokumen_model extends CI_Model
 
     public function get_dokumenByNip($nip)
     {
-        $query = $this->db->select('dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.nama_karyawan, k.kode_jabatan, k.jabatan')
+        // ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
+        $query = $this->db->select('dk.id_dokumen, dk.nama_dokumen, jk.jenis_dokumen, k.nip, k.id_karyawan, k.nama_karyawan, k.kode_jabatan, k.jabatan')
             ->from('dokumen AS dk')
-            ->join('penyimpanan AS py', 'dk.id_dokumen = py.id_dokumen')
             ->join('jenis_dokumen AS jk', '(dk.id_jenis_dokumen = jk.id_jenis_dokumen)')
-            ->join('karyawan AS k', '(py.id_karyawan = k.id_karyawan)')
+            ->join('karyawan AS k', '(dk.id_karyawan = k.id_karyawan)')
             ->where('k.nip', $nip)->get();
         return $query->result_array();
     }
@@ -112,6 +112,13 @@ class dokumen_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    
+    public function update_dokumen($data)
+    {
+        $this->db->where('id_dokumen', $data['id_dokumen']);
+        return $this->db->update('dokumen', $data);
+    }
+
     public function delete_dokumen($id_dokumen)
     {
         $this->db->where('id_dokumen', $id_dokumen);
@@ -125,6 +132,12 @@ class dokumen_model extends CI_Model
             'jenis_dokumen' => $data['jenis_dokumen'],
         );
         return $this->db->insert('jenis_dokumen', $jenis);
+    }
+
+    public function delete_jenis($id_jenis_dokumen)
+    {
+        $this->db->where('id_jenis_dokumen', $id_jenis_dokumen);
+        return $this->db->delete('jenis_dokumen');
     }
 
 
