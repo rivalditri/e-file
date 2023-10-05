@@ -177,12 +177,7 @@ class dokumen extends RestController
             }
         }
     }
-<<<<<<< HEAD
 }
-=======
-<<<<<<< HEAD
-}
-=======
 
 
     public function jenis_post()
@@ -256,6 +251,3 @@ class dokumen extends RestController
     //         }
     //     }
     // }
-}
->>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
->>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b

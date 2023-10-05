@@ -78,17 +78,16 @@ function openKaryawan() {
 function openDokumen() {
 	var row = $("#datadokumen").datagrid("getSelected");
 	if (row) {
-<<<<<<< HEAD
+
 		console.log(row);
 		showDokumen(row.nama_dokumen);
-=======
 
 		console.log(row);
 		showDokumen(row.nama_dokumen);
 
 		showDokumen(id);
 
->>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
+
 	}
 }
 
@@ -227,17 +226,13 @@ function clearFormKaryawan() {
 }
 
 function submitFormKaryawan() {
-<<<<<<< HEAD
-=======
 
->>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
 	var nip = $("#nip_karyawan").val();
 	var nama = $("#nama_karyawan").val();
 	var kode_jabatan = $("#jabatan").combobox('getValue');;
 	var jabatan = $("#jabatan").combobox('getText');
 	if (nip == "" || nama == "" || kode_jabatan == "" || jabatan == "") {
-<<<<<<< HEAD
-=======
+
 
 	var nip = $("#nip").val();
 	var nama = $("#nama_karyawan").val();
@@ -250,7 +245,7 @@ function submitFormKaryawan() {
 		jabatan == ""
 	) {
 
->>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
+
 		$("#tambahWindow").window("close");
 		Swal.fire({
 			icon: "error",
@@ -261,11 +256,11 @@ function submitFormKaryawan() {
 	} else {
 		var formData = new FormData();
 		// Tambahkan nilai-nilai ke dalam objek FormData
-<<<<<<< HEAD
+
 		formData.append("nip_karyawan", nip);
 		formData.append("nama_karyawan", nama);
 		formData.append("kode_jabatan", kode_jabatan);
-=======
+
 
 		formData.append("nip_karyawan", nip);
 		formData.append("nama_karyawan", nama);
@@ -275,7 +270,7 @@ function submitFormKaryawan() {
 		formData.append("nama", nama);
 		formData.append("kode jabatan", kode_jabatan);
 
->>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
+
 		formData.append("jabatan", jabatan);
 		// Kirimkan object FormData ke server
 		$.ajax({
@@ -286,30 +281,30 @@ function submitFormKaryawan() {
 			processData: false,
 			success: function (response) {
 				//close popup
-<<<<<<< HEAD
+
 				$("#tambahWindow").window("close");
-=======
+
 
 				$("#tambahWindow").window("close");
 
 				$("#userWindow").window("close");
 
->>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
+
 				// Tampilkan pesan berhasil
 				Swal.fire({
 					icon: "success",
 					text: response.message,
 					title: "success",
 				});
-<<<<<<< HEAD
+
 				// clearFormTambah();
-=======
+
 
 				// clearFormTambah();
 
 				clearFormTambah();
 
->>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
+
 				// Muat ulang datagrid
 				$("#karyawan").datagrid("reload");
 			},
