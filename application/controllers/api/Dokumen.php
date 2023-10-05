@@ -177,4 +177,85 @@ class dokumen extends RestController
             }
         }
     }
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+}
+=======
+
+
+    public function jenis_post()
+    {
+        $jenis = $this->post('jenisdokumen');
+        $kode = $this->post('kodejenisdokumen');
+        $data['kode_jenis_dokumen'] = $kode;
+        $data['jenis_dokumen'] = $jenis;
+        $result = $this->dokumen->insert_jenis($data);
+        if ($result) {
+            $this->response(
+                array(
+                    "status" => "success",
+                    "message" => "jenis berhasil ditambahkan",
+                    "data" => array($data),
+                ),
+                RestController::HTTP_CREATED
+            );
+        } else {
+            $this->response(
+                array(
+                    "status" => "error",
+                    "message" => "jenis gagal ditambahkan",
+                    "error" => "something went wrong",
+                ),
+                RestController::HTTP_BAD_REQUEST
+            );
+        }
+    }
+
+    // public function jenis_get()
+    // {
+    //     $jenis = $this->dokumen->get_jenis();
+    //     if ($jenis) {
+    //         $this->response(
+    //             $jenis,
+    //             RestController::HTTP_OK
+    //         );
+    //     }
+    // }
+    // public function jenis_delete()
+    // {
+    //     $jenis_dokumen = $this->input->get('jenis_dokumen');
+    //     if (!$jenis_dokumen) {
+    //         $this->response([
+    //             'status' => false,
+    //             'message' => 'Data gagal dihapus',
+    //             'error' => 'jenis tidak boleh kosong',
+    //         ], RestController::HTTP_BAD_REQUEST);
+    //     } else if ($this->db->get_where('jenis_dokumen', ['jenis_dokumen' => $jenis_dokumen])->row_array() == null) {
+    //         $this->response([
+    //             'status' => false,
+    //             'message' => 'Data gagal dihapus',
+    //             'error' => 'jenis tidak ditemukan',
+    //         ], RestController::HTTP_BAD_REQUEST);
+    //     } else {
+    //         $data = $this->db->get_where('jenis_dokumen', ['jenis_dokumen' => $jenis_dokumen])->row_array();
+    //         $row = $this->jenis_dokumen->delete_jenis($jenis_dokumen);
+    //         if ($row === true) {
+    //             $this->response([
+    //                 'status' => true,
+    //                 'message' => 'Data berhasil dihapus',
+    //                 'data' => array($data)
+    //             ], RestController::HTTP_CREATED);
+    //         } else {
+    //             $this->response([
+    //                 'status' => false,
+    //                 'message' => 'Data gagal dihapus',
+    //                 'error' => $row,
+    //             ], RestController::HTTP_BAD_REQUEST);
+    //         }
+    //     }
+    // }
+}
+>>>>>>> 4b651c220b7dab899f8b820648980a909f3ace31
+>>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b

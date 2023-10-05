@@ -29,6 +29,45 @@ class user extends RestController
         }
     }
 
+    //api/user/edit
+    //method post
+    public function edit_post()
+    {
+        $nip = $this->post('nip');
+        $nama = $this->post('nama');
+        $role_id = $this->post('role_id');
+        $password = $this->post('password');
+
+        $data = [
+            'nip' => $nip,
+            'nama' => $nama,
+            'role_id' => $role_id,
+            'password' => $password,
+        ];
+
+        $response = $this->user->update_user($data);
+
+        if ($response) {
+            $this->response(
+                array(
+                    'status' => 'success',
+                    'message' => 'Data berhasil diubah',
+                    'data' => $data,
+                ),
+                RestController::HTTP_OK
+            );
+        } else {
+            $this->response(
+                array(
+                    'status' => 'error',
+                    'message' => 'Data gagal diubah',
+                    'data' => $data,
+                ),
+                RestController::HTTP_BAD_REQUEST
+            );
+        }
+    }
+    
     public function index_post()
     {
         $nip = $this->post('nip');

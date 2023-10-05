@@ -78,8 +78,17 @@ function openKaryawan() {
 function openDokumen() {
 	var row = $("#datadokumen").datagrid("getSelected");
 	if (row) {
+<<<<<<< HEAD
 		console.log(row);
 		showDokumen(row.nama_dokumen);
+=======
+
+		console.log(row);
+		showDokumen(row.nama_dokumen);
+
+		showDokumen(id);
+
+>>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
 	}
 }
 
@@ -218,11 +227,30 @@ function clearFormKaryawan() {
 }
 
 function submitFormKaryawan() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
 	var nip = $("#nip_karyawan").val();
 	var nama = $("#nama_karyawan").val();
 	var kode_jabatan = $("#jabatan").combobox('getValue');;
 	var jabatan = $("#jabatan").combobox('getText');
 	if (nip == "" || nama == "" || kode_jabatan == "" || jabatan == "") {
+<<<<<<< HEAD
+=======
+
+	var nip = $("#nip").val();
+	var nama = $("#nama_karyawan").val();
+	var kode_jabatan = $("#kode_jabatan").val();
+	var jabatan = $("#jabatan").val();
+	if (
+		nip == "" ||
+		nama == "" ||
+		kode_jabatan == "" ||
+		jabatan == ""
+	) {
+
+>>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
 		$("#tambahWindow").window("close");
 		Swal.fire({
 			icon: "error",
@@ -233,9 +261,21 @@ function submitFormKaryawan() {
 	} else {
 		var formData = new FormData();
 		// Tambahkan nilai-nilai ke dalam objek FormData
+<<<<<<< HEAD
 		formData.append("nip_karyawan", nip);
 		formData.append("nama_karyawan", nama);
 		formData.append("kode_jabatan", kode_jabatan);
+=======
+
+		formData.append("nip_karyawan", nip);
+		formData.append("nama_karyawan", nama);
+		formData.append("kode_jabatan", kode_jabatan);
+
+		formData.append("nip", nip);
+		formData.append("nama", nama);
+		formData.append("kode jabatan", kode_jabatan);
+
+>>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
 		formData.append("jabatan", jabatan);
 		// Kirimkan object FormData ke server
 		$.ajax({
@@ -246,14 +286,30 @@ function submitFormKaryawan() {
 			processData: false,
 			success: function (response) {
 				//close popup
+<<<<<<< HEAD
 				$("#tambahWindow").window("close");
+=======
+
+				$("#tambahWindow").window("close");
+
+				$("#userWindow").window("close");
+
+>>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
 				// Tampilkan pesan berhasil
 				Swal.fire({
 					icon: "success",
 					text: response.message,
 					title: "success",
 				});
+<<<<<<< HEAD
 				// clearFormTambah();
+=======
+
+				// clearFormTambah();
+
+				clearFormTambah();
+
+>>>>>>> 1c411c1ed960799493582d121b4a9d5949e46d7b
 				// Muat ulang datagrid
 				$("#karyawan").datagrid("reload");
 			},
@@ -421,4 +477,87 @@ function deleteDokumen() {
 			}
 		});
 	}
+}
+
+//user
+// function deleteUser() {
+//     var row = $("#datauser").datagrid("getSelected");
+//     if (row && row.nip) {
+//         var url = base_url + "api/user?nip=" + row.nip;
+//         $("#userWindow").window("close");
+//         Swal.fire({
+//             title: "Are you sure?",
+//             text: "You won't be able to revert this!",
+//             icon: "warning",
+//             showCancelButton: true,
+//             confirmButtonColor: "#3085d6",
+//             cancelButtonColor: "#d33",
+//             confirmButtonText: "Yes, delete it!",
+//         }).then((result) => {
+//             if (result.isConfirmed) {
+//                 fetch(url, {
+//                     method: "DELETE",
+//                 })
+//                 .then((response) => {
+//                     if (response.ok) {
+//                         return response.json();
+//                     } else {
+//                         throw new Error("HTTP status " + response.status);
+//                     }
+//                 })
+//                 .then((data) => {
+//                     Swal.fire(data.message, "success");
+//                     $("#datauser").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+//                 })
+//                 .catch((error) => {
+//                     console.error("Terjadi kesalahan:", error);
+//                     Swal.fire("Error", "An error occurred while deleting the user.", "error");
+//                 });
+//             }
+//         });
+//     } else {
+//         Swal.fire("Error", "No user selected for deletion.", "error");
+//     }
+// }
+
+
+// function deleteJenis() {
+//     var row = $("#datajenis").datagrid("getSelected");
+//     if (row && row.nip) {
+//         var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+//         $("#jenisDokumenWindow").window("close");
+//         Swal.fire({
+//             title: "Are you sure?",
+//             text: "You won't be able to revert this!",
+//             icon: "warning",
+//             showCancelButton: true,
+//             confirmButtonColor: "#3085d6",
+//             cancelButtonColor: "#d33",
+//             confirmButtonText: "Yes, delete it!",
+//         }).then((result) => {
+//             if (result.isConfirmed) {
+//                 fetch(url, {
+//                     method: "DELETE",
+//                 })
+//                 .then((response) => {
+//                     if (response.ok) {
+//                         return response.json();
+//                     } else {
+//                         throw new Error("HTTP status " + response.status);
+//                     }
+//                 })
+//                 .then((data) => {
+//                     Swal.fire(data.message, "success");
+//                     $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+//                 })
+//                 .catch((error) => {
+//                     console.error("Terjadi kesalahan:", error);
+//                     Swal.fire("Error", "An error occurred while deleting the user.", "error");
+//                 });
+//             }
+//         });
+//     } else {
+//         Swal.fire("Error", "No user selected for deletion.", "error");
+//     }
+// }
 }
