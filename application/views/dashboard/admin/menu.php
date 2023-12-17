@@ -30,6 +30,7 @@ if (!isset($_SESSION['nip'])) {
     <script type="text/javascript" src="<?= base_url('vendor/easyui/datagrid-filter.js') ?>"></script>
     <script>
         var base_url = "<?= base_url() ?>";
+        var _nip, _nama = '';
     </script>
     <script type="text/javascript" src="<?= base_url('vendor/js/tes.js') ?>"></script>
 
@@ -38,8 +39,7 @@ if (!isset($_SESSION['nip'])) {
 <body>
     <div class="easyui-layout" style="width:100%;height: 675px;">
         <!-- header menu -->
-        <div class="modalContent" data-options="region:'north'"
-            style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
+        <div class="modalContent" data-options="region:'north'" style="width:100%;height:5%;background-color: #87CEFA; display: flex; align-items: center; justify-content: space-between;">
             <div style="float: left;">
                 Perumda Tugu Tirta
             </div>
@@ -72,12 +72,8 @@ if (!isset($_SESSION['nip'])) {
                 </ul>
                 <!-- manage admin (button tambah user dan jenis dokumen -->
                 <div title="Manage" data-options="selected:true" style="padding:20px;">
-                    <a href="javascript:void(0)" class="easyui-linkbutton"
-                        style="width:100%; height: 30px;margin: 5px; " onclick="$('#userWindow').window('open')"
-                        data-options="iconCls:'icon-add'">User</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton"
-                        onclick="$('#jenisDokumenWindow').window('open')" style="width:100%; height: 50px;margin: 5px;"
-                        data-options="iconCls:'icon-add'">Jenis
+                    <a href="javascript:void(0)" class="easyui-linkbutton" style="width:100%; height: 30px;margin: 5px; " onclick="$('#userWindow').window('open')" data-options="iconCls:'icon-add'">User</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#jenisDokumenWindow').window('open')" style="width:100%; height: 50px;margin: 5px;" data-options="iconCls:'icon-add'">Jenis
                         Dokumen</a>
                     <!-- close manage admin -->
                 </div>
@@ -86,14 +82,10 @@ if (!isset($_SESSION['nip'])) {
         <!-- close menu -->
         <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
             <div id="toolbar">
-                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
-                    onclick="$('#dokumenGrid').window('open')">Dokumen</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
-                    onclick=acceptit()>Accept</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
-                    onclick="$('#tambahWindow').window('open')">Tambah</a>
-                <input class="easyui-searchbox karyawan-filter"
-                    data-options="prompt:'Please Input Value',menu:'#filterKaryawan'" style="width: 20%;">
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="openAndReloadDokumen()">Dokumen</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick=acceptit()>Accept</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="$('#tambahWindow').window('open')">Tambah</a>
+                <input class="easyui-searchbox karyawan-filter" data-options="prompt:'Please Input Value',menu:'#filterKaryawan'" style="width: 20%;">
                 <div id="filterKaryawan">
                     <div data-options="name:'filterNIP',iconCls:'icon-man'">NIP</div>
                     <div data-options="name:'filterNama',iconCls:'icon-man'">Nama</div>
@@ -101,13 +93,13 @@ if (!isset($_SESSION['nip'])) {
                 <script>
                     var typingTimer;
                     var doneTypingInterval = 1000; // Waktu jeda dalam milidetik (misalnya 500 ms)
-                    $(function () {
-                        $('.karyawan-filter').textbox('textbox').on('keyup', function () {
+                    $(function() {
+                        $('.karyawan-filter').textbox('textbox').on('keyup', function() {
                             clearTimeout(typingTimer);
                             var value = $(this).val();
                             var filterName = $('.karyawan-filter').searchbox('getName');
 
-                            typingTimer = setTimeout(function () {
+                            typingTimer = setTimeout(function() {
                                 var queryParams = {};
                                 queryParams[filterName] = value;
                                 console.log(queryParams);
@@ -121,10 +113,7 @@ if (!isset($_SESSION['nip'])) {
                 <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#karyawan').edatagrid('saveRow')">Save</a> -->
                 <!-- <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#karyawan').edatagrid('cancelRow')">Cancel</a> -->
             </div>
-            <table id="karyawan" class="easyui-datagrid"
-                data-options="url:'<?= base_url('api/karyawan') ?>',method:'get',queryParams:{filterNIP:'', filterNama:''},border:false,singleSelect:true,fit:true,fitColumns:true"
-                fit="true" pagination="true" toolbar="#toolbar" idField="nip" rownumbers="true" fitColumns="true"
-                singleSelect="true">
+            <table id="karyawan" class="easyui-datagrid" data-options="url:'<?= base_url('api/karyawan') ?>',method:'get',queryParams:{filterNIP:'', filterNama:''},border:false,singleSelect:true,fit:true,fitColumns:true" fit="true" pagination="true" toolbar="#toolbar" idField="nip" rownumbers="true" fitColumns="true" singleSelect="true">
                 <thead>
                     <tr>
                         <div id="menuKaryawan" class="easyui-menu" style="width:120px;">
@@ -149,8 +138,7 @@ if (!isset($_SESSION['nip'])) {
         </div>
 
         <!-- window user -->
-        <div id="userWindow" class="easyui-window" title="User"
-            data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
+        <div id="userWindow" class="easyui-window" title="User" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
             <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
                 <!-- form user -->
                 <div title="Form User" style="overflow:hidden">
@@ -160,23 +148,19 @@ if (!isset($_SESSION['nip'])) {
                             <tr>
                                 <td><label for="nip" style="width: 80%; margin-right: 50px;">NIP:</label>
                                 </td>
-                                <td><input id="nip" class="easyui-textbox" style="width: 80%;" name="nip"
-                                        data-options="required:true"></td>
+                                <td><input id="nip" class="easyui-textbox" style="width: 80%;" name="nip" data-options="required:true"></td>
                             </tr>
                             <tr>
                                 <td><label for="nama" style="width: 80%">Nama:</label></td>
-                                <td><input id="nama" class="easyui-textbox" style="width: 80%;" name="nama"
-                                        data-options="required:true"></td>
+                                <td><input id="nama" class="easyui-textbox" style="width: 80%;" name="nama" data-options="required:true"></td>
                             </tr>
                             <tr>
                                 <td><label for="password1" style="width: 80%">password:</label></td>
-                                <td><input id="password1" class="easyui-passwordbox" style="width: 80%;"
-                                        name="password1" data-options="required:true"></td>
+                                <td><input id="password1" class="easyui-passwordbox" style="width: 80%;" name="password1" data-options="required:true"></td>
                             </tr>
                             <tr>
                                 <td><label for="password2" style="width: 80%">re-password:</label></td>
-                                <td><input id="password2" class="easyui-passwordbox" style="width: 80%;"
-                                        name="password2" data-options="required:true"></td>
+                                <td><input id="password2" class="easyui-passwordbox" style="width: 80%;" name="password2" data-options="required:true"></td>
                             </tr>
                             <tr>
                                 <td><label for="role_id" style="width: 80%">Role User:</label></td>
@@ -189,18 +173,14 @@ if (!isset($_SESSION['nip'])) {
                             </tr>
                         </table>
                         <div style="text-align: center; margin-top: 10px;">
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormUser()"
-                                style="width:80px; text-align:center;padding:5px 0">Submit</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormUser()"
-                                style="width:80px; text-align:center;padding:5px 0">Clear</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormUser()" style="width:80px; text-align:center;padding:5px 0">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormUser()" style="width:80px; text-align:center;padding:5px 0">Clear</a>
                         </div>
                     </form>
                 </div>
                 <!-- data grid user -->
                 <div title="Data User" style="padding:10px">
-                    <table class="easyui-datagrid" id="datauser"
-                        data-options="url:'<?= base_url('api/user') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true"
-                        toolbar="#tbuser">
+                    <table class="easyui-datagrid" id="datauser" data-options="url:'<?= base_url('api/user') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true" toolbar="#tbuser">
                         <thead>
                             <tr>
                                 <th field="nip" width="auto" editor="{type:'validatebox',options:{required:true}}">NIP
@@ -215,47 +195,38 @@ if (!isset($_SESSION['nip'])) {
                         </thead>
                     </table>
                     <div id="tbuser" style="height:auto">
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a> -->
                     </div>
                 </div>
             </div>
         </div>
         <!-- close window user -->
         <!-- window dokumen -->
-        <div id="dokumenGrid" class="easyui-window" title="Dokumen"
-            data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
-            <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
+        <div id="dokumenGrid" class="easyui-window" title="Dokumen" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
+            <div id="tabsDokumen" class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
                 <!-- data grid dokumen -->
                 <div title="Data Dokumen" style="padding:10px" id="dokumenGrid">
-                    <table id="datadokumen" class="easyui-datagrid"
-                        data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',queryParams:{nama_dokumen:'', jenis_dokumen:'', nama_karyawan:''},border:false,singleSelect:true,toolbar: '#tbdok',fit:true,fitColumns:true, singleSelect:true,rownumbers:true">
+                    <table id="datadokumen" class="easyui-datagrid" data-options="url:'<?= base_url('api/dokumen') ?>',method:'get',queryParams:{nip : '',nama_dokumen:'', jenis_dokumen:'', nama_karyawan:''},border:false,singleSelect:true,toolbar: '#tbdok',fit:true,fitColumns:true, singleSelect:true,rownumbers:true" fit="true" fitColumns="true">
                         <thead>
                             <tr>
-                                <th field="nama_dokumen" width="auto"
-                                    editor="{type:'validatebox',options:{required:true}}">
+                                <th field="nama_dokumen" width="50" editor="{type:'validatebox',options:{required:true}}">
                                     Nama Dokumen</th>
-                                <th field="jenis_dokumen" width="auto"
-                                    editor="{type:'validatebox',options:{required:true}}">
+                                <th field="jenis_dokumen" width="50" editor="{type:'validatebox',options:{required:true}}">
                                     Jenis Dokumen</th>
-                                <th field="nip" width="auto" editor="{type:'validatebox',options:{required:true}}">NIP
+                                <th field="nip" width="50" editor="{type:'validatebox',options:{required:true}}">NIP
                                 </th>
-                                <th field="nama_karyawan" width="auto"
-                                    editor="{type:'validatebox',options:{required:true}}">Nama
+                                <th field="nama_karyawan" width="50" editor="{type:'validatebox',options:{required:true}}">Nama
                                     Karyawan
                                 </th>
-                                <th field="jabatan" width="auto" editor="{type:'validatebox',options:{required:true}}">
+                                <th field="jabatan" width="50" editor="{type:'validatebox',options:{required:true}}">
                                     Jabatan</th>
                             </tr>
                         </thead>
                     </table>
                     <div id="tbdok" style="height:auto">
-                        <input class="easyui-searchbox dokumen-filter"
-                            data-options="prompt:'Please Input Value',menu:'#filterDokumen'" style="width: 100%;">
+                        <input class="easyui-searchbox dokumen-filter" data-options="prompt:'Please Input Value',menu:'#filterDokumen'" style="width: 100%;">
                         <div id="filterDokumen">
                             <div data-options="name:'nama_dokumen',iconCls:'icon-man'">dokumen</div>
                             <div data-options="name:'jenis_dokumen',iconCls:'icon-man'">jenis</div>
@@ -264,13 +235,13 @@ if (!isset($_SESSION['nip'])) {
                         <script>
                             var typingTimer;
                             var doneTypingInterval = 1000; // Waktu jeda dalam milidetik (misalnya 500 ms)
-                            $(function () {
-                                $('.dokumen-filter').textbox('textbox').on('keyup', function () {
+                            $(function() {
+                                $('.dokumen-filter').textbox('textbox').on('keyup', function() {
                                     clearTimeout(typingTimer);
                                     var value = $(this).val();
                                     var filterName = $('.dokumen-filter').searchbox('getName');
 
-                                    typingTimer = setTimeout(function () {
+                                    typingTimer = setTimeout(function() {
                                         var queryParams = {};
                                         queryParams[filterName] = value;
                                         console.log(queryParams);
@@ -281,31 +252,22 @@ if (!isset($_SESSION['nip'])) {
                         </script>
                     </div>
                     <div id="mmdd" class="easyui-menu" style="width:120px;">
-                        <div data-options="iconCls:'icon-open'" onclick="openDokumen()">Open Dokumen</div>
+                        <div data-options="iconCls:'icon-open'" onclick="openDokumenByNip()">Open Dokumen</div>
                         <div class="menu-sep"></div>
-                        <div data-options="iconCls:'icon-edit'" onclick="editRow()">Edit</div>
+                        <!-- <div data-options="iconCls:'icon-edit'" onclick="openEditDokumen()">Edit</div> -->
                         <div data-options="iconCls:'icon-remove'" onclick="deleteDokumen()">Remove</div>
                     </div>
                 </div>
                 <!-- form create dokumen -->
                 <div title="Add Document" style="overflow:hidden">
                     <div class="easyui-form" style="width:100%;padding:10px;">
-                        <form id="formDokumen" action="<?= base_url('api/dokumen') ?>" method="post"
-                            enctype="multipart/form-data">
+                        <form id="formDokumen" action="<?= base_url('api/dokumen') ?>" method="post" enctype="multipart/form-data">
                             <table style="width: 100%; margin-right: 10%">
-                                <tr>
-                                    <td style="text-align: left;">
-                                        <label style="width: 60%">nama:</label>
-                                    </td>
-                                    <td>
-                                        <input id="name" style="width:80%"></input>
-                                    </td>
-                                </tr>
-
                                 <tr>
                                     <td><label style="width: 60%">Jenis Dokumen:</label></td>
                                     <td>
-                                        <input id="jenis" style="width:80%"></input>
+                                        <input id="idkaryawan" style="width:80%" hidden="hidden"></input>
+                                        <input class="easyui-combobox" id="jenis" style="width:80%"></input>
                                     </td>
                                 </tr>
                                 <tr>
@@ -316,10 +278,8 @@ if (!isset($_SESSION['nip'])) {
                             </table>
                         </form>
                         <div style="text-align: center; margin-top: 20px;">
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormDok()"
-                                style="width:80px">Submit</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormDok()"
-                                style="width:80px">Clear</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormDok()" style="width:80px">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormDok()" style="width:80px">Clear</a>
 
                         </div>
                     </div>
@@ -331,8 +291,7 @@ if (!isset($_SESSION['nip'])) {
         <!-- close window dokumen -->
 
         <!-- window tambah -->
-        <!-- <div id="tambahWindow" class="easyui-window" title="Karyawan"
-            data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
+        <div id="tambahWindow" class="easyui-window" title="Karyawan" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
             <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
                 form karyawan
                 <div title="Form Karyawan" style="overflow:hidden">
@@ -342,64 +301,62 @@ if (!isset($_SESSION['nip'])) {
                             <tr>
                                 <td><label for="nip" style="width: 80%; margin-right: 50px;">NIP:</label>
                                 </td>
-                                <td><input id="nip" class="easyui-textbox" style="width: 80%;" name="nip"
-                                        data-options="required:true"></td>
+                                <td><input id="nip_karyawan" class="easyui-textbox" style="width: 80%;" name="nip_karyawan" data-options="required:true"></td>
                             </tr>
                             <tr>
                                 <td><label for="nama_karyawan" style="width: 80%">Nama:</label></td>
-                                <td><input id="nama_karyawan" class="easyui-textbox" style="width: 80%;" name="nama"
-                                        data-options="required:true"></td>
+                                <td><input id="nama_karyawan" class="easyui-textbox" style="width: 80%;" name="nama_karyawan" data-options="required:true"></td>
                             </tr>
                             <tr>
                                 <td><label for="kode_jabatan" style="width: 80%">Kode Jabatan:</label></td>
-                                <td><input id="kode_jabatan" class="easyui-textbox" style="width: 80%;"
-                                        name="kode_jabatan" data-options="required:true"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="jabatan" style="width: 80%">Jabatan:</label></td>
-                                <td><input id="jabatan" class="easyui-textbox" style="width: 80%;"
-                                        name="jabatan" data-options="required:true"></td>
+                                <td>
+                                    <select id="jabatan" class="easyui-combobox" style="width: 80%;" name="kode_jabatan" data-options="
+                                        valueField: 'value',
+                                        textField: 'text',
+                                        data: [
+                                            { value: '001', text: 'Manager' },
+                                            { value: '002', text: 'Asisten Manager' },
+                                            { value: '005', text: 'Staff' },
+                                            { value: '003', text: 'Supervisor' }
+                                        ]
+                                    ">
+                                    </select>
+                                </td>
                             </tr>
                         </table>
                         <div style="text-align: center; margin-top: 10px;">
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormKaryawan()"
-                                style="width:80px; text-align:center;padding:5px 0">Submit</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormKaryawan()"
-                                style="width:80px; text-align:center;padding:5px 0">Clear</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormKaryawan()" style="width:80px; text-align:center;padding:5px 0">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormKaryawan()" style="width:80px; text-align:center;padding:5px 0">Clear</a>
                         </div>
                     </form>
-                </div> -->
+                </div>
+            </div>
+        </div>
 
 
 
         <!-- window jenis dokumen -->
-        <div id="jenisDokumenWindow" class="easyui-window" title="Jenis Dokumen"
-            data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
+        <div id="jenisDokumenWindow" class="easyui-window" title="Jenis Dokumen" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
             <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
                 <!-- tab form jenis dokumen -->
                 <div title="Form Jenis Dokumen" style="overflow:hidden">
                     <div class="easyui-form" style="width:100%;padding:10px;">
-                        <form id="jenisDokumen" action="<? base_url('api/dokumen/jenis') ?>" method="post"
-                            enctype="multipart/form-data">
+                        <form id="jenisDokumen" action="<? base_url('api/jenis') ?>" method="post">
                             <table style="width: 100%; margin-right: 10%">
                                 <tr>
                                     <td><label style="width: 20%">Nama Jenis Dokumen:</label></td>
-                                    <td><input id="jenisdokumen" class="easyui-textbox" name="jenisdokumen"
-                                            style="width:80%" data-options="required:true"></td>
+                                    <td><input id="jenisdokumen" class="easyui-textbox" name="jenisdokumen" style="width:80%" data-options="required:true"></td>
                                 </tr>
                                 <tr>
                                     <td><label style="width: 20%" for="kodejenisdokumen">Kode Jenis Dokumen:</label>
                                     </td>
-                                    <td><input id="kodejenisdokumen" class="easyui-textbox" name="kodejenisdokumen"
-                                            style="width:80%" data-options="required:true"></td>
+                                    <td><input id="kodejenisdokumen" class="easyui-textbox" name="kodejenisdokumen" style="width:80%" data-options="required:true"></td>
                                 </tr>
                             </table>
                         </form>
                         <div style="text-align: center; margin-top: 20px;">
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormJenis()"
-                                style="width:80px">Submit</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormJenis()"
-                                style="width:80px">Clear</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormJenis()" style="width:80px">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormJenis()" style="width:80px">Clear</a>
 
                         </div>
                     </div>
@@ -408,28 +365,21 @@ if (!isset($_SESSION['nip'])) {
                 <!-- close form -->
                 <!-- data grid jenis dokumen -->
                 <div title="Jenis Dokumen" style="padding:10px">
-                    <table id="datajenis" class="easyui-datagrid"
-                        data-options="url:'<?= base_url('api/dokumen/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true"
-                        toolbar="#tbjen">
+                    <table id="datajenis" class="easyui-datagrid" data-options="url:'<?= base_url('api/jenis') ?>',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true, singleSelect:true,rownumbers:true" toolbar="#tbjen">
                         <thead>
                             <tr>
-                                <th field="jenis_dokumen" width="auto"
-                                    editor="{type:'validatebox',options:{required:true}}">
+                                <th field="jenis_dokumen" width="auto" editor="{type:'validatebox',options:{required:true}}">
                                     Jenis Dokumen</th>
-                                <th field="kode_jenis_dokumen" width="auto"
-                                    editor="{type:'validatebox',options:{required:true}}">
+                                <th field="kode_jenis_dokumen" width="auto" editor="{type:'validatebox',options:{required:true}}">
                                     Kode Jenis Dokumen</th>
 
                             </tr>
                         </thead>
                     </table>
                     <div id="tbjen" style="height:auto">
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a> -->
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
+                        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a> -->
                     </div>
                 </div>
             </div>
@@ -444,7 +394,7 @@ if (!isset($_SESSION['nip'])) {
         <script>
             //klik kanan pada datadokumen
             $('#datadokumen').datagrid({
-                onRowContextMenu: function (e, index, row) {
+                onRowContextMenu: function(e, index, row) {
                     e.preventDefault();
                     $('#mmdd').menu('show', {
                         left: e.pageX,
@@ -456,7 +406,7 @@ if (!isset($_SESSION['nip'])) {
 
             // klik kanan pada datakaryawan
             $('#karyawan').datagrid({
-                onRowContextMenu: function (e, index, row) {
+                onRowContextMenu: function(e, index, row) {
                     e.preventDefault();
                     $('#menuKaryawan').menu('show', {
                         left: e.pageX,
@@ -466,56 +416,90 @@ if (!isset($_SESSION['nip'])) {
                 }
             });
 
-            //show dokumen
-            function showDokumen(id) {
+            function openEditDokumen() {
+                var row = $("#datadokumen").datagrid("getSelected");
+                var idKaryawanInput = document.getElementById('idkaryawan');
+                idKaryawanInput.value = row.id_karyawan
+                // jenisDokInput.value = row.jenis_dokumen
+                // $("#jenis").combobox('select',row.jenis_dokumen)
+                $('#jenis').combobox('select', row.jenis_dokumen)
+                methodDok = 'put';
+                idDok = row.id_dokumen;
+                // idKaryawanInput.value = row.id_karyawan
+                $('#tabsDokumen').tabs('select', 'Data Dokumen');
+            }
 
-                $.ajax({
-                    url: base_url + "/api/dokumen", // Gantilah dengan URL yang sesuai
-                    method: 'GET', // Sesuaikan metode sesuai kebutuhan Anda
-                    data: { 'id': id }, // Kirim ID pengguna sebagai parameter
-                    dataType: 'json', // Tipe data yang diharapkan dari respons
+            function openAndReloadDokumen() {
+                reloadJenisDok()
+                $("#dokumenGrid").window("open");
+                $('#tabsDokumen').tabs('select', 'Data Dokumen');
+                $('#datadokumen').datagrid('load', {
+                    nip: ''
+                })
+            }
 
-                success: function(data) {
-                    if (data && data.path) {
-                         // Gantilah dengan nama field yang sesuai
-                        var path = data.path; // Gantilah dengan nama field yang sesuai
-
-
-                var path = id;
+            function showDokumen(path) {
                 $('#dokumenWindow').window({
                     title: 'Dokumen',
                     width: 800,
                     height: 600,
-                    content: '<iframe src="<?= base_url() ?>' + path + '" style="width: 100%; height: 100%; border: 0;"></iframe>',
+                    content: '<iframe src="' + base_url + '/uploads/' + path + '" style="width: 100%; height: 100%; border: 0;"></iframe>',
                     modal: true,
                     collapsible: false,
                     minimizable: false,
                     maximizable: false
                 });
-                // Membuka window
-                $('#dokumenWindow').window('open');
-                } else {
-                alert('Data dokumen tidak ditemukan.'); // Pesan jika data tidak ditemukan
-                    }
-                },
 
-                error: function(xhr, status, error) {
-                    console.error('Terjadi kesalahan: ' + error); // Tangani kesalahan jika ada
-                }
-                })
-                };
+                // $.ajax({
+                //     url: base_url + "/api/dokumen", // Gantilah dengan URL yang sesuai
+                //     method: 'GET', // Sesuaikan metode sesuai kebutuhan Anda
+                //     // data: { 'id': id }, // Kirim ID pengguna sebagai parameter
+                //     dataType: 'json', // Tipe data yang diharapkan dari respons
+
+                //     success: function(data) {
+                //         console.log(data);
+                //         const filterData = data.filter(function(item) {
+                //             return item.id_dokumen == id
+                //         })
+                //         console.log('hehe',filterData);
+                //         if (filterData) {
+                //             // Gantilah dengan nama field yang sesuai
+                //             var path = filterData[0].path; // Gantilah dengan nama field yang sesuai
+
+                //             // Membuka window
+                //             $('#dokumenGrid').window('open');
+                //         } else {
+                //             alert('Data dokumen tidak ditemukan.'); // Pesan jika data tidak ditemukan
+                //         }
+                //     },
+
+                //     error: function(xhr, status, error) {
+                //         console.error('Terjadi kesalahan: ' + error); // Tangani kesalahan jika ada
+                //     }
+                // })
+            };
 
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#karyawan').datagrid({
-                    onDblClickRow  : function (index, row) {
-                        var id = row.id;
-                        showDokumen(id);
-            
-                 }
+                    onDblClickRow: function(index, row) {
+                        $("#dokumenGrid").window("open");
+                        $('#tabsDokumen').tabs('select', 'Data Dokumen');
+                        $('#datadokumen').datagrid('load', {
+                            nip: row.nip
+                        })
+                        // $('#_name').val
+                        var idKaryawanInput = document.getElementById('idkaryawan');
+                        idKaryawanInput.value = row.id_karyawan
+                    }
+                });
+                $('#datadokumen').datagrid({
+                    onDblClickRow: function(index, row) {
+                        showDokumen(row.nama_dokumen);
+                    }
+                });
             });
-            });
-            
+
             function editKaryawan() {
                 var row = $('#karyawan').datagrid('getSelected');
                 if (row) {
@@ -538,8 +522,6 @@ if (!isset($_SESSION['nip'])) {
                 }
             }
 
-
-           
 
             function acceptit() {
                 if (endEditing()) {
@@ -571,7 +553,7 @@ if (!isset($_SESSION['nip'])) {
                     method: "POST",
                     data: data, // Kirim data NIP ke server
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
                         // Menutup popup atau window
                         $("#dokumenGrid").window("close");
                         // Menampilkan pesan berhasil
@@ -579,7 +561,7 @@ if (!isset($_SESSION['nip'])) {
                         // Memuat ulang datagrid
                         $("#datadokumen").datagrid("reload");
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         // Menangani kesalahan jika terjadi
                         console.error(error);
                         Swal.fire("Error", "Terjadi kesalahan", "error");
@@ -603,37 +585,37 @@ if (!isset($_SESSION['nip'])) {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             fetch(url, {
-                                method: "DELETE",
-                            })
-                            .then((response) => {
-                                if (response.ok) {
-                                    return response.json();
-                                } else {
-                                    throw new Error("HTTP status " + response.status);
-                                }
-                            })
-                            .then((data) => {
-                                Swal.fire(data.message, "success");
-                                $("#datauser").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
-                            })
-                            .catch((error) => {
-                                console.error("Terjadi kesalahan:", error);
-                                Swal.fire("Error", "An error occurred while deleting the user.", "error");
-                            });
+                                    method: "DELETE",
+                                })
+                                .then((response) => {
+                                    if (response.ok) {
+                                        return response.json();
+                                    } else {
+                                        throw new Error("HTTP status " + response.status);
+                                    }
+                                })
+                                .then((data) => {
+                                    Swal.fire(data.message, "success");
+                                    $("#datauser").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+                                })
+                                .catch((error) => {
+                                    console.error("Terjadi kesalahan:", error);
+                                    Swal.fire("Error", "An error occurred while deleting the user.", "error");
+                                });
                         }
                     });
                 } else {
                     Swal.fire("Error", "No user selected for deletion.", "error");
                 }
             }
-            
+
             function deleteJenis() {
                 var row = $("#datajenis").datagrid("getSelected");
                 if (row && row.jenis_dokumen) {
                     var index = $("#datajenis").datagrid("getRowIndex", row);
-                    $("#datajenis").datagrid("cancelEdit", index).datagrid("deleteRow", index);
                     editIndex = undefined;
-                    var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+                    console.log(row);
+                    var url = base_url + "api/jenis?id_jenis_dokumen=" + row.id_jenis_dokumen;
                     $("#jenisDokumenWindow").window("close");
                     Swal.fire({
                         title: "Are you sure?",
@@ -646,26 +628,33 @@ if (!isset($_SESSION['nip'])) {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             fetch(url, {
-                                method: "DELETE",
-                            })
-                                .then((response) => response.json())
+                                    method: "DELETE",
+                                })
+                                .then((response) => {
+                                    if (!response.ok) {
+                                        throw new Error("Network response was not ok");
+                                    }
+                                    return response.json();
+                                })
                                 .then((data) => {
+                                    $("#datajenis").datagrid("cancelEdit", index).datagrid("deleteRow", index);
                                     Swal.fire(data.message, "success");
                                     $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
                                 })
                                 .catch((error) => {
                                     console.error("Terjadi kesalahan:", error);
+                                    Swal.fire("Error!", "There was an error deleting the file.", "error");
                                 });
-                            Swal.fire("Deleted!", "Your file has been deleted.", "success");
                         }
                     });
                 }
             }
 
+
             // function deleteJenis() {
             //     var row = $("#datajenis").datagrid("getSelected");
             //     if (row) {
-            //         var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+            //         var url = base_url + "api/jenis?jenis_dokumen=" + row.jenis_dokumen;
             //         $("#jenisDokumenWindow").window("close");
             //         Swal.fire({
             //             title: "Are you sure?",
@@ -710,7 +699,7 @@ if (!isset($_SESSION['nip'])) {
                         }
                         editIndex = index;
                     } else {
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('#karyawan').datagrid('selectRow', editIndex);
                         }, 0);
                     }
@@ -735,9 +724,9 @@ if (!isset($_SESSION['nip'])) {
 
         <!-- script pagination -->
         <script>
-            (function ($) {
+            (function($) {
                 function pagerFilter(data) {
-                    if ($.isArray(data)) {    // is array
+                    if ($.isArray(data)) { // is array
                         data = {
                             total: data.length,
                             rows: data
@@ -753,13 +742,13 @@ if (!isset($_SESSION['nip'])) {
                     if (!opts.remoteSort && opts.sortName) {
                         var names = opts.sortName.split(',');
                         var orders = opts.sortOrder.split(',');
-                        state.allRows.sort(function (r1, r2) {
+                        state.allRows.sort(function(r1, r2) {
                             var r = 0;
                             for (var i = 0; i < names.length; i++) {
                                 var sn = names[i];
                                 var so = orders[i];
                                 var col = $(target).datagrid('getColumnOption', sn);
-                                var sortFunc = col.sorter || function (a, b) {
+                                var sortFunc = col.sorter || function(a, b) {
                                     return a == b ? 0 : (a > b ? 1 : -1);
                                 };
                                 r = sortFunc(r1[sn], r2[sn]) * (so == 'asc' ? 1 : -1);
@@ -779,20 +768,20 @@ if (!isset($_SESSION['nip'])) {
                 var loadDataMethod = $.fn.datagrid.methods.loadData;
                 var deleteRowMethod = $.fn.datagrid.methods.deleteRow;
                 $.extend($.fn.datagrid.methods, {
-                    clientPaging: function (jq) {
-                        return jq.each(function () {
+                    clientPaging: function(jq) {
+                        return jq.each(function() {
                             var karyawan = $(this);
                             var state = karyawan.data('datagrid');
                             var opts = state.options;
                             opts.loadFilter = pagerFilter;
                             var onBeforeLoad = opts.onBeforeLoad;
-                            opts.onBeforeLoad = function (param) {
+                            opts.onBeforeLoad = function(param) {
                                 state.allRows = null;
                                 return onBeforeLoad.call(this, param);
                             }
                             var pager = karyawan.datagrid('getPager');
                             pager.pagination({
-                                onSelectPage: function (pageNum, pageSize) {
+                                onSelectPage: function(pageNum, pageSize) {
                                     opts.pageNumber = pageNum;
                                     opts.pageSize = pageSize;
                                     pager.pagination('refresh', {
@@ -808,14 +797,14 @@ if (!isset($_SESSION['nip'])) {
                             }
                         });
                     },
-                    loadData: function (jq, data) {
-                        jq.each(function () {
+                    loadData: function(jq, data) {
+                        jq.each(function() {
                             $(this).data('datagrid').allRows = null;
                         });
                         return loadDataMethod.call($.fn.datagrid.methods, jq, data);
                     },
-                    deleteRow: function (jq, index) {
-                        return jq.each(function () {
+                    deleteRow: function(jq, index) {
+                        return jq.each(function() {
                             var row = $(this).datagrid('getRows')[index];
                             deleteRowMethod.call($.fn.datagrid.methods, $(this), index);
                             var state = $(this).data('datagrid');
@@ -830,7 +819,7 @@ if (!isset($_SESSION['nip'])) {
                             }
                         });
                     },
-                    getAllRows: function (jq) {
+                    getAllRows: function(jq) {
                         return jq.data('datagrid').allRows;
                     }
                 })
@@ -854,8 +843,10 @@ if (!isset($_SESSION['nip'])) {
                 return rows;
             }
 
-            $(function () {
-                $('#karyawan').datagrid({ data: getData() }).datagrid('clientPaging');
+            $(function() {
+                $('#karyawan').datagrid({
+                    data: getData()
+                }).datagrid('clientPaging');
             });
 
             function doSearch(nip) {
