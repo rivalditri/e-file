@@ -24,6 +24,7 @@ if (!isset($_SESSION['nip'])) {
     <link rel="stylesheet" type="text/css" href="<?= base_url('vendor/') ?>easyui/demo/demo.css">
     <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="<?= base_url('vendor/') ?>easyui/jquery.propertygrid.js"></script>
     <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.all.min.js"></script>
     <script src="<?= base_url('vendor/sweetalert/') ?>sweetalert2.min.js"></script>
     <script type="text/javascript" src="<?= base_url('vendor/easyui/datagrid-filter.js') ?>"></script>
@@ -88,7 +89,9 @@ if (!isset($_SESSION['nip'])) {
                 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
                     onclick="$('#dokumenGrid').window('open')">Dokumen</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
-                    onclick="acceptit()">Accept</a>
+                    onclick=acceptit()>Accept</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+                    onclick="$('#tambahWindow').window('open')">Tambah</a>
                 <input class="easyui-searchbox karyawan-filter"
                     data-options="prompt:'Please Input Value',menu:'#filterKaryawan'" style="width: 20%;">
                 <div id="filterKaryawan">
@@ -144,6 +147,7 @@ if (!isset($_SESSION['nip'])) {
                 </thead>
             </table>
         </div>
+
         <!-- window user -->
         <div id="userWindow" class="easyui-window" title="User"
             data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
@@ -214,7 +218,7 @@ if (!isset($_SESSION['nip'])) {
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="removeRow()">Hapus</a>
+                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteUser()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
                     </div>
@@ -325,6 +329,49 @@ if (!isset($_SESSION['nip'])) {
             </div>
         </div>
         <!-- close window dokumen -->
+
+        <!-- window tambah -->
+        <!-- <div id="tambahWindow" class="easyui-window" title="Karyawan"
+            data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:500px;padding:10px;">
+            <div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:100%;height:100%">
+                form karyawan
+                <div title="Form Karyawan" style="overflow:hidden">
+                    <form id="register" action="<?= base_url('api/karyawan') ?>" method="post">
+                        <h1 style="text-align: center;">Registrasi</h1>
+                        <table style="width: 100%; margin-right: 100px;">
+                            <tr>
+                                <td><label for="nip" style="width: 80%; margin-right: 50px;">NIP:</label>
+                                </td>
+                                <td><input id="nip" class="easyui-textbox" style="width: 80%;" name="nip"
+                                        data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="nama_karyawan" style="width: 80%">Nama:</label></td>
+                                <td><input id="nama_karyawan" class="easyui-textbox" style="width: 80%;" name="nama"
+                                        data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="kode_jabatan" style="width: 80%">Kode Jabatan:</label></td>
+                                <td><input id="kode_jabatan" class="easyui-textbox" style="width: 80%;"
+                                        name="kode_jabatan" data-options="required:true"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="jabatan" style="width: 80%">Jabatan:</label></td>
+                                <td><input id="jabatan" class="easyui-textbox" style="width: 80%;"
+                                        name="jabatan" data-options="required:true"></td>
+                            </tr>
+                        </table>
+                        <div style="text-align: center; margin-top: 10px;">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitFormKaryawan()"
+                                style="width:80px; text-align:center;padding:5px 0">Submit</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFormKaryawan()"
+                                style="width:80px; text-align:center;padding:5px 0">Clear</a>
+                        </div>
+                    </form>
+                </div> -->
+
+
+
         <!-- window jenis dokumen -->
         <div id="jenisDokumenWindow" class="easyui-window" title="Jenis Dokumen"
             data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:50%;height:400px;padding:10px;">
@@ -380,7 +427,7 @@ if (!isset($_SESSION['nip'])) {
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-add',plain:true" onclick="append()">Tambah</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
-                            data-options="iconCls:'icon-remove',plain:true" onclick="removeRow()">Hapus</a>
+                            data-options="iconCls:'icon-remove',plain:true" onclick="deleteJenis()">Hapus</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton"
                             data-options="iconCls:'icon-save',plain:true" onclick="acceptit()">Save</a>
                     </div>
@@ -421,6 +468,19 @@ if (!isset($_SESSION['nip'])) {
 
             //show dokumen
             function showDokumen(id) {
+
+                $.ajax({
+                    url: base_url + "/api/dokumen", // Gantilah dengan URL yang sesuai
+                    method: 'GET', // Sesuaikan metode sesuai kebutuhan Anda
+                    data: { 'id': id }, // Kirim ID pengguna sebagai parameter
+                    dataType: 'json', // Tipe data yang diharapkan dari respons
+
+                success: function(data) {
+                    if (data && data.path) {
+                         // Gantilah dengan nama field yang sesuai
+                        var path = data.path; // Gantilah dengan nama field yang sesuai
+
+
                 var path = id;
                 $('#dokumenWindow').window({
                     title: 'Dokumen',
@@ -434,14 +494,23 @@ if (!isset($_SESSION['nip'])) {
                 });
                 // Membuka window
                 $('#dokumenWindow').window('open');
-            }
+                } else {
+                alert('Data dokumen tidak ditemukan.'); // Pesan jika data tidak ditemukan
+                    }
+                },
 
-            var editIndex = undefined;
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan: ' + error); // Tangani kesalahan jika ada
+                }
+                })
+                };
+
 
             $(document).ready(function () {
-            $('#karyawan').datagrid({
-            onDblClickRow  : function (index, row) {
-            openKaryawan(index, 'nama_karyawan');
+                $('#karyawan').datagrid({
+                    onDblClickRow  : function (index, row) {
+                        var id = row.id;
+                        showDokumen(id);
             
                  }
             });
@@ -469,31 +538,163 @@ if (!isset($_SESSION['nip'])) {
                 }
             }
 
+
+           
+
             function acceptit() {
                 if (endEditing()) {
                     $('#karyawan').datagrid('acceptChanges');
                 }
-                //get selected row data
+                // Mengambil data baris yang dipilih
                 var rows = $('#karyawan').datagrid('getSelections');
-                var formdata = new FormData();
-                var idValue = $("#name").combogrid("getValue");
-                formData.append("id_karyawan",idValue);
-                formData.append("jenis",jenisValue);
-                var fileInput = $("#file").next().find('input[type="file"]')[0];
-                //get edit row index
-                //save to variable
-                //var edited column = rows[0].column_name;
-                //.ajax call to update edited column
+                // Pastikan ada baris yang dipilih sebelum melanjutkan
+                if (rows.length === 0) {
+                    alert('Pilih setidaknya satu baris untuk diedit.');
+                    return;
+                }
+                // Ambil nilai NIP dari baris yang pertama (misalnya, jika NIP ada di kolom "nip")
+                var id = rows[0].id_karyawan;
+                var nip = rows[0].nip;
+                var namaKaryawan = rows[0].nama_karyawan;
+                var kodeJabatan = rows[0].kode_jabatan;
+                var jabatan = rows[0].jabatan;
+                var data = {
+                    id: id,
+                    nip: nip,
+                    nama_karyawan: namaKaryawan,
+                    kode_jabatan: kodeJabatan,
+                    jabatan: jabatan
+                };
+                // Lakukan panggilan AJAX untuk mengirim data ke server
                 $.ajax({
-                    url: base_url + "api/karyawam/edit",
-                    type: "post", 
-                    data: formData,
-                    contenType:false,
-                    processData:false,
-                    success: function(result){}});
-
-
+                    url: base_url + "api/karyawan/edit",
+                    method: "POST",
+                    data: data, // Kirim data NIP ke server
+                    dataType: 'json',
+                    success: function (response) {
+                        // Menutup popup atau window
+                        $("#dokumenGrid").window("close");
+                        // Menampilkan pesan berhasil
+                        Swal.fire("Success", response.message, "success");
+                        // Memuat ulang datagrid
+                        $("#datadokumen").datagrid("reload");
+                    },
+                    error: function (xhr, status, error) {
+                        // Menangani kesalahan jika terjadi
+                        console.error(error);
+                        Swal.fire("Error", "Terjadi kesalahan", "error");
+                    }
+                });
             }
+
+            function deleteUser() {
+                var row = $("#datauser").datagrid("getSelected");
+                if (row && row.nip) {
+                    var url = base_url + "api/user?nip=" + row.nip;
+                    $("#userWindow").window("close");
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(url, {
+                                method: "DELETE",
+                            })
+                            .then((response) => {
+                                if (response.ok) {
+                                    return response.json();
+                                } else {
+                                    throw new Error("HTTP status " + response.status);
+                                }
+                            })
+                            .then((data) => {
+                                Swal.fire(data.message, "success");
+                                $("#datauser").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+                            })
+                            .catch((error) => {
+                                console.error("Terjadi kesalahan:", error);
+                                Swal.fire("Error", "An error occurred while deleting the user.", "error");
+                            });
+                        }
+                    });
+                } else {
+                    Swal.fire("Error", "No user selected for deletion.", "error");
+                }
+            }
+            
+            function deleteJenis() {
+                var row = $("#datajenis").datagrid("getSelected");
+                if (row && row.jenis_dokumen) {
+                    var index = $("#datajenis").datagrid("getRowIndex", row);
+                    $("#datajenis").datagrid("cancelEdit", index).datagrid("deleteRow", index);
+                    editIndex = undefined;
+                    var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+                    $("#jenisDokumenWindow").window("close");
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(url, {
+                                method: "DELETE",
+                            })
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    Swal.fire(data.message, "success");
+                                    $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+                                })
+                                .catch((error) => {
+                                    console.error("Terjadi kesalahan:", error);
+                                });
+                            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                        }
+                    });
+                }
+            }
+
+            // function deleteJenis() {
+            //     var row = $("#datajenis").datagrid("getSelected");
+            //     if (row) {
+            //         var url = base_url + "api/dokumen/jenis?jenis_dokumen=" + row.jenis_dokumen;
+            //         $("#jenisDokumenWindow").window("close");
+            //         Swal.fire({
+            //             title: "Are you sure?",
+            //             text: "You won't be able to revert this!",
+            //             icon: "warning",
+            //             showCancelButton: true,
+            //             confirmButtonColor: "#3085d6",
+            //             cancelButtonColor: "#d33",
+            //             confirmButtonText: "Yes, delete it!",
+            //         }).then((result) => {
+            //             if (result.isConfirmed) {
+            //                 fetch(url, {
+            //                     method: "DELETE",
+            //                 })
+            //                     .then((response) => response.json())
+            //                     .then((data) => {
+            //                         Swal.fire(data.message, "success");
+            //                         $("#datajenis").datagrid("reload"); // Muat ulang DataGrid setelah penghapusan
+            //                     })
+            //                     .catch((error) => {
+            //                         console.error("Terjadi kesalahan:", error);
+            //                     });
+            //                 Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            //             }
+            //         });
+            //     }
+            // }
+
+
 
             function onClickCell(index, field) {
                 if (editIndex != index) {
