@@ -113,32 +113,18 @@ class dokumen extends RestController
                 $data['path'] = 'uploads/' . $uploaded_data['file_name'];
                 $data['id_karyawan'] = $id;
                 $data['id_jenis_dokumen'] = $jenis;
-                if ($action == 'post') {
-                    $this->dokumen->insert_dokumen($data);
-                    $this->response(
-                        array(
-                            "status" => "success",
-                            "message" => "Dokumen Berhasil Ditambahkan",
-                            "data" => array($data),
-                        ),
-                        RestController::HTTP_CREATED
-                    );
-                } else {
-                    $data['id_dokumen'] = $idDok;
-                    $this->dokumen->update_dokumen($data);
-                    $this->response(
-                        array(
-                            "status" => "success",
-                            "message" => "Dokumen Berhasil Diubah",
-                            "data" => array($data),
-                        ),
-                        RestController::HTTP_CREATED
-                    );
-                }
+                $this->dokumen->insert_dokumen($data);
+                $this->response(
+                    array(
+                        "status" => "success",
+                        "message" => "Dokumen Berhasil Ditambahkan",
+                        "data" => array($data),
+                    ),
+                    RestController::HTTP_CREATED
+                );
             }
         }
     }
-
     public function index_delete()
     {
         $id_dokumen = $this->input->get('id_dokumen');
@@ -175,6 +161,45 @@ class dokumen extends RestController
                     RestController::HTTP_INTERNAL_ERROR
                 );
             }
+        }
+    }
+
+    public function jenis_post()
+    {
+        $jenis = $this->post('jenisdokumen');
+        $kode = $this->post('kodejenisdokumen');
+        $data['kode_jenis_dokumen'] = $kode;
+        $data['jenis_dokumen'] = $jenis;
+        $result = $this->dokumen->insert_jenis($data);
+        if ($result) {
+            $this->response(
+                array(
+                    "status" => "success",
+                    "message" => "jenis berhasil ditambahkan",
+                    "data" => array($data),
+                ),
+                RestController::HTTP_CREATED
+            );
+        } else {
+            $this->response(
+                array(
+                    "status" => "error",
+                    "message" => "jenis gagal ditambahkan",
+                    "error" => "something went wrong",
+                ),
+                RestController::HTTP_BAD_REQUEST
+            );
+        }
+    }
+
+    public function jenis_get()
+    {
+        $jenis = $this->dokumen->get_jenis();
+        if ($jenis) {
+            $this->response(
+                $jenis,
+                RestController::HTTP_OK
+            );
         }
     }
 }
